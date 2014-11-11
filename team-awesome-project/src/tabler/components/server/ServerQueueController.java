@@ -29,7 +29,7 @@ public class ServerQueueController implements ActionListener{
 	public void actionPreformed(ActionEvent e){
 
 		ServerModel.updateQueue();
-		ServerView.updateList(ServerModel.addToQueue);
+		ServerQueueView.updateList(ServerModel.addToQueue);
 	}
 	
 }

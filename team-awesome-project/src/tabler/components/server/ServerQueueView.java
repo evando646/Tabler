@@ -10,7 +10,7 @@ import java.util.Scanner;
 import javax.swing.*;
 
 
-public class ServerView extends JFrame{
+public class ServerQueueView extends JFrame{
 	
 
 	public ServerModel model;
@@ -18,7 +18,7 @@ public class ServerView extends JFrame{
 	public JFrame frame;
 	public DefaultListModel<String> listModel;
 	public ArrayList<ServerModel> serverModel = new ArrayList<>();
-	public ServerView(){
+	public ServerQueueView(){
 		JFrame frame = new JFrame();
 		JPanel paneleast = new JPanel();
 		
