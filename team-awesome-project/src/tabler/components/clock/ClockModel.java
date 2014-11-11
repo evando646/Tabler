@@ -2,6 +2,8 @@ package tabler.components.clock;
 
 import java.util.Date;
 
+import javax.swing.JLabel;
+
 /**
  * The <code>ClockModel</code> class represents the current state of the clock.
  * 
@@ -31,5 +33,20 @@ public class ClockModel {
 	 */
 	public void updateDate() {
 		this.currentDate = new Date();
+	}
+	
+	/**
+	 * Creates a string representation of the <code>ClockModel</code> object 
+	 * a format similar to: Thu, Jan 1 10:42:27 AM
+	 * 
+	 * @return a string representation of the <code>ClockModel</code> object
+	 */
+	public String toString() {
+		String objectString = null;
+		
+		objectString = "" + String.format("%ta, %<te %<tb %<tI:%<tM:%<tS %<Tp", 
+				this.currentDate);
+		
+		return objectString;
 	}
 }
