@@ -1,4 +1,4 @@
-package Server;
+package tabler.components.server;
 
 import java.awt.*;
 import java.io.File;
@@ -23,7 +23,7 @@ public class ServerView extends JFrame{
 		
 		Scanner in1 = null;
 	      try {
-	          in1 = new Scanner(new File("./src/Server/serverdata.txt"));
+	          in1 = new Scanner(new File("./src/tabler/components/server/serverdata.txt"));
 	       } catch (Exception FileNotFoundException) {
 	          System.err.println("failed to open serverdata.txt");
 	          System.exit(1);
@@ -38,7 +38,7 @@ public class ServerView extends JFrame{
 		}
 		Scanner in2 = null;
 	      try {
-	          in2 = new Scanner(new File("./src/Server/sections.txt"));
+	          in2 = new Scanner(new File("./src/tabler/components/server/sections.txt"));
 	       } catch (Exception FileNotFoundException) {
 	          System.err.println("failed to open sections.txt");
 	          System.exit(1);

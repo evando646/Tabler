@@ -1,4 +1,4 @@
-package Server;
+package tabler.components.server;
 
 import java.util.Date;
 import java.util.Random;
