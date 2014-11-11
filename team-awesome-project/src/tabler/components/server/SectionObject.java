@@ -62,4 +62,14 @@ public class SectionObject {
 			return true;
 		}
 	}
+	
+	public ArrayList<String> tableSeatAvailable(){
+		ArrayList<String> returnOpen = new ArrayList<>();
+		for (int i = 0; i < this.tableList.size(); i ++){
+			if (this.tableList.get(i).state.equals("open")){
+				returnOpen.add(tableList.get(i).toString());
+			}
+		}
+		return returnOpen;
+	}
 }

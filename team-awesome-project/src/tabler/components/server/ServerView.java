@@ -57,21 +57,15 @@ public class ServerView extends JFrame{
 	    }
 		String[]serverNames = new String [names.size()];
 		for (int n = 0; n < names.size(); n++){
-			serverNames[n] = names.get(n);
+			serverNames[n] = names.get(i);
 		}
+
 		JList serverList = new JList(serverNames);
 		serverList.setVisibleRowCount(1);
 		serverList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		paneleast.add(button1);
 		paneleast.add(new JScrollPane(serverList));
 		paneleast.add(button2);
-
-		
-
-	    
-		
-
-
 		
 	}
 }

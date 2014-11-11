@@ -8,6 +8,7 @@ public class Table {
 	double time;
 	int tablenum;
 	String sectionName;
+	int seats;
 	
 	public String state;
 
@@ -17,6 +18,7 @@ public class Table {
 		this.date = new Date();
 		this.time =  date.getTime();
 		this.state = randomState();
+		this.seats = randomSeat();
 
 		
 	}
@@ -25,6 +27,16 @@ public class Table {
 		String [] states = {"open", "dirty", "set up", "reserved"};
 		int index = rand.nextInt(4);
 		return states[index];
+	}
+	public int randomSeat(){
+		Random rand = new Random();
+		int [] seats = {2, 4, 6, 8};
+		int index = rand.nextInt(4);
+		return seats[index];
+	}
+	
+	public String toString(){
+		return String.format("%d", this.seats);
 	}
 	
 }

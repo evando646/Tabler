@@ -17,13 +17,13 @@ public class ServerModel {
 	 * This is a queue to keep track of Server's who are
 	 * available in a Fist In First Out order
 	 */
-	private LinkedList<ServerModel> addToQueue = new LinkedList<ServerModel>();
+	public LinkedList<ServerModel> addToQueue = new LinkedList<ServerModel>();
 	
 	/**
 	 * This is a queue to keep track of Server's who have been previously
 	 * removed from the upcoming seat queue
 	 */
-	private LinkedList<ServerModel> removedFromQueue = new LinkedList<ServerModel>();
+	public LinkedList<ServerModel> removedFromQueue = new LinkedList<ServerModel>();
 	
 	/**
 	 * Initializes the instance variables.
@@ -81,15 +81,7 @@ public class ServerModel {
 		queue.add(last);
 		return;
 	}
-	public String[] getServerStrings(){
-		ArrayList<String> string = new ArrayList<>();
-		for (int i = 0; i < addToQueue.size(); i++){
-			string.add(addToQueue.get(i).toString());
-		}
-		String [] ret = new String[string.size()];
-		for (int i = 0; i < string.size(); i++){
-			ret[i] = string.get(i);
-		}
-		return ret;
+	public String toString(){
+		
 	}
 }
