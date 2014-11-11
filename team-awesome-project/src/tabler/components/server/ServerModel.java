@@ -11,7 +11,7 @@ public class ServerModel {
     /**
 	 * This is an array of tables in a section for an employee
 	 */
-	public SectionObject Section;
+	public SectionModel Section;
 	
 	/**
 	 * This is a queue to keep track of Server's who are
@@ -30,7 +30,7 @@ public class ServerModel {
 	 */
 	public ServerModel(String Name, String SectionName, ArrayList<Integer> Tables) {
 		this.ServerName = Name;
-		this.Section = new SectionObject(SectionName, Tables);
+		this.Section = new SectionModel(SectionName, Tables);
 		addToQueue.add(this);
 	}
 

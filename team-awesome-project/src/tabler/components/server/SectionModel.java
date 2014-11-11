@@ -4,7 +4,7 @@ package tabler.components.server;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SectionObject {
+public class SectionModel {
 	/**
 	 * This is the name of a section
 	 */
@@ -16,7 +16,7 @@ public class SectionObject {
 	private ArrayList<Table> tableList;
 	private Table newtable;
 	
-	SectionObject(String SectionName, ArrayList<Integer> Tables){
+	SectionModel(String SectionName, ArrayList<Integer> Tables){
 		this.sectionName = SectionName;
 		this.tableList = new ArrayList<>();
 		for (int i = 0; i < Tables.size(); i++){
