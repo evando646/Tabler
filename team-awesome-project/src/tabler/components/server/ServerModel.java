@@ -6,12 +6,12 @@ public class ServerModel {
 	/**
 	 * This is the name of the server the user has selected
 	 */
-    private String ServerName;
+    public String ServerName;
     
     /**
 	 * This is an array of tables in a section for an employee
 	 */
-	private SectionObject Section;
+	public SectionObject Section;
 	
 	/**
 	 * This is a queue to keep track of Server's who are
@@ -47,8 +47,11 @@ public class ServerModel {
 			return true;
 	}
 	public void updateQueue(){
-		
+		/**
+		 * Adds any removed ServerModels back to the queue when sections are not full
+		 */
 		for(int i = 0; i < removedFromQueue.size(); i++){
+
 			if (removedFromQueue.get(i).Section.isFull() != true){
 				int k = 0;
 				while(addToQueue.get(k).Section.TimeLastSeated() < removedFromQueue.get(i).Section.TimeLastSeated()){
@@ -57,6 +60,9 @@ public class ServerModel {
 				addToQueue.add(k,removedFromQueue.get(i));
 			}
 		}
+		/**
+		 * Removes any servers with full sections from the available queue
+		 */
 		for (int i = 0; i < addToQueue.size(); i++){
 			if(addToQueue.get(i).Section.isFull() == true){
 				removedFromQueue.add(addToQueue.get(i));
@@ -64,6 +70,9 @@ public class ServerModel {
 				continue;
 			}
 		}
+		/**
+		 * Calculates the servermodel with the most recent assigned table time (needs date accommodation)
+		 */
 		ServerModel lastAssigned = addToQueue.get(0);
 		int moveIndex = 0;
 		for(int i = 1; i < addToQueue.size(); i++){
@@ -76,12 +85,15 @@ public class ServerModel {
 		return;
 		
 	}
+	/**
+	 * Moves the most recent assigned servermodel to end of queue
+	 * @param queue
+	 * @param last
+	 * @param moveIndex
+	 */
 	public void update(LinkedList<ServerModel> queue, ServerModel last, int moveIndex){
 		queue.remove(moveIndex);
 		queue.add(last);
 		return;
-	}
-	public String toString(){
-		
 	}
 }

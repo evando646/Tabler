@@ -1,5 +1,7 @@
 package tabler.components.server;
 
+import java.util.*;
+
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -7,16 +9,18 @@ import java.util.Scanner;
 
 import javax.swing.*;
 
-public class ServerView extends JFrame{
 
+public class ServerView extends JFrame{
+	
+
+	public ServerModel model;
+	public JPanel paneleast;
+	public JFrame frame;
+	public DefaultListModel<String> listModel;
+	public ArrayList<ServerModel> serverModel = new ArrayList<>();
 	public ServerView(){
 		JFrame frame = new JFrame();
 		JPanel paneleast = new JPanel();
-
-
-		
-		JButton button1 = new JButton("skip");
-		JButton button2 = new JButton("use");
 		
 		add(paneleast, BorderLayout.EAST);
 		paneleast.setBackground(Color.CYAN);
@@ -32,10 +36,14 @@ public class ServerView extends JFrame{
 	    ArrayList<String> sections = new ArrayList<>();
 	    ArrayList<String> names = new ArrayList<>();
 		ArrayList<Integer> tables = new ArrayList<>();
-	    while (in1.hasNextLine()){	
+		serverModel = new ArrayList<>();
+	    listModel = new DefaultListModel<String>();
+	    
+		while (in1.hasNextLine()){	
 	    	sections.add(in1.next());
 	    	names.add(in1.next());
 		}
+		
 		Scanner in2 = null;
 	      try {
 	          in2 = new Scanner(new File("./src/tabler/components/server/sections.txt"));
@@ -47,25 +55,49 @@ public class ServerView extends JFrame{
 	    String tempSection;
 	    while (in2.hasNextLine()){	
 	    	tempSection = in2.next();
-	    	if(tempSection.equals(sections.get(i))){
-	    		while(in2.hasNextInt()){
-	    			tables.add(in2.nextInt());
-	    		}
-	    		ServerModel newModel = new ServerModel(names.get(i), sections.get(i), tables);
-		}
-	    
+	    	while(in2.hasNextInt()){
+	    		if(tempSection.equals(sections.get(i))){
+	   				tables.add(in2.nextInt());
+	   			}
+	   		}
+	    	
+	    	ServerModel newModel = new ServerModel(names.get(i), sections.get(i), tables);
+	    	serverModel.add(newModel);
+	    	listModel.addElement(newModel.ServerName);
+	    	tables.clear();
+	    	i++;
 	    }
-		String[]serverNames = new String [names.size()];
-		for (int n = 0; n < names.size(); n++){
-			serverNames[n] = names.get(i);
-		}
+		JButton button1 = new JButton(serverModel.get(0).Section.tableSeatAvailable().get(0));
 
-		JList serverList = new JList(serverNames);
+		JList<String> serverList = new JList<String>(listModel);
 		serverList.setVisibleRowCount(1);
 		serverList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		paneleast.add(new JScrollPane(serverList), BorderLayout.EAST);
+
 		paneleast.add(button1);
-		paneleast.add(new JScrollPane(serverList));
-		paneleast.add(button2);
 		
+	}
+	
+	/**
+	 * *
+	public ServerModel getSelectedServer(){
+		String s = listModel.get(serverList.getSelectedIndex());
+		ServerModel ret = serverModel.get(0);
+		for (int i = 1; i < listModel.size(); i++){
+			if(ret.ServerName.equals(s)){
+				break;
+			}
+			else{
+			ret = serverModel.get(i);
+			}
+		}
+		return ret;
+	}*/
+	
+	public void updateList(LinkedList <ServerModel> queue){
+		listModel.clear();
+		for (int i = 0; i < queue.size(); i++){
+			listModel.addElement(queue.get(i).ServerName);
+		}
 	}
 }
