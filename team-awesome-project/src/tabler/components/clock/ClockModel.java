@@ -2,8 +2,6 @@ package tabler.components.clock;
 
 import java.util.Date;
 
-import javax.swing.JLabel;
-
 /**
  * The <code>ClockModel</code> class represents the current state of the clock.
  * 
@@ -37,7 +35,7 @@ public class ClockModel {
 	
 	/**
 	 * Creates a string representation of the <code>ClockModel</code> object 
-	 * a format similar to: Thu, Jan 1 10:42:27 AM
+	 * a format similar to: Thu, 
 	 * 
 	 * @return a string representation of the <code>ClockModel</code> object
 	 */
