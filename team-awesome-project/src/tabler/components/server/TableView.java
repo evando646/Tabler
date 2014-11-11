@@ -19,7 +19,7 @@ public class TableView extends JFrame {
 		add(panelcenter, BorderLayout.CENTER);
 		panelcenter.setBackground(Color.CYAN);
 	}
-	public void registerListeners(ServerController controller){
+	public void registerListeners(ServerQueueController controller){
 		
 	}
 }

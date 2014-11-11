@@ -22,7 +22,7 @@ public class WaitlistView extends JFrame {
 		add(panelwest, BorderLayout.WEST);
 		panelwest.setBackground(Color.CYAN);
 	}
-	public void registerListeners(ServerController controller){
+	public void registerListeners(ServerQueueController controller){
 		
 	}
 }

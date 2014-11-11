@@ -15,13 +15,13 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
 
-public class ServerController implements ActionListener{
+public class ServerQueueController implements ActionListener{
 	
 
 	private TableView tableView;
 	private WaitlistView waitView;
 	
-	public ServerController ( TableView tableView, WaitlistView waitView){
+	public ServerQueueController ( TableView tableView, WaitlistView waitView){
 		this.tableView = tableView;
 		this.waitView = waitView;
 	}
