@@ -140,7 +140,7 @@ public class GuestModel {
 				+ ", contactNumber=" + contactNumber + "]";
 	}
 	
-	public String reservationTimeRet(){
+	public String getReservationTime(){
 		int year=reservationTime.get(Calendar.YEAR);
 		int month=reservationTime.get(Calendar.MONTH);
 		int day=reservationTime.get(Calendar.DAY_OF_MONTH);
