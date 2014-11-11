@@ -28,9 +28,9 @@ public class ServerModel {
 	/**
 	 * Initializes the instance variables.
 	 */
-	public ServerModel(String Name, String SectionName, ArrayList<Table> Tables) {
-		ServerName = Name;
-		Section = new SectionObject(SectionName, Tables);
+	public ServerModel(String Name, String SectionName, ArrayList<Integer> Tables) {
+		this.ServerName = Name;
+		this.Section = new SectionObject(SectionName, Tables);
 		addToQueue.add(this);
 	}
 
@@ -51,7 +51,7 @@ public class ServerModel {
 		for(int i = 0; i < removedFromQueue.size(); i++){
 			if (removedFromQueue.get(i).Section.isFull() != true){
 				int k = 0;
-				while(addToQueue.get(k).Section.TimeLastSeated().before(removedFromQueue.get(i).Section.TimeLastSeated())){
+				while(addToQueue.get(k).Section.TimeLastSeated() < removedFromQueue.get(i).Section.TimeLastSeated()){
 					k++;
 				}
 				addToQueue.add(k,removedFromQueue.get(i));
@@ -67,7 +67,7 @@ public class ServerModel {
 		ServerModel lastAssigned = addToQueue.get(0);
 		int moveIndex = 0;
 		for(int i = 1; i < addToQueue.size(); i++){
-			if(addToQueue.get(i).Section.TimeLastSeated().after(lastAssigned.Section.TimeLastSeated())){
+			if(addToQueue.get(i).Section.TimeLastSeated() > lastAssigned.Section.TimeLastSeated()){
 				lastAssigned = addToQueue.get(i);
 				moveIndex = i;
 			}
@@ -81,11 +81,15 @@ public class ServerModel {
 		queue.add(last);
 		return;
 	}
-	public ArrayList<String> getServerStrings(){
+	public String[] getServerStrings(){
 		ArrayList<String> string = new ArrayList<>();
 		for (int i = 0; i < addToQueue.size(); i++){
 			string.add(addToQueue.get(i).toString());
 		}
-		return string;
+		String [] ret = new String[string.size()];
+		for (int i = 0; i < string.size(); i++){
+			ret[i] = string.get(i);
+		}
+		return ret;
 	}
 }
