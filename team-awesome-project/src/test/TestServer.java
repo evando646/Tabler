@@ -1,6 +1,8 @@
-package tabler.components.server;
+package test;
 
 import javax.swing.*;
+
+import tabler.components.server.ServerView;
 
 
 
