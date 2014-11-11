@@ -7,7 +7,7 @@ import tabler.components.server.ServerView;
 
 
 
-public class TestServer extends JFrame{
+public class ServerTest extends JFrame{
 	
 	public static void main (String[] args){
 
