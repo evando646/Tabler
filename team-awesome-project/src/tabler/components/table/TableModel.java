@@ -3,7 +3,7 @@ package tabler.components.table;
 import javax.swing.JButton;
 
 /**
- * Table Model
+ * TableModel Model
  * 
  * @author frg169
  *

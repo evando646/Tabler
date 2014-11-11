@@ -3,7 +3,7 @@ package tabler.components.server;
 import java.util.Date;
 import java.util.Random;
 
-public class Table {
+public class TableModel {
 	Date date;
 	double time;
 	int tablenum;
@@ -12,7 +12,7 @@ public class Table {
 	
 	public String state;
 
-	public Table (String section, int table){
+	public TableModel (String section, int table){
 		this.sectionName = section;
 		this.tablenum = table;
 		this.date = new Date();

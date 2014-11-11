@@ -13,14 +13,14 @@ public class SectionModel {
 	/**
 	 * This is an array of TableObjects assigned to a section
 	 */
-	private ArrayList<Table> tableList;
-	private Table newtable;
+	private ArrayList<TableModel> tableList;
+	private TableModel newtable;
 	
 	SectionModel(String SectionName, ArrayList<Integer> Tables){
 		this.sectionName = SectionName;
 		this.tableList = new ArrayList<>();
 		for (int i = 0; i < Tables.size(); i++){
-			newtable = new Table(this.sectionName, Tables.get(i));
+			newtable = new TableModel(this.sectionName, Tables.get(i));
 			this.tableList.add(newtable);
 		}
 	}
