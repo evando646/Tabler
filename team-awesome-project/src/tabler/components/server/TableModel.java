@@ -52,16 +52,13 @@ public class TableModel implements Comparable<TableModel> {
 		return String.format("%d", this.capacity);
 	}
 	
-	// TODO replace the contents of this placeholder method
 	public boolean isReady() {
-		return true;
+		return (state.equals(TableState.AVAILABLE));
 	}
 
-	// TODO replace the contents of this placeholder method
 	public boolean isOccupied() {
-		return true;
+		return !(currentGuest.equals(null));
 	}
-
 	
 	public int compareTo(TableModel other) {
 		if (this.tableNumber == other.getTableNumber()) {
