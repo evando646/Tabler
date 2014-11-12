@@ -1,7 +1,5 @@
 package tabler.components.server;
 
-import java.util.*;
-
 public class ServerModel {
 	/**
 	 * This is the name of the server the user has selected
@@ -19,5 +17,22 @@ public class ServerModel {
 	public ServerModel(String name, SectionModel section) {
 		this.serverName = name;
 		this.assignedSection = section;
+	}
+	
+	/**
+	 * Accessor function for the server's name
+	 * 
+	 * @return the server's name
+	 */
+	public String getServerName() {
+		return serverName;
+	}
+	
+	/** Accessor function for the server's assigned section
+	 * 
+	 * @return the server's assigned section
+	 */
+	public SectionModel getSection() {
+		return assignedSection;
 	}
 }
