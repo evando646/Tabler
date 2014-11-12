@@ -48,6 +48,18 @@ public class SectionModel {
 		this.tableList.add(newTable);
 	}
 	
+	public TableModel removeTable(int tableNumber) {
+		for (TableModel table : tableList) {
+			if (table.getTableNumber() == tableNumber) {
+				// the remove() method should return a reference to the
+				// element that was removed
+				return tableList.remove(tableList.indexOf(table));
+			}
+		}
+		
+		return null;
+	}
+	
 	/**
 	 * table.time represents the updated time the table was last seated 
 	 * Function returns the earliest time per section that a table 

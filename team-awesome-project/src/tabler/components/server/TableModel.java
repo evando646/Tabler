@@ -18,16 +18,17 @@ public class TableModel implements Comparable<TableModel> {
 	private TableState state;
 	private String section;
 
-	public TableModel (String section, int table){
-		this.sectionName = section;
-		this.tablenum = table;
-		this.date = new Date();
-		this.time =  date.getTime();
-		this.state = randomState();
-		this.seats = randomSeat();
-
-		
+	public TableModel (String section, int tableNum, int capacity){
+		this.tableNumber = tableNum;
+		this.capacity = capacity;
+		this.section = section;
+		this.positionX = 0;
+		this.positionY = 0;
+		this.currentGuest = null;
+		this.currentGuestArrived = null;
+		this.state = TableState.AVAILABLE;
 	}
+	
 	public String randomState(){
 		Random rand = new Random();
 		String [] states = {"open", "dirty", "set up", "reserved"};
@@ -46,7 +47,7 @@ public class TableModel implements Comparable<TableModel> {
 	}
 	
 	public String toString(){
-		return String.format("%d", this.seats);
+		return String.format("%d", this.capacity);
 	}
 	
 	// TODO replace the contents of this placeholder method
