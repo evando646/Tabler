@@ -93,14 +93,21 @@ public class SectionModel {
 		return (numOccupied == tableList.size());
 	}
 	
-	public ArrayList<String> tableSeatAvailable(){
-		ArrayList<String> returnOpen = new ArrayList<>();
-		for (int i = 0; i < this.tableList.size(); i ++){
-			if (this.tableList.get(i).state.equals("open")){
-				returnOpen.add(tableList.get(i).toString());
+	/**
+	 * Searches a section for tables that are ready for guests
+	 *
+	 * @return a list of available tables
+	 */
+	public ArrayList<TableModel> getAvailableTables() {
+		ArrayList<TableModel> availableTables = new ArrayList<TableModel>();
+		
+		for (TableModel table : tableList) {
+			if (table.isReady()) {
+				availableTables.add(table);
 			}
 		}
-		return returnOpen;
+
+		return availableTables;
 	}
 	
 	public String getSectionName() {
