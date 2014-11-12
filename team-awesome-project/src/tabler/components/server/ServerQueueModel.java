@@ -31,7 +31,7 @@ public class ServerQueueModel {
 
 			if (removedFromQueue.get(i).assignedSection.isFull() != true){
 				int k = 0;
-				while(addToQueue.get(k).assignedSection.TimeLastSeated() < removedFromQueue.get(i).assignedSection.TimeLastSeated()){
+				while(addToQueue.get(k).assignedSection.timeLastSeated() < removedFromQueue.get(i).assignedSection.timeLastSeated()){
 					k++;
 				}
 				addToQueue.add(k,removedFromQueue.get(i));
@@ -53,7 +53,7 @@ public class ServerQueueModel {
 		ServerModel lastAssigned = addToQueue.get(0);
 		int moveIndex = 0;
 		for(int i = 1; i < addToQueue.size(); i++){
-			if(addToQueue.get(i).assignedSection.TimeLastSeated() > lastAssigned.assignedSection.TimeLastSeated()){
+			if(addToQueue.get(i).assignedSection.timeLastSeated() > lastAssigned.assignedSection.timeLastSeated()){
 				lastAssigned = addToQueue.get(i);
 				moveIndex = i;
 			}

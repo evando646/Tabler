@@ -2,6 +2,7 @@ package tabler.components.server;
 
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class SectionModel {
 	/**
@@ -61,21 +62,25 @@ public class SectionModel {
 	}
 	
 	/**
-	 * table.time represents the updated time the table was last seated 
-	 * Function returns the earliest time per section that a table 
-	 * was assigned
+	 * Identifies the time at which the most recent guest was seated at a 
+	 * table in a section.
+     *
+     * @return the time that the most recent guest was seated in the section
  	 */
-	public double TimeLastSeated(){
-		double lastDate = this.tableList.get(0).time;
-		for (int i = 1; i < this.tableList.size(); i++){
-			if (this.tableList.get(i).time > lastDate){
-				lastDate = this.tableList.get(i).time;
-			}
-			else{
-				continue;
+	public GregorianCalendar timeLastSeated(){
+		GregorianCalendar mostRecentSeatedTime = null;
+		
+		if (tableList.size() > 0) {
+			mostRecentSeatedTime = tableList.get(0).getCurrentGuestArrived();
+		}
+		
+		for (TableModel table : tableList) {
+			if (mostRecentSeatedTime.compareTo(table.getCurrentGuestArrived()) == -1) {
+				mostRecentSeatedTime = table.getCurrentGuestArrived();
 			}
 		}
-		return lastDate;
+		
+		return mostRecentSeatedTime;
 	}
 	/**
 	 * This Function returns true if a section is full. False otherwise 
@@ -98,7 +103,7 @@ public class SectionModel {
 	 *
 	 * @return a list of available tables
 	 */
-	public ArrayList<TableModel> getAvailableTables() {
+	public ArrayList<TableModel> availableTables() {
 		ArrayList<TableModel> availableTables = new ArrayList<TableModel>();
 		
 		for (TableModel table : tableList) {
