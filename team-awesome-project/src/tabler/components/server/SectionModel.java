@@ -85,8 +85,9 @@ public class SectionModel {
 	/**
 	 * This Function returns true if a section is full. False otherwise 
 	 * 
+	 * @return true if the section is full; false otherwise
 	 */
-	public boolean isFull(){
+	public boolean isFull() {
 		int numOccupied = 0;
 		
 		for (TableModel table : tableList) {
