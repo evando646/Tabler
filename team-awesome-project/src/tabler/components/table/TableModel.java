@@ -12,15 +12,16 @@ public class TableModel {
 	
 	public enum TableState { AVAILABLE, OCCUPIDE, DIRTY };
 	
+	private int tableNumber;
+	
 	private TableState state;
 
-	private String GuestName;
+	private String guestName;
 	private int size;
 	
 	private int x;
 	private int y;
-	
-	private JButton button;
+
 	
 	/**
 	 * Constructor
@@ -30,14 +31,19 @@ public class TableModel {
 	 * @param y
 	 * @param size
 	 */
-	public TableModel(JButton button, int x, int y, int size)
+	public TableModel(int x, int y, int tableNum, int size)
 	{
 		this.state = TableState.AVAILABLE;
-		this.GuestName = "";
-		this.button = button;
+		this.guestName = "";
 		this.x = x;
 		this.y = y;
+		this.tableNumber = tableNum;
 		this.size = size;
+	}
+	
+	public TableModel()
+	{
+		//Testing
 	}
 	
 	public TableState getState() {
@@ -49,11 +55,11 @@ public class TableModel {
 	}
 
 	public String getGuestName() {
-		return GuestName;
+		return guestName;
 	}
 
 	public void setGuestName(String guestName) {
-		GuestName = guestName;
+		guestName = guestName;
 	}
 
 	public int getSize() {
@@ -78,14 +84,6 @@ public class TableModel {
 
 	public void setY(int y) {
 		this.y = y;
-	}
-
-	public JButton getButton() {
-		return button;
-	}
-
-	public void setButton(JButton button) {
-		this.button = button;
 	}
 
 }
