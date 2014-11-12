@@ -147,4 +147,9 @@ public class SectionModel {
 	public ArrayList<TableModel> getTableList() {
 		return this.tableList;
 	}
+	
+	// TODO add a toString() method
+	public String toString() {
+		return new String("");
+	}
 }

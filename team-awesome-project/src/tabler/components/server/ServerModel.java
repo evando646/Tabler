@@ -42,4 +42,9 @@ public class ServerModel {
 	public SectionModel getSection() {
 		return assignedSection;
 	}
+	
+	// TODO add a toString() method
+	public String toString() {
+		return new String("");
+	}
 }
