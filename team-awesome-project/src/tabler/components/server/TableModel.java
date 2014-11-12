@@ -1,16 +1,22 @@
 package tabler.components.server;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Random;
 
-public class TableModel {
-	Date date;
-	double time;
-	int tablenum;
-	String sectionName;
-	int seats;
+import tabler.components.guest.GuestModel;
+
+public class TableModel implements Comparable<TableModel> {
+	private static enum TableState { AVAILABLE, OCCUPIED, NEEDS_SERVICING, RESERVED };
 	
-	public String state;
+	private int tableNumber;
+	private int capacity;
+	private int positionX;
+	private int positionY;
+	private GuestModel currentGuest;
+	private GregorianCalendar currentGuestArrived;
+	private TableState state;
+	private String section;
 
 	public TableModel (String section, int table){
 		this.sectionName = section;
@@ -35,6 +41,10 @@ public class TableModel {
 		return seats[index];
 	}
 	
+	public int getTableNumber() {
+		return this.tableNumber;
+	}
+	
 	public String toString(){
 		return String.format("%d", this.seats);
 	}
@@ -48,4 +58,17 @@ public class TableModel {
 	public boolean isOccupied() {
 		return true;
 	}
+
+	
+	public int compareTo(TableModel other) {
+		if (this.tableNumber == other.getTableNumber()) {
+			return 0;// TODO Auto-generated method stub
+		} else if (this.tableNumber < other.getTableNumber()) {
+			return -1;
+		} else {
+			return 1;
+		}
+	}
+	
+	
 }

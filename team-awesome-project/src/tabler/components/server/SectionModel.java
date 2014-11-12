@@ -2,7 +2,6 @@ package tabler.components.server;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SectionModel {
 	/**
@@ -34,6 +33,19 @@ public class SectionModel {
 	SectionModel(String sectionName, ArrayList<TableModel> tables){
 		this.sectionName = sectionName;
 		this.tableList = tables;
+	}
+	
+	public void addTable(TableModel newTable) {
+		for (TableModel table : tableList) {
+			if (table.equals(newTable)) {
+				System.err.println("Cannot add table to section " + 
+						"because it already exists in the section");
+				
+				// throw new InvalidTableExample (maybe)
+			}
+		}
+		
+		this.tableList.add(newTable);
 	}
 	
 	/**
@@ -77,5 +89,13 @@ public class SectionModel {
 			}
 		}
 		return returnOpen;
+	}
+	
+	public String getSectionName() {
+		return this.sectionName;
+	}
+	
+	public ArrayList<TableModel> getTableList() {
+		return this.tableList;
 	}
 }
