@@ -28,7 +28,7 @@ public class SectionModel {
 	 * 
 	 * @param sectionName the name of the section
 	 */
-	SectionModel(String sectionName) {
+	public SectionModel(String sectionName) {
 		this.sectionName = sectionName;
 		tableList = new ArrayList<TableModel>();
 	}
@@ -39,7 +39,7 @@ public class SectionModel {
 	 * @param sectionName the name of the section
 	 * @param tables a list of unique tables to add to the section
 	 */
-	SectionModel(String sectionName, ArrayList<TableModel> tables){
+	public SectionModel(String sectionName, ArrayList<TableModel> tables){
 		this.sectionName = sectionName;
 		this.tableList = tables;
 	}
