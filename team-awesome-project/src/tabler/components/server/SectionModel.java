@@ -4,6 +4,14 @@ package tabler.components.server;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+/**
+ * The SectionModel represents a collection of tables that can be assigned
+ * to a server.
+ * 
+ * @author Kristin (krismndz)
+ * @author Augustine (mr-augustine)
+ *
+ */
 public class SectionModel {
 	/**
 	 * This is the name of a section

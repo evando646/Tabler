@@ -1,5 +1,12 @@
 package tabler.components.server;
 
+/**
+ * The ServerModel represents a server that tends to a section of tables
+ * 
+ * @author Kristin (krismndz)
+ * @author Augustine (mr-augustine)
+ *
+ */
 public class ServerModel {
 	/**
 	 * This is the name of the server the user has selected
