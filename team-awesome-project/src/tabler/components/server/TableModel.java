@@ -28,12 +28,15 @@ public class TableModel implements Comparable<TableModel> {
 		this.state = TableState.AVAILABLE;
 	}
 	
+	// TODO Consider moving to the test class for TableModel
 	public String randomState(){
 		Random rand = new Random();
 		String [] states = {"open", "dirty", "set up", "reserved"};
 		int index = rand.nextInt(4);
 		return states[index];
 	}
+	
+	// TODO Consider moving to the test class for TableModel
 	public int randomSeat(){
 		Random rand = new Random();
 		int [] seats = {2, 4, 6, 8};
@@ -62,7 +65,7 @@ public class TableModel implements Comparable<TableModel> {
 	
 	public int compareTo(TableModel other) {
 		if (this.tableNumber == other.getTableNumber()) {
-			return 0;// TODO Auto-generated method stub
+			return 0;
 		} else if (this.tableNumber < other.getTableNumber()) {
 			return -1;
 		} else {
