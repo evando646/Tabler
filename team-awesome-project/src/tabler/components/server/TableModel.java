@@ -1,6 +1,5 @@
 package tabler.components.server;
 
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
@@ -71,5 +70,27 @@ public class TableModel implements Comparable<TableModel> {
 		}
 	}
 	
+	public int getPositionX() { 
+		return this.positionX;
+	}
 	
+	public int getPositionY() {
+		return this.positionY;
+	}
+	
+	public GuestModel getCurrentGuest() {
+		return this.currentGuest;
+	}
+	
+	public GregorianCalendar getCurrentGuestArrived() {
+		return this.currentGuestArrived;
+	}
+	
+	public TableState getTableState() {
+		return this.state;
+	}
+	
+	public String getTableSection() {
+		return this.section;
+	}
 }
