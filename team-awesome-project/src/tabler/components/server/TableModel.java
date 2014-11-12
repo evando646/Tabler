@@ -39,4 +39,13 @@ public class TableModel {
 		return String.format("%d", this.seats);
 	}
 	
+	// TODO replace the contents of this placeholder method
+	public boolean isReady() {
+		return true;
+	}
+
+	// TODO replace the contents of this placeholder method
+	public boolean isOccupied() {
+		return true;
+	}
 }

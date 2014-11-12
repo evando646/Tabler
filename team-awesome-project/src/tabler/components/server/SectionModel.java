@@ -14,15 +14,26 @@ public class SectionModel {
 	 * This is an array of TableObjects assigned to a section
 	 */
 	private ArrayList<TableModel> tableList;
-	private TableModel newtable;
+
+	/**
+	 * Constructs a section with an empty list of tables
+	 * 
+	 * @param sectionName the name of the section
+	 */
+	SectionModel(String sectionName) {
+		this.sectionName = sectionName;
+		tableList = new ArrayList<TableModel>();
+	}
 	
-	SectionModel(String SectionName, ArrayList<Integer> Tables){
-		this.sectionName = SectionName;
-		this.tableList = new ArrayList<>();
-		for (int i = 0; i < Tables.size(); i++){
-			newtable = new TableModel(this.sectionName, Tables.get(i));
-			this.tableList.add(newtable);
-		}
+	/**
+	 * Constructs a section with a set of tables
+	 * 
+	 * @param sectionName the name of the section
+	 * @param tables a list of unique tables to add to the section
+	 */
+	SectionModel(String sectionName, ArrayList<TableModel> tables){
+		this.sectionName = sectionName;
+		this.tableList = tables;
 	}
 	
 	/**
@@ -43,24 +54,19 @@ public class SectionModel {
 		return lastDate;
 	}
 	/**
-	 *This Function returns true if a section is full. False otherwise 
-	 * State variable represents the current status of open or not open
+	 * This Function returns true if a section is full. False otherwise 
+	 * 
 	 */
 	public boolean isFull(){
-		int numOpen = 0;
-		for(int i = 0; i< this.tableList.size(); i++){
-			if(this.tableList.get(i).state.equals("open")){
-				numOpen++;
-			}
-			else{
-				continue; 
+		int numOccupied = 0;
+		
+		for (TableModel table : tableList) {
+			if (table.isOccupied()) {
+				numOccupied++;
 			}
 		}
-		if (numOpen >= 1){
-			return false;
-		}else {
-			return true;
-		}
+		
+		return (numOccupied == tableList.size());
 	}
 	
 	public ArrayList<String> tableSeatAvailable(){
