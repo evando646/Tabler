@@ -36,6 +36,11 @@ public class SectionModel {
 		this.tableList = tables;
 	}
 	
+	/**
+	 * Adds a table to a section
+	 * 
+	 * @param newTable a table to be added to the section
+	 */
 	public void addTable(TableModel newTable) {
 		for (TableModel table : tableList) {
 			if (table.equals(newTable)) {
@@ -82,6 +87,7 @@ public class SectionModel {
 		
 		return mostRecentSeatedTime;
 	}
+	
 	/**
 	 * This Function returns true if a section is full. False otherwise 
 	 * 
@@ -116,10 +122,20 @@ public class SectionModel {
 		return availableTables;
 	}
 	
+	/**
+	 * Accessor function for the section name
+	 * 
+	 * @return the section name
+	 */
 	public String getSectionName() {
 		return this.sectionName;
 	}
 	
+	/**
+	 * Accessor function for the table list
+	 * 
+	 * @return a list of all tables in the section
+	 */
 	public ArrayList<TableModel> getTableList() {
 		return this.tableList;
 	}
