@@ -63,11 +63,11 @@ public class ServerQueueView extends JFrame{
 	    	
 	    	ServerModel newModel = new ServerModel(names.get(i), sections.get(i), tables);
 	    	serverModel.add(newModel);
-	    	listModel.addElement(newModel.ServerName);
+	    	listModel.addElement(newModel.serverName);
 	    	tables.clear();
 	    	i++;
 	    }
-		JButton button1 = new JButton(serverModel.get(0).Section.tableSeatAvailable().get(0));
+		JButton button1 = new JButton(serverModel.get(0).assignedSection.tableSeatAvailable().get(0));
 
 		JList<String> serverList = new JList<String>(listModel);
 		serverList.setVisibleRowCount(1);
@@ -97,7 +97,7 @@ public class ServerQueueView extends JFrame{
 	public void updateList(LinkedList <ServerModel> queue){
 		listModel.clear();
 		for (int i = 0; i < queue.size(); i++){
-			listModel.addElement(queue.get(i).ServerName);
+			listModel.addElement(queue.get(i).serverName);
 		}
 	}
 }
