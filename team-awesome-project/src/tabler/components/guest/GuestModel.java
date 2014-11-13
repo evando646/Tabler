@@ -128,6 +128,10 @@ public GuestModel(){
 		this.size=size;
 	}
 	
+	public void setContactNumber(String contactNum){
+		contactNumber=contactNum;
+	}
+	
 	/*
 	 * every time this method is called it will switch 
 	 * Whether a reservation is true or not.
