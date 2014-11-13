@@ -148,8 +148,26 @@ public class SectionModel {
 		return this.tableList;
 	}
 	
-	// TODO add a toString() method
+	/**
+	 * Creates a String representation of a SectionModel object
+	 * 
+	 * @return the section's String representation
+	 */
 	public String toString() {
-		return new String("");
+		String objectString = null;
+		
+		objectString = "[SectionModel: name=" + getSectionName() + ", tables={";
+		
+		for (int i = 0; i < tableList.size(); i++) {
+			objectString += tableList.get(i).getTableNumber();
+			
+			if (i < tableList.size() - 1) {
+				objectString += ", ";
+			}
+		}
+
+		objectString += "}]";
+		
+		return objectString;
 	}
 }
