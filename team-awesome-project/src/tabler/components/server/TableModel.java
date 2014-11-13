@@ -48,8 +48,34 @@ public class TableModel implements Comparable<TableModel> {
 		return this.tableNumber;
 	}
 	
+	/**
+	 * Creates a String representation of a TableeModel object
+	 * 
+	 * @return the table's String representation
+	 */
 	public String toString(){
-		return String.format("%d", this.capacity);
+		String objectString = null;
+		
+		objectString = "[TableModel: id=" + getTableNumber() + ", capacity=" +
+				getCapacity() + ", section=" + getSectionName() + ", position=(" +
+				getPositionX() + "," + getPositionY() + "), state=" + getState() +
+				", current_guest=(" + getCurrentGuest().getName() + "party of " +
+				getCurrentGuest().getSize() + "), guest_arrived=" + 
+				getCurrentGuestArrived() + "]";
+		
+		return objectString;
+	}
+	
+	public int getCapacity() {
+		return this.capacity;
+	}
+	
+	public String getSectionName() {
+		return this.section;
+	}
+	
+	public TableState getState() {
+		return this.state;
 	}
 	
 	public boolean isReady() {
