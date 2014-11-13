@@ -1,7 +1,6 @@
 package tabler.components.server;
 
 import java.util.GregorianCalendar;
-import java.util.Random;
 
 import tabler.components.guest.GuestModel;
 
@@ -55,6 +54,22 @@ public class TableModel implements Comparable<TableModel> {
 		objectString += "]";
 		
 		return objectString;
+	}
+	
+	public void assignGuest(GuestModel newGuest) {
+		if (!newGuest.equals(null)) {
+			currentGuest = newGuest;
+			currentGuestArrived = new GregorianCalendar();
+		}
+	}
+	
+	public GuestModel removeGuest() {
+		GuestModel removedGuest = currentGuest;
+		
+		currentGuest = null;
+		currentGuestArrived = null;
+		
+		return removedGuest;
 	}
 	
 	public int getCapacity() {
