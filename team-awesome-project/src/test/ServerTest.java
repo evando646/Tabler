@@ -152,15 +152,21 @@ public class ServerTest {
 	
 	public static void main (String[] args){
 		ArrayList<TableModel> tables = null;
+		ArrayList<SectionModel> sections = null;
 		
 		tables = importTables(tablesFile);
+		sections = importSections(sectionsFile, tables);
 		//importSections(sectionsFile, null);
 		//importServers(serversFile);
 		
-		for (TableModel table : tables) {
+		/*for (TableModel table : tables) {
 			System.out.println(table);
-		}
+		}*/
 	
+		for (SectionModel section : sections) {
+			System.out.println(section);
+		}
+		
 		/*ServerQueueView window = new ServerQueueView();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setSize(700, 700);
