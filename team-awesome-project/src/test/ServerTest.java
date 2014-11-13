@@ -124,12 +124,21 @@ public class ServerTest {
 		return importedSections;
 	}
 
-	public static ArrayList<ServerModel> importServers(String pathToServersFile) {
+	/**
+	 * Imports the servers listed in the servers file and assign to each server a
+	 * reference to the section they are responsible for.
+	 * 
+	 * @param pathToServersFile
+	 * @return
+	 */
+	public static ArrayList<ServerModel> importServers(String pathToServersFile,
+			ArrayList<SectionModel> sections) {
 		if (pathToServersFile.equals(null)) {
 			return null;
 		}
 		
 		Scanner inputFile = null;
+		ArrayList<ServerModel> importedServers = new ArrayList<ServerModel>();
 		
 		try {
 			inputFile = new Scanner(new File(serversFile));
@@ -141,31 +150,46 @@ public class ServerTest {
 		// skip the field descriptor line
 		inputFile.nextLine();
 		
-		System.out.println("Contents of servers file\n");
+		//System.out.println("Contents of servers file\n");
 		
 		while (inputFile.hasNextLine()) {
-			System.out.println(inputFile.nextLine());
+			String sectionName = inputFile.next();
+			String serverName = inputFile.next();
+			
+			for (SectionModel section : sections) {
+				if (section.getSectionName().equals(sectionName)) {
+					ServerModel newServer = new ServerModel(serverName, section);
+					importedServers.add(newServer);
+				}
+			}
+			
+			//System.out.println(inputFile.nextLine());
 		}
 		
-		return null; //return new ArrayList<ServerModel>();
+		return importedServers;
 	}
 	
 	public static void main (String[] args){
 		ArrayList<TableModel> tables = null;
 		ArrayList<SectionModel> sections = null;
+		ArrayList<ServerModel> servers = null;
 		
 		tables = importTables(tablesFile);
 		sections = importSections(sectionsFile, tables);
-		//importSections(sectionsFile, null);
-		//importServers(serversFile);
+		servers = importServers(serversFile, sections);
+
+		for (ServerModel server : servers) {
+			System.out.println(server);
+		}
 		
-		/*for (TableModel table : tables) {
-			System.out.println(table);
-		}*/
-	
 		for (SectionModel section : sections) {
 			System.out.println(section);
 		}
+		
+		for (TableModel table : tables) {
+		System.out.println(table);
+		}
+		
 		
 		/*ServerQueueView window = new ServerQueueView();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
