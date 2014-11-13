@@ -72,6 +72,10 @@ public class TableModel implements Comparable<TableModel> {
 		return removedGuest;
 	}
 	
+	public void setSection(String sectionName) {
+		this.section = sectionName;
+	}
+	
 	public int getCapacity() {
 		return this.capacity;
 	}

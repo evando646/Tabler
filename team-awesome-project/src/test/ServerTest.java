@@ -61,6 +61,8 @@ public class ServerTest {
 			positionX = tableScanner.nextInt();
 			positionY = tableScanner.nextInt();
 			
+			// When creating a new table, use a placeholder section value. The
+			// section value will be added when the sections are imported.
 			TableModel newTable = new TableModel("Unknown Section", tableNumber, 
 												tableCapacity,
 												positionX, positionY);
@@ -82,6 +84,7 @@ public class ServerTest {
 		}
 		
 		Scanner inputFile = null;
+		ArrayList<SectionModel> importedSections = new ArrayList<SectionModel>();
 		
 		try {
 			inputFile = new Scanner(new File(sectionsFile));
@@ -93,13 +96,32 @@ public class ServerTest {
 		// skip the field descriptor line
 		inputFile.nextLine();
 		
-		System.out.println("Contents of sections file\n");
+		//System.out.println("Contents of sections file\n");
 		
 		while (inputFile.hasNextLine()) {
-			System.out.println(inputFile.nextLine());
+			String sectionName = inputFile.next();
+			
+			SectionModel newSection = new SectionModel(sectionName);
+			
+			// Add the corresponding table (identified in the file by tableNumber)
+			// to the new section AND updated the table's section number
+			while (inputFile.hasNextInt()) {
+				int nextTableNumber = inputFile.nextInt();
+				
+				for (TableModel table : tables) {
+					if (table.getTableNumber() == nextTableNumber) {
+						newSection.addTable(table);
+						table.setSection(sectionName);
+					}
+				}
+			}
+			
+			importedSections.add(newSection);
+			
+			//System.out.println(inputFile.nextLine());
 		}
 		
-		return null; //return new ArrayList<SectionModel>();
+		return importedSections;
 	}
 
 	public static ArrayList<ServerModel> importServers(String pathToServersFile) {
