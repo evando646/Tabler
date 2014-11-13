@@ -33,13 +33,6 @@ public class WaitlistModel {
 		return false;
 	}
 	
-	private static boolean isWalkin(GuestModel guest) {
-		// TODO fix the getReservationTime() method to actually return a Date
-		// instead of a String
-		//return (guest.getDateCreated().compareTo(guest.getReservationTime()) !=0);
-		return false;
-	}
-	
 	private void sortedAdd(LinkedList<GuestModel> list, 
 			GuestModel newGuest) {
 		if (newGuest.isReservation() == false) {
@@ -63,6 +56,17 @@ public class WaitlistModel {
 			}
 			
 			soon.addLast(newGuest);
+			return;
+		} else {
+			for (int i = 0; i < remaining.size(); i++) {
+				if (newGuest.getReservationTime().compareTo(
+						remaining.get(i).getReservationTime()) == -1) {
+					remaining.add(i, newGuest);
+					return;
+				}
+			}
+			
+			remaining.addLast(newGuest);
 			return;
 		}
 	}
