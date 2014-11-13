@@ -4,12 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.*;
+//import javax.swing.*;
 
 import tabler.components.server.SectionModel;
 import tabler.components.server.ServerModel;
 import tabler.components.server.TableModel;
-import tabler.components.server.ServerQueueView;
+//import tabler.components.server.ServerQueueView;
 
 
 
@@ -22,9 +22,9 @@ import tabler.components.server.ServerQueueView;
  *
  */
 public class ServerTest {
-	private static String tablesFile = "./test/tables.txt";
-	private static String sectionsFile = "./test/sections.txt";
-	private static String serversFile = "./test/servers.txt";
+	private static String tablesFile = "./src/test/tables.txt";
+	private static String sectionsFile = "./src/test/sections.txt";
+	private static String serversFile = "./src/test/servers.txt";
 	
 	public static ArrayList<TableModel> importTables(String pathToTablesFile) {
 		if (pathToTablesFile.equals(null)) {
