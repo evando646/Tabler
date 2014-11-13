@@ -33,6 +33,7 @@ public class ServerTest {
 		}
 		
 		Scanner inputFile = null;
+		ArrayList<TableModel> importedTables = new ArrayList<TableModel>();
 		
 		try {
 			inputFile = new Scanner(new File(tablesFile));
@@ -41,16 +42,41 @@ public class ServerTest {
 			System.exit(1);
 		}
 		
+		// skip the field descriptor line
+		inputFile.nextLine();
+		
 		System.out.println("Contents of tables file\n");
 		
 		while (inputFile.hasNextLine()) {
-			System.out.println(inputFile.nextLine());
+			int tableNumber = 0;
+			int tableCapacity = 0;
+			int positionX = 0;
+			int positionY = 0;
+			
+			String nextTableEntry = inputFile.nextLine();
+			Scanner tableScanner = new Scanner(nextTableEntry);
+			
+			tableNumber = tableScanner.nextInt();
+			tableCapacity = tableScanner.nextInt();
+			positionX = tableScanner.nextInt();
+			positionY = tableScanner.nextInt();
+			
+			TableModel newTable = new TableModel("Unknown Section", tableNumber, 
+												tableCapacity,
+												positionX, positionY);
+			
+			importedTables.add(newTable);
+			tableScanner.close();
+			//System.out.println(inputFile.nextLine());
 		}
 		
-		return null; //new ArrayList<TableModel>();
+		if (!inputFile.equals(null)) { inputFile.close(); }
+		
+		return importedTables;
 	}
 	
-	public static ArrayList<SectionModel> importSections(String pathToSectionsFile) {
+	public static ArrayList<SectionModel> importSections(String pathToSectionsFile, 
+			ArrayList<TableModel> tables) {
 		if (pathToSectionsFile.equals(null)) {
 			return null;
 		}
@@ -63,6 +89,9 @@ public class ServerTest {
 			System.err.printf("Error: %s not found\n", inputFile);
 			System.exit(1);
 		}
+		
+		// skip the field descriptor line
+		inputFile.nextLine();
 		
 		System.out.println("Contents of sections file\n");
 		
@@ -87,6 +116,9 @@ public class ServerTest {
 			System.exit(1);
 		}
 		
+		// skip the field descriptor line
+		inputFile.nextLine();
+		
 		System.out.println("Contents of servers file\n");
 		
 		while (inputFile.hasNextLine()) {
@@ -98,7 +130,7 @@ public class ServerTest {
 	
 	public static void main (String[] args){
 		importTables(tablesFile);
-		importSections(sectionsFile);
+		importSections(sectionsFile, null);
 		importServers(serversFile);
 	
 		/*ServerQueueView window = new ServerQueueView();

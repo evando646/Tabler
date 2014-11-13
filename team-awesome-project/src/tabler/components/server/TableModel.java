@@ -17,12 +17,12 @@ public class TableModel implements Comparable<TableModel> {
 	private TableState state;
 	private String section;
 
-	public TableModel (String section, int tableNum, int capacity){
+	public TableModel (String section, int tableNum, int capacity, int x, int y){
 		this.tableNumber = tableNum;
 		this.capacity = capacity;
 		this.section = section;
-		this.positionX = 0;
-		this.positionY = 0;
+		this.positionX = x;
+		this.positionY = y;
 		this.currentGuest = null;
 		this.currentGuestArrived = null;
 		this.state = TableState.AVAILABLE;
