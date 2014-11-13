@@ -26,8 +26,32 @@ public class ServerTest {
 	private static String sectionsFile = "./src/test/sections.txt";
 	private static String serversFile = "./src/test/servers.txt";
 	
+	// TODO actually create objects based on data ingested from the file
 	public static ArrayList<TableModel> importTables(String pathToTablesFile) {
 		if (pathToTablesFile.equals(null)) {
+			return null;
+		}
+		
+		Scanner inputFile = null;
+		
+		try {
+			inputFile = new Scanner(new File(tablesFile));
+		} catch (Exception FileNotFoundException) {
+			System.err.printf("Error: %s not found\n", inputFile);
+			System.exit(1);
+		}
+		
+		System.out.println("Contents of tables file\n");
+		
+		while (inputFile.hasNextLine()) {
+			System.out.println(inputFile.nextLine());
+		}
+		
+		return null; //new ArrayList<TableModel>();
+	}
+	
+	public static ArrayList<SectionModel> importSections(String pathToSectionsFile) {
+		if (pathToSectionsFile.equals(null)) {
 			return null;
 		}
 		
@@ -40,26 +64,42 @@ public class ServerTest {
 			System.exit(1);
 		}
 		
+		System.out.println("Contents of sections file\n");
+		
+		while (inputFile.hasNextLine()) {
+			System.out.println(inputFile.nextLine());
+		}
+		
+		return null; //return new ArrayList<SectionModel>();
+	}
+
+	public static ArrayList<ServerModel> importServers(String pathToServersFile) {
+		if (pathToServersFile.equals(null)) {
+			return null;
+		}
+		
+		Scanner inputFile = null;
+		
+		try {
+			inputFile = new Scanner(new File(serversFile));
+		} catch (Exception FileNotFoundException) {
+			System.err.printf("Error: %s not found\n", inputFile);
+			System.exit(1);
+		}
+		
 		System.out.println("Contents of servers file\n");
 		
 		while (inputFile.hasNextLine()) {
 			System.out.println(inputFile.nextLine());
 		}
 		
-		return null; //new ArrayList<TableModel>();
-	}
-	
-	public static ArrayList<SectionModel> importSections(String pathToSectionsFile) {
-		return new ArrayList<SectionModel>();
-	}
-
-	public static ArrayList<ServerModel> importServers(String pathToServersFile) {
-		return new ArrayList<ServerModel>();
+		return null; //return new ArrayList<ServerModel>();
 	}
 	
 	public static void main (String[] args){
 		importTables(tablesFile);
-
+		importSections(sectionsFile);
+		importServers(serversFile);
 	
 		/*ServerQueueView window = new ServerQueueView();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
