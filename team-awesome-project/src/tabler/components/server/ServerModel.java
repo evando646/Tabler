@@ -43,8 +43,17 @@ public class ServerModel {
 		return assignedSection;
 	}
 	
-	// TODO add a toString() method
+	/**
+	 * Creates a String representation of a ServerModel object
+	 * 
+	 * @return the server's String representation
+	 */
 	public String toString() {
-		return new String("");
+		String objectString = null;
+		
+		objectString = "[ServerModel: name=" + getServerName() + ", section="
+				+ getSection().getSectionName() + "]";
+		
+		return objectString;
 	}
 }
