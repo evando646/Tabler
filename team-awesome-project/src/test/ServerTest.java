@@ -34,7 +34,7 @@ public class ServerTest {
 		Scanner inputFile = null;
 		
 		try {
-			inputFile = new Scanner(new File(tablesFile));
+			inputFile = new Scanner(new File(sectionsFile));
 		} catch (Exception FileNotFoundException) {
 			System.err.printf("Error: %s not found\n", inputFile);
 			System.exit(1);
@@ -43,7 +43,7 @@ public class ServerTest {
 		System.out.println("Contents of servers file\n");
 		
 		while (inputFile.hasNextLine()) {
-			System.out.print(inputFile.nextLine());
+			System.out.println(inputFile.nextLine());
 		}
 		
 		return null; //new ArrayList<TableModel>();
