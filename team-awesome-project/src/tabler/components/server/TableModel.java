@@ -49,7 +49,7 @@ public class TableModel implements Comparable<TableModel> {
 	}
 	
 	/**
-	 * Creates a String representation of a TableeModel object
+	 * Creates a String representation of a TableModel object
 	 * 
 	 * @return the table's String representation
 	 */
@@ -59,9 +59,16 @@ public class TableModel implements Comparable<TableModel> {
 		objectString = "[TableModel: id=" + getTableNumber() + ", capacity=" +
 				getCapacity() + ", section=" + getSectionName() + ", position=(" +
 				getPositionX() + "," + getPositionY() + "), state=" + getState() +
-				", current_guest=(" + getCurrentGuest().getName() + "party of " +
-				getCurrentGuest().getSize() + "), guest_arrived=" + 
-				getCurrentGuestArrived() + "]";
+				", current_guest=(";
+		
+		if	(getCurrentGuest() == null) { 
+			objectString += "nobody party of 0), guest_arrived= n/a";
+		} else {
+			objectString += getCurrentGuest().getName() + "party of " +	getCurrentGuest().getSize() + 
+			"), guest_arrived=" + getCurrentGuestArrived();
+		}
+		
+		objectString += "]";
 		
 		return objectString;
 	}

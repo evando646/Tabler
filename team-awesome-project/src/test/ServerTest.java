@@ -45,7 +45,7 @@ public class ServerTest {
 		// skip the field descriptor line
 		inputFile.nextLine();
 		
-		System.out.println("Contents of tables file\n");
+		//System.out.println("Contents of tables file\n");
 		
 		while (inputFile.hasNextLine()) {
 			int tableNumber = 0;
@@ -129,9 +129,15 @@ public class ServerTest {
 	}
 	
 	public static void main (String[] args){
-		importTables(tablesFile);
-		importSections(sectionsFile, null);
-		importServers(serversFile);
+		ArrayList<TableModel> tables = null;
+		
+		tables = importTables(tablesFile);
+		//importSections(sectionsFile, null);
+		//importServers(serversFile);
+		
+		for (TableModel table : tables) {
+			System.out.println(table);
+		}
 	
 		/*ServerQueueView window = new ServerQueueView();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
