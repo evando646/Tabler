@@ -153,6 +153,23 @@ public GuestModel(){
 				+ ", contactNumber=" + contactNumber + "]";
 	}
 	
+	public int compareTo(GuestModel other) {
+		if (this.isReservation() && other.isReservation()) {
+			int comparison = this.getReservationTime().compareTo(
+					other.getReservationTime());
+			
+			if (comparison == 0) {
+				return (this.getDateCreated().compareTo(other.getDateCreated()));
+			} else {
+				return comparison;
+			}
+		} else if (!(this.isReservation()) && !(other.isReservation())) {
+			return (this.getDateCreated().compareTo(other.getDateCreated()));
+		} else {
+			return (this.getReservationTime().compareTo(other.getReservationTime()));
+		}
+	}
+	
 	public String getReservationTime(){
 		int year=reservationTime.get(Calendar.YEAR);
 		int month=reservationTime.get(Calendar.MONTH);
