@@ -5,14 +5,15 @@ package tabler.components.guest;
  * TEAM AWESOME!!!!!
  */
 
-import java.util.Date;
+
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class GuestModel {
 	
 	private String name;
-	private Date created;
-	private Calendar reservationTime;
+	private GregorianCalendar created;
+	private GregorianCalendar reservationTime;
 	private int size;
 	private String note;
 	private boolean reservation;
@@ -24,11 +25,8 @@ public class GuestModel {
 	 * Assuming that all variables are valid
 	 * Need to use ValidGuest Class before making Model
 	 */
-public GuestModel(){
-		
-	}
 
-	public void createGuest(String name,String note, boolean rev, String contactNumber,int day,int month,int year,int hour,int minute) throws Exception{
+	public GuestModel(String name,String note,String contactNumber,int size,GregorianCalendar created,GregorianCalendar reservationTime) throws Exception{
 		if(checkName(name)==false){
 			throw new Exception("Enter Valid Name\n Must be one letter long");
 		}
@@ -36,13 +34,16 @@ public GuestModel(){
 			throw new Exception("Enter Valid Contact Number\n Only (123) 456-7890");
 		}
 		
+
+		
 		this.name=name;
 		this.note=note;
-		reservation=rev;
+		this.size=size;
 		this.contactNumber=contactNumber;
-		created=new Date();
-		reservationTime=Calendar.getInstance();
-		reservationTime.set(year, month-1, day, hour, minute);
+		this.created=created;
+		this.reservationTime=reservationTime;
+		reservation=false;
+		//checkReservation(created,reservationTime);
 		
 	}
 	
@@ -57,7 +58,7 @@ public GuestModel(){
 	 * return the date when this guest model 
 	 * was created
 	 */
-	public Date getDateCreated(){
+	public GregorianCalendar getDateCreated(){
 		return created;
 	}
 
@@ -83,6 +84,10 @@ public GuestModel(){
 		return size;
 	}
 	
+	public GregorianCalendar getReservation(){
+		return reservationTime;
+	}
+	
 	/*
 	 * return true or false if party is a 
 	 * Reservation or not.
@@ -99,24 +104,10 @@ public GuestModel(){
 	 * ??? DO WE WANT TO KEEP??? 
 	 */
 	
-	
-	/*
-	 * when setting the date it is set as 
-	 * 0-11
-	 * Jan-Dec
-	 * Will assume it has not been correct for this
-	 * This will set the reservation time as a Calendar class 
-	 */
-	public void setReservationTime(int day,int month,int year,int hour,int minute){
-		reservationTime=Calendar.getInstance();
-		reservationTime.set(year, month-1, day, hour, minute);
-	}
-	
+		
 	public void setName(String name){
 		this.name=name;
 	}
-	
-
 	
 	public void setNote(String note){
 		this.note=note;
@@ -132,16 +123,7 @@ public GuestModel(){
 		contactNumber=contactNum;
 	}
 	
-	/*
-	 * every time this method is called it will switch 
-	 * Whether a reservation is true or not.
-	 * So the User can switch the reservation every time they click
-	 * the check box or whatever it is that we will use to check a 
-	 * reservation
-	 */
-	public void setReservation(){
-		reservation=!(reservation);
-	}
+
 
 	@Override
 	/*
@@ -151,9 +133,9 @@ public GuestModel(){
 	 * Just returns all fields
 	 */
 	public String toString() {
-		return "GuestModel [name=" + name + ", created=" + created
-				+ ", reservationTime="  + ", size=" + size
-				+ ", note=" + note + ", reservation=" + reservation
+		return "GuestModel [name=" + name + ", created=" + getCreatedTime()
+				+ ", reservationTime="  + ", \nsize=" + size
+				+ ", note=" + note + ", reservationTime=" +getReservationTime() +"\nIS Reservation" +reservation
 				+ ", contactNumber=" + contactNumber + "]";
 	}
 	
@@ -174,7 +156,12 @@ public GuestModel(){
 		}
 	}
 	
-	public String getReservationTime(){
+	
+	/**
+	 * For toString method
+	 * @return string
+	 */
+	private String getReservationTime(){
 		int year=reservationTime.get(Calendar.YEAR);
 		int month=reservationTime.get(Calendar.MONTH);
 		int day=reservationTime.get(Calendar.DAY_OF_MONTH);
@@ -187,6 +174,24 @@ public GuestModel(){
 			return (month+1)+"/"+day+"/"+year+" "+hour+":"+minute;
 		}
 	}
+	/**
+	 * For toStringMEtod
+	 * @return String
+	 */
+	private String getCreatedTime(){
+		int year=created.get(Calendar.YEAR);
+		int month=created.get(Calendar.MONTH);
+		int day=created.get(Calendar.DAY_OF_MONTH);
+		int hour=created.get(Calendar.HOUR);
+		int minute=created.get(Calendar.MINUTE);
+		if(minute<10){
+			return (month+1)+"/"+day+"/"+year+" "+hour+":0"+minute;
+		}
+		else{
+			return (month+1)+"/"+day+"/"+year+" "+hour+":"+minute;
+		}
+	}
+	
 	
 	/*
 	 * Validation Methods
@@ -194,18 +199,6 @@ public GuestModel(){
 	 */
 	
 	
-	/*
-	 * Use this method to check if the contact and name fields are both valid
-	 * Both must be valid to continue on.
-	 */
-	public static boolean checkGuest(String name,String contact){
-		if(checkContact(contact)&&checkName(name)){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
 	
 	/*
 	 * will filter the contact string to leave only digits
