@@ -82,8 +82,8 @@ public class WaitlistModel {
 		 */ 
 		else if (isSoonReservation(newGuest) == true) {
 			for (int i = 0; i < soon.size(); i++) {
-				if (newGuest.getReservation().compareTo(
-						soon.get(i).getReservation()) == -1) {
+				if (newGuest.getReservationTime().compareTo(
+						soon.get(i).getReservationTime()) == -1) {
 					soon.add(i, newGuest);
 					return;
 				}
@@ -96,8 +96,8 @@ public class WaitlistModel {
 		// Add all other guests with reservations to the remaining waitlist
 		else {
 			for (int i = 0; i < remaining.size(); i++) {
-				if (newGuest.getReservation().compareTo(
-						remaining.get(i).getReservation()) == -1) {
+				if (newGuest.getReservationTime().compareTo(
+						remaining.get(i).getReservationTime()) == -1) {
 					remaining.add(i, newGuest);
 					return;
 				}

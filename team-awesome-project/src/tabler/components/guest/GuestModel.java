@@ -84,7 +84,7 @@ public class GuestModel {
 		return size;
 	}
 	
-	public GregorianCalendar getReservation(){
+	public GregorianCalendar getReservationTime(){
 		return reservationTime;
 	}
 	
@@ -141,8 +141,8 @@ public class GuestModel {
 	
 	public int compareTo(GuestModel other) {
 		if (this.isReservation() && other.isReservation()) {
-			int comparison = this.getReservation().compareTo(
-					other.getReservation());
+			int comparison = this.getReservationTime().compareTo(
+					other.getReservationTime());
 			
 			if (comparison == 0) {
 				return (this.getDateCreated().compareTo(other.getDateCreated()));
@@ -152,7 +152,7 @@ public class GuestModel {
 		} else if (!(this.isReservation()) && !(other.isReservation())) {
 			return (this.getDateCreated().compareTo(other.getDateCreated()));
 		} else {
-			return (this.getReservation().compareTo(other.getReservation()));
+			return (this.getReservationTime().compareTo(other.getReservationTime()));
 		}
 	}
 	
