@@ -60,6 +60,8 @@ public class WaitlistModel {
 	 */
 	private void sortedAdd(LinkedList<GuestModel> list, 
 			GuestModel newGuest) {
+		
+		// Add walkin guest to the walkin list
 		if (newGuest.isReservation() == false) {
 			for (int i = 0; i < walkins.size(); i++) {
 				if (newGuest.getDateCreated().compareTo(
@@ -71,7 +73,14 @@ public class WaitlistModel {
 			
 			walkins.addLast(newGuest);
 			return;
-		} else if (isSoonReservation(newGuest) == true) {
+		} 
+		
+		/* Add guests with immediate reservations to the soon waitlist.
+		 * This option likely won't get triggered, but is here just in case
+		 * we relax the requirement for how far in advance a reservation must
+		 * be made.
+		 */ 
+		else if (isSoonReservation(newGuest) == true) {
 			for (int i = 0; i < soon.size(); i++) {
 				if (newGuest.getReservation().compareTo(
 						soon.get(i).getReservation()) == -1) {
@@ -82,7 +91,10 @@ public class WaitlistModel {
 			
 			soon.addLast(newGuest);
 			return;
-		} else {
+		} 
+		
+		// Add all other guests with reservations to the remaining waitlist
+		else {
 			for (int i = 0; i < remaining.size(); i++) {
 				if (newGuest.getReservation().compareTo(
 						remaining.get(i).getReservation()) == -1) {
