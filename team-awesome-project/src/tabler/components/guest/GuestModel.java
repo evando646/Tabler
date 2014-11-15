@@ -133,9 +133,9 @@ public class GuestModel {
 	 * Just returns all fields
 	 */
 	public String toString() {
-		return "GuestModel [name=" + name + ", created=" + getCreatedTime()
+		return "GuestModel [name=" + name + ", created=" + getCreatedTimeAsString()
 				+ ", reservationTime="  + ", \nsize=" + size
-				+ ", note=" + note + ", reservationTime=" +getReservationTime() +"\nIS Reservation" +reservation
+				+ ", note=" + note + ", reservationTime=" +getReservationTimeAsString() +"\nIS Reservation" +reservation
 				+ ", contactNumber=" + contactNumber + "]";
 	}
 	
@@ -161,7 +161,7 @@ public class GuestModel {
 	 * For toString method
 	 * @return string
 	 */
-	private String getReservationTime(){
+	private String getReservationTimeAsString(){
 		int year=reservationTime.get(Calendar.YEAR);
 		int month=reservationTime.get(Calendar.MONTH);
 		int day=reservationTime.get(Calendar.DAY_OF_MONTH);
@@ -178,7 +178,7 @@ public class GuestModel {
 	 * For toStringMEtod
 	 * @return String
 	 */
-	private String getCreatedTime(){
+	private String getCreatedTimeAsString(){
 		int year=created.get(Calendar.YEAR);
 		int month=created.get(Calendar.MONTH);
 		int day=created.get(Calendar.DAY_OF_MONTH);
