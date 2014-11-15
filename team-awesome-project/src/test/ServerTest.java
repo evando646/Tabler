@@ -26,7 +26,12 @@ public class ServerTest {
 	private static String sectionsFile = "./src/test/sections.txt";
 	private static String serversFile = "./src/test/servers.txt";
 	
-	// TODO actually create objects based on data ingested from the file
+	/**
+	 * Imports tables listed in the tables file
+	 * 
+	 * @param pathToTablesFile path to the file containing the list of tables
+	 * @return a list of tables
+	 */
 	public static ArrayList<TableModel> importTables(String pathToTablesFile) {
 		if (pathToTablesFile.equals(null)) {
 			return null;
@@ -77,6 +82,14 @@ public class ServerTest {
 		return importedTables;
 	}
 	
+	/**
+	 * Imports the sections listed in the sections file and assigns the specified
+	 * tables to the sections as described in the file.
+	 * 
+	 * @param pathToSectionsFile path to the file containing the list of sections
+	 * @param tables a list of tables to be assigned to the sections
+	 * @return a list of sections with assigned tables
+	 */
 	public static ArrayList<SectionModel> importSections(String pathToSectionsFile, 
 			ArrayList<TableModel> tables) {
 		if (pathToSectionsFile.equals(null)) {
@@ -128,8 +141,9 @@ public class ServerTest {
 	 * Imports the servers listed in the servers file and assign to each server a
 	 * reference to the section they are responsible for.
 	 * 
-	 * @param pathToServersFile
-	 * @return
+	 * @param pathToServersFile path to the file containing the list of servers
+	 * @param sections a list of sections to be assigned to the servers
+	 * @return a list of servers with assigned sections
 	 */
 	public static ArrayList<ServerModel> importServers(String pathToServersFile,
 			ArrayList<SectionModel> sections) {
