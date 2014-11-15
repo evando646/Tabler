@@ -141,8 +141,8 @@ public class GuestModel {
 	
 	public int compareTo(GuestModel other) {
 		if (this.isReservation() && other.isReservation()) {
-			int comparison = this.getReservationTime().compareTo(
-					other.getReservationTime());
+			int comparison = this.getReservation().compareTo(
+					other.getReservation());
 			
 			if (comparison == 0) {
 				return (this.getDateCreated().compareTo(other.getDateCreated()));
@@ -152,7 +152,7 @@ public class GuestModel {
 		} else if (!(this.isReservation()) && !(other.isReservation())) {
 			return (this.getDateCreated().compareTo(other.getDateCreated()));
 		} else {
-			return (this.getReservationTime().compareTo(other.getReservationTime()));
+			return (this.getReservation().compareTo(other.getReservation()));
 		}
 	}
 	
