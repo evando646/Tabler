@@ -12,7 +12,7 @@ public class WaitlistModel {
 	
 	/*
 	 * The waitlist is really comprised of three lists: (1) the soon list which
-	 * represent the sorted list of reservations whose windows are currently open;
+	 * represents the sorted list of reservations whose windows are currently open;
 	 * (2) the walkins list which represents the sorted list of guests who did not
 	 * create a reservation beforehand; and (3) the remaining list which represents
 	 * the sorted list of reservations whose windows have not opened yet.
