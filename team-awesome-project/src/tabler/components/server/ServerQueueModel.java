@@ -7,9 +7,28 @@ public class ServerQueueModel {
 	private LinkedList<ServerModel> activeQueue;
 	private ArrayList<ServerModel> fullServers;
 	
+	/**
+	 * Constructer for initial creation and addition of servers
+	 * @param ArrayList<ServerModel>servers
+	 */
 	public ServerQueueModel(ArrayList<ServerModel> servers) {
-		// TODO fill in the constructor
+		//1. Create queue 
+		activeQueue = new LinkedList<ServerModel>();
+		//2. Put ArrayList of ServerModels in active
+		activeQueue.add(servers);
+		
+		
 	}
+	/**
+	 * Constructer for post initial addition and deletion of ServerModels
+	 * @param TableModel table
+	 */
+	public ServerQueueModel(ServerModel server){
+		//1. Add server to queue
+		activeQueue.add(server);
+	}
+	
+	
 
 	/**
 	 * This function returns a true or false value depending
@@ -22,6 +41,18 @@ public class ServerQueueModel {
 		}
 		else 
 			return true;
+	}
+	
+	/**
+	 * Implemented by changes in TableModel states. Assume created TableModel/GuestModel
+	 * 		-> Assign GuestModel to TableModel
+	 * 		-->Method call ServerQueueModel
+	 * @param TableModel table
+	 */
+	public void rearrangeQueue(TableModel table){
+		//1. Retrieve section->server assigned to table
+		//2. Check if server belongs to activeQueue
+		//3. 
 	}
 	public void updateQueue(){
 		/**
@@ -77,11 +108,5 @@ public class ServerQueueModel {
 	 * This is a queue to keep track of Server's who are
 	 * available in a Fist In First Out order
 	 */
-	public LinkedList<ServerModel> addToQueue = new LinkedList<ServerModel>();
 
-	/**
-	 * This is a queue to keep track of Server's who have been previously
-	 * removed from the upcoming seat queue
-	 */
-	public LinkedList<ServerModel> removedFromQueue = new LinkedList<ServerModel>();
 }
