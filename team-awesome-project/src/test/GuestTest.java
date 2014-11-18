@@ -8,10 +8,6 @@ import java.io.File;
 import java.lang.Integer;
 
 import javax.swing.JFrame;
-//import Guest.ValidGuest;
-
-
-
 
 import tabler.components.guest.GuestModel;
 import tabler.components.guest.GuestView;
@@ -44,7 +40,8 @@ public class GuestTest {
 		
 		while (inputFile.hasNextLine()) {
 			String nextGuest = inputFile.nextLine();
-			Scanner guestScanner = new Scanner(nextGuest).useDelimiter(",");
+			Scanner guestScanner = new Scanner(nextGuest);
+			guestScanner.useDelimiter(",");
 			
 			String name = guestScanner.next();
 			String contact = guestScanner.next();
@@ -62,10 +59,38 @@ public class GuestTest {
 					now.get(Calendar.MINUTE) + minuteOffset, 
 					now.get(Calendar.SECOND) + secondOffset);
 			
-			System.out.println(nextGuest);
+			String rDayOffset = guestScanner.next();
+			String rHourOffset = guestScanner.next();
+			String rMinuteOffset = guestScanner.next();
+			String rSecondOffset = guestScanner.next();
+
+			GregorianCalendar reservationStart = new GregorianCalendar(
+					now.get(Calendar.YEAR), now.get(Calendar.MONTH),
+					now.get(Calendar.DAY_OF_MONTH) + (rDayOffset.equals("-") ? dayOffset : Integer.parseInt(rDayOffset.toString())),
+					now.get(Calendar.HOUR) + (rHourOffset.equals("-") ? hourOffset : Integer.parseInt(rHourOffset.toString())),
+					now.get(Calendar.MINUTE) + (rMinuteOffset.equals("-") ? minuteOffset : Integer.parseInt(rMinuteOffset.toString())),
+					now.get(Calendar.SECOND)+ (rSecondOffset.equals("-") ? secondOffset : Integer.parseInt(rSecondOffset.toString())));
+			
+			String note;
+
+			if (guestScanner.hasNext()) {
+				note = guestScanner.next();
+			} else {
+				note = "";
+			}
+			
+			GuestModel newGuest = null;
+			try {
+				newGuest = new GuestModel(name, note, contact, 
+					partySize, created, reservationStart);
+			} catch (Exception e) {
+				
+			}
+			
+			if (newGuest != null) { importedGuests.add(newGuest); }
+			//System.out.println(nextGuest);
 			guestScanner.close();
 		}
-		
 		
 		inputFile.close();
 		return importedGuests;
@@ -76,7 +101,7 @@ public class GuestTest {
 		ArrayList<GuestModel> guests = null;
 		
 		guests = importGuests(guestsFile);
-		
+
 		for (GuestModel guest : guests) {
 			System.out.println(guest);
 		}
