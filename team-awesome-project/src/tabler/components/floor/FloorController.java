@@ -8,7 +8,7 @@ public class FloorController implements ActionListener{
 	private FloorModel model;
 	private FloorView view;
 	
-	public FloorController( FloorModel model, FloorView view)
+	public FloorController( FloorModel model, FloorView view )
 	{
 		this.model = model;
 		this.view = view;

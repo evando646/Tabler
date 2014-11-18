@@ -24,7 +24,7 @@ public class TableView extends JFrame {
 	private JTextField tableCapacityTextField;
 	
 	private JLabel guestNameLabel;
-	private JTextField guestTextField;
+	private JTextField guestNameTextField;
 	
 	private JLabel guestPartySizeLabel;
 	private JTextField guestParySizeTextField;
@@ -37,14 +37,9 @@ public class TableView extends JFrame {
 	
 	private JLabel sectionLabel;
 	private JTextField sectionTextField;
-	//TODO
-	//guest size
-	//current guest arrived
-	//state
-	//section
 	
 	
-	public TableView()
+	public TableView( TableModel table )
 	{
 		panel = new JPanel();
 		
@@ -59,6 +54,7 @@ public class TableView extends JFrame {
 		panel.add(tableNumLabel,c);
 		
 		tableNumTextField = new JTextField();
+		tableNumTextField.setText( "" +  table.getTableNumber() );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 0;
@@ -73,6 +69,7 @@ public class TableView extends JFrame {
 		panel.add(tableCapacityLabel,c);
 		
 		tableCapacityTextField = new JTextField();
+		tableCapacityTextField.setText( "" + table.getCapacity() );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 1;
@@ -86,12 +83,13 @@ public class TableView extends JFrame {
 		c.gridx = 0;
 		panel.add(guestNameLabel,c);
 		
-		guestTextField = new JTextField();
+		guestNameTextField = new JTextField();
+		guestNameTextField.setText( (table.getCurrentGuest() != null) ? table.getCurrentGuest().getName() : "" );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 2;
 		c.gridx = 1;
-		panel.add(guestTextField,c);
+		panel.add(guestNameTextField,c);
 		
 		guestPartySizeLabel = new JLabel("Guest Party Size: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -101,6 +99,7 @@ public class TableView extends JFrame {
 		panel.add(guestPartySizeLabel,c);
 		
 		guestParySizeTextField = new JTextField();
+		guestParySizeTextField.setText( "" + ( (table.getCurrentGuest() != null) ? table.getCurrentGuest().getSize() : 0 ) );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 3;
@@ -115,6 +114,7 @@ public class TableView extends JFrame {
 		panel.add(guestArrivedLabel,c);
 		
 		guestArrivedTextField = new JTextField();
+		guestArrivedTextField.setText( (table.getCurrentGuestArrived() != null) ? table.getCurrentGuestArrived().toString() : "" );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 4;
@@ -129,6 +129,7 @@ public class TableView extends JFrame {
 		panel.add(tableStateLabel,c);
 		
 		tableStateTextField = new JTextField();
+		tableStateTextField.setText( "" + table.getState() );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 5;
@@ -143,6 +144,7 @@ public class TableView extends JFrame {
 		panel.add(sectionLabel,c);
 		
 		sectionTextField = new JTextField();
+		sectionTextField.setText( table.getTableSection() );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 6;
