@@ -58,6 +58,10 @@ public class ServerTest {
 			int positionX = 0;
 			int positionY = 0;
 			
+			//Modified my MW
+			int width = 0;
+			int height = 0;
+			
 			String nextTableEntry = inputFile.nextLine();
 			Scanner tableScanner = new Scanner(nextTableEntry);
 			
@@ -65,6 +69,8 @@ public class ServerTest {
 			tableCapacity = tableScanner.nextInt();
 			positionX = tableScanner.nextInt();
 			positionY = tableScanner.nextInt();
+			width = tableScanner.nextInt();
+			height = tableScanner.nextInt();
 			
 			// When creating a new table, use a placeholder section value. The
 			// section value will be added when the sections are imported.

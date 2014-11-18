@@ -11,17 +11,21 @@ public class TableModel implements Comparable<TableModel> {
 	private int capacity;
 	private int positionX;
 	private int positionY;
+	private int width;
+	private int height;
 	private GuestModel currentGuest;
 	private GregorianCalendar currentGuestArrived;
 	private TableState state;
 	private String section;
 
-	public TableModel (String section, int tableNum, int capacity, int x, int y){
+	public TableModel (String section, int tableNum, int capacity, int x, int y, int width, int height){
 		this.tableNumber = tableNum;
 		this.capacity = capacity;
 		this.section = section;
 		this.positionX = x;
 		this.positionY = y;
+		this.width = width;
+		this.height = height;
 		this.currentGuest = null;
 		this.currentGuestArrived = null;
 		this.state = TableState.AVAILABLE;
@@ -117,6 +121,22 @@ public class TableModel implements Comparable<TableModel> {
 	
 	public int getPositionY() {
 		return this.positionY;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
 	}
 	
 	public GuestModel getCurrentGuest() {
