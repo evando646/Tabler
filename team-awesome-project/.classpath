@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="tabler/TablerMain.java|test/Test.java|tabler/components/guest/testMain.java|tabler/components/guest/ValidGuest.java|test/testMain.java|test/ClockTest.java|tabler/components/server/ServerQueueController.java|tabler/components/server/ServerQueueModel.java|tabler/components/server/ServerQueueView.java|test/WaitlistTest.java|test/TableTest.java|tabler/components/waitlist/|test/FloorTest.java|test/ServerTest.java" kind="src" path="src"/>
+	<classpathentry excluding="tabler/TablerMain.java|test/Test.java|tabler/components/guest/testMain.java|tabler/test/testMain.java|test/ClockTest.java|tabler/components/server/ServerQueueController.java|tabler/components/server/ServerQueueModel.java|tabler/components/server/ServerQueueView.java|test/TableTest.java|test/FloorTest.java|test/ServerTest.java|test/WaitlistTest.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
