@@ -1,89 +1,132 @@
 package tabler.components.table;
 
-import javax.swing.JButton;
+import java.util.GregorianCalendar;
 
-/**
- * TableModel Model
- * 
- * @author frg169
- *
- */
-public class TableModel {
-	
-	public enum TableState { AVAILABLE, OCCUPIDE, DIRTY };
+import tabler.components.guest.GuestModel;
+
+public class TableModel implements Comparable<TableModel> {
+	private static enum TableState { AVAILABLE, OCCUPIED, NEEDS_SERVICING, RESERVED };
 	
 	private int tableNumber;
-	
+	private int capacity;
+	private int positionX;
+	private int positionY;
+	private GuestModel currentGuest;
+	private GregorianCalendar currentGuestArrived;
 	private TableState state;
+	private String section;
 
-	private String guestName;
-	private int size;
-	
-	private int x;
-	private int y;
-
-	
-	/**
-	 * Constructor
-	 * 
-	 * @param button
-	 * @param x
-	 * @param y
-	 * @param size
-	 */
-	public TableModel(int x, int y, int tableNum, int size)
-	{
-		this.state = TableState.AVAILABLE;
-		this.guestName = "";
-		this.x = x;
-		this.y = y;
+	public TableModel (String section, int tableNum, int capacity, int x, int y){
 		this.tableNumber = tableNum;
-		this.size = size;
+		this.capacity = capacity;
+		this.section = section;
+		this.positionX = x;
+		this.positionY = y;
+		this.currentGuest = null;
+		this.currentGuestArrived = null;
+		this.state = TableState.AVAILABLE;
 	}
 	
-	public TableModel()
-	{
-		//Testing
+	public int getTableNumber() {
+		return this.tableNumber;
+	}
+	
+	/**
+	 * Creates a String representation of a TableModel object
+	 * 
+	 * @return the table's String representation
+	 */
+	public String toString(){
+		String objectString = null;
+		
+		objectString = "[TableModel: id=" + getTableNumber() + ", capacity=" +
+				getCapacity() + ", section=" + getSectionName() + ", position=(" +
+				getPositionX() + "," + getPositionY() + "), state=" + getState() +
+				", current_guest=(";
+		
+		if	(getCurrentGuest() == null) { 
+			objectString += "nobody party of 0), guest_arrived= n/a";
+		} else {
+			objectString += getCurrentGuest().getName() + "party of " +	getCurrentGuest().getSize() + 
+			"), guest_arrived=" + getCurrentGuestArrived();
+		}
+		
+		objectString += "]";
+		
+		return objectString;
+	}
+	
+	public void assignGuest(GuestModel newGuest) {
+		if (!newGuest.equals(null)) {
+			currentGuest = newGuest;
+			currentGuestArrived = new GregorianCalendar();
+		}
+	}
+	
+	public GuestModel removeGuest() {
+		GuestModel removedGuest = currentGuest;
+		
+		currentGuest = null;
+		currentGuestArrived = null;
+		
+		return removedGuest;
+	}
+	
+	public void setSection(String sectionName) {
+		this.section = sectionName;
+	}
+	
+	public int getCapacity() {
+		return this.capacity;
+	}
+	
+	public String getSectionName() {
+		return this.section;
 	}
 	
 	public TableState getState() {
-		return state;
-	}
-
-	public void setState(TableState state) {
-		this.state = state;
-	}
-
-	public String getGuestName() {
-		return guestName;
-	}
-
-	public void setGuestName(String guestName) {
-		guestName = guestName;
-	}
-
-	public int getSize() {
-		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
+		return this.state;
 	}
 	
-	public int getX() {
-		return x;
+	public boolean isReady() {
+		return (state.equals(TableState.AVAILABLE));
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public boolean isOccupied() {
+		return !(currentGuest.equals(null));
 	}
-
-	public int getY() {
-		return y;
+	
+	public int compareTo(TableModel other) {
+		if (this.tableNumber == other.getTableNumber()) {
+			return 0;
+		} else if (this.tableNumber < other.getTableNumber()) {
+			return -1;
+		} else {
+			return 1;
+		}
 	}
-
-	public void setY(int y) {
-		this.y = y;
+	
+	public int getPositionX() { 
+		return this.positionX;
 	}
-
+	
+	public int getPositionY() {
+		return this.positionY;
+	}
+	
+	public GuestModel getCurrentGuest() {
+		return this.currentGuest;
+	}
+	
+	public GregorianCalendar getCurrentGuestArrived() {
+		return this.currentGuestArrived;
+	}
+	
+	public TableState getTableState() {
+		return this.state;
+	}
+	
+	public String getTableSection() {
+		return this.section;
+	}
 }

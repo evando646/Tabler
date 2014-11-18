@@ -13,7 +13,15 @@ import javax.swing.JTextField;
 
 public class TableView extends JFrame {
 	
+	private final int IPADX_CONST = 200;
+	
 	private JPanel panel;
+	
+	private JLabel tableNumLabel;
+	private JTextField tableNumTextField;
+	private JLabel guestNameLabel;
+	private JTextField guestTextField;
+	
 	
 	public TableView()
 	{
@@ -22,26 +30,33 @@ public class TableView extends JFrame {
 		panel.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		JLabel tableNumLabel = new JLabel("Table Number: ");
-		
+		tableNumLabel = new JLabel("Table Number: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
+		c.ipadx = 0;
 		c.gridx = 0;
 		c.gridy = 0;
+		panel.add(tableNumLabel,c);
 		
-		panel.add(tableNumLabel);
-		
-		JTextField tableNumTextField = new JTextField();
-		
+		tableNumTextField = new JTextField();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.ipadx = IPADX_CONST;
 		c.gridx = 1;
+		c.gridy = 0;
+		panel.add(tableNumTextField,c);
 		
-		panel.add(tableNumTextField);
-		
-		JLabel guestNameLabel = new JLabel("Guest Name: ");
-		
+		guestNameLabel = new JLabel("Guest Name: ");
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.ipadx = 0;
 		c.gridx = 0;
 		c.gridy = 1;
+		panel.add(guestNameLabel,c);
 		
-		panel.add(guestNameLabel);
+		guestTextField = new JTextField();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.ipadx = IPADX_CONST;
+		c.gridx = 1;
+		c.gridy = 1;
+		panel.add(guestTextField,c);
 		
 		add(panel);
 	}
