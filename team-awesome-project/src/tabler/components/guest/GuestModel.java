@@ -133,10 +133,26 @@ public class GuestModel {
 	 * Just returns all fields
 	 */
 	public String toString() {
-		return "GuestModel [name=" + name + ", created=" + getCreatedTimeAsString()
+		String objectString = null;
+		
+		objectString = "[GuestModel: name=" + getName() + ", contact=" +
+				getContactNumber() + ", partySize=" + getSize() + ", created=" +
+				getCreatedTimeAsString() + ", reservation=" + isReservation() +
+				", reservation_start=";
+		
+		if (isReservation()) {
+			objectString += getReservationTimeAsString();
+		} else {
+			objectString += "N/A";
+		}
+		
+		objectString += "]";
+		
+		return objectString;
+		/*return "GuestModel [name=" + name + ", created=" + getCreatedTimeAsString()
 				+ ", reservationTime="  + ", \nsize=" + size
 				+ ", note=" + note + ", reservationTime=" +getReservationTimeAsString() +"\nIS Reservation" +reservation
-				+ ", contactNumber=" + contactNumber + "]";
+				+ ", contactNumber=" + contactNumber + "]";*/
 	}
 	
 	public int compareTo(GuestModel other) {
