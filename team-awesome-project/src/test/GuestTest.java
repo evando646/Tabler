@@ -40,9 +40,32 @@ public class GuestTest {
 		
 		//System.out.println("Contents of guests file\n");
 		
+		GregorianCalendar now = new GregorianCalendar();
+		
 		while (inputFile.hasNextLine()) {
-			System.out.println(inputFile.nextLine());
+			String nextGuest = inputFile.nextLine();
+			Scanner guestScanner = new Scanner(nextGuest).useDelimiter(",");
+			
+			String name = guestScanner.next();
+			String contact = guestScanner.next();
+			int partySize = guestScanner.nextInt();
+			
+			int dayOffset = guestScanner.nextInt();
+			int hourOffset = guestScanner.nextInt();
+			int minuteOffset = guestScanner.nextInt();
+			int secondOffset = guestScanner.nextInt();
+			
+			GregorianCalendar created = new GregorianCalendar(
+					now.get(Calendar.YEAR),	now.get(Calendar.MONTH), 
+					now.get(Calendar.DAY_OF_MONTH) +  + dayOffset, 
+					now.get(Calendar.HOUR) + hourOffset, 
+					now.get(Calendar.MINUTE) + minuteOffset, 
+					now.get(Calendar.SECOND) + secondOffset);
+			
+			System.out.println(nextGuest);
+			guestScanner.close();
 		}
+		
 		
 		inputFile.close();
 		return importedGuests;

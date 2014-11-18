@@ -1,4 +1,4 @@
-<name> <contact> <party_size> <creation_offset(d,m,h,s)> <reservation_offset(d,m,h,s)> <note>
+<name> <contact> <party_size> <creation_offset(d,h,m,s)> <reservation_offset(d,h,m,s)> <note>
 R. Boppana,(210)555-1234,2,0,0,2,0,-,-,-,-,Prefers window seating
 T. Bylander,(210)555-2345,2,0,0,2,0,-,-,-,-,Requests high-chair
 A. Chronopoulos,(210)555-3456,2,0,0,2,0,-,-,-,-,Birthday
