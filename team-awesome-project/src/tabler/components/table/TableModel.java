@@ -27,6 +27,11 @@ public class TableModel implements Comparable<TableModel> {
 		this.state = TableState.AVAILABLE;
 	}
 	
+	public TableModel()
+	{
+		//Empty Constructor for testing purposes
+	}
+	
 	public int getTableNumber() {
 		return this.tableNumber;
 	}
