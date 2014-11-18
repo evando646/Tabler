@@ -10,6 +10,12 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class GuestModel {
+	private static final long RES_ADV_NOTICE_HOURS = 2;
+	private static final long MIN_PER_HOUR = 60;
+	private static final long SEC_PER_MIN = 60;
+	private static final long MILLIS_PER_SEC = 1000;
+	private static final long RESERVATION_WINDOW_MILLIS = (RES_ADV_NOTICE_HOURS * 
+			MIN_PER_HOUR * SEC_PER_MIN * MILLIS_PER_SEC);
 	
 	private String name;
 	private GregorianCalendar created;
@@ -42,7 +48,7 @@ public class GuestModel {
 		this.contactNumber=contactNumber;
 		this.created=created;
 		this.reservationTime=reservationTime;
-		reservation=false;
+		reservation = isReservation(created, reservationTime);
 		//checkReservation(created,reservationTime);
 		
 	}
@@ -92,10 +98,23 @@ public class GuestModel {
 	 * return true or false if party is a 
 	 * Reservation or not.
 	 */
-	public boolean isReservation(){
-		return reservation;
+	public boolean isReservation(GregorianCalendar created,
+			GregorianCalendar reservationStart){
+		if (created.compareTo(reservationStart) == 0) {
+			return false;
+		}
+		
+		if (reservationStart.getTimeInMillis() - created.getTimeInMillis()
+				>= RESERVATION_WINDOW_MILLIS) {
+			return true;
+		}
+		
+		return false;
 	}
 	
+	public boolean isReservation() {
+		return reservation;
+	}
 	
 	/*
 	 * Following set Methods 
