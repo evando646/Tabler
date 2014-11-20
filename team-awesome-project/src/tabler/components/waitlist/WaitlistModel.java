@@ -1,5 +1,6 @@
 package tabler.components.waitlist;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import tabler.components.guest.GuestModel;
@@ -26,52 +27,54 @@ public class WaitlistModel {
 	}
 	
 	/**
-	 * Determine the appropriate waitlist to add the guest to and then adds the guest
+	 * Determines the appropriate waitlist to add the guest to 
+	 * and then adds the guest
 	 * 
-	 * @param newGuest a guest with a reservation
+	 * @param newGuest a guest to add to the waitlist
 	 */
 	public void addGuestToList(GuestModel newGuest) {
-		if (newGuest.isReservation() == false) {
-			sortedAdd(walkins, newGuest);
-		}
-	}
-	
-	/**
-	 * Determines whether a guest's reservation window is open
-	 * 
-	 * @param guest a guest with a reservation
-	 * @return true if the guest's reservation window is open; false otherwise
-	 */
-	private static boolean isSoonReservation(GuestModel guest) {
-		if (guest.isReservation() == false) {
-			return false;
+		if (newGuest == null) {
+			return;
 		}
 		
-		// TODO replace this placeholder
-		return false;
-	}
-	
-	/**
-	 * Adds a new guest to the specified waitlist by inserting the guest
-	 * in priority order.
-	 * 
-	 * @param list the waitlist the guest would be added to
-	 * @param newGuest a guest with a reservation
-	 */
-	private void sortedAdd(LinkedList<GuestModel> list, 
-			GuestModel newGuest) {
-		
-		// Add walkin guest to the walkin list
+		// Add walk-in guests to the walkin list
 		if (newGuest.isReservation() == false) {
-			for (int i = 0; i < walkins.size(); i++) {
-				if (newGuest.getDateCreated().compareTo(
-						walkins.get(i).getDateCreated()) == -1) {
-					walkins.add(i, newGuest);
-					return;
-				}
+			
+			/* Add the walk-in guest to the end of the list if the walkins list
+			 is empty OR the guest is the latest to have arrived. Normally this
+			 would always be the case; except if we import guests with unordered
+			 creation dates.*/
+			if (walkins.isEmpty() || newGuest.getDateCreated().compareTo(
+					walkins.getLast().getDateCreated()) == 1) {
+				walkins.add(newGuest);
+				return;
 			}
 			
-			walkins.addLast(newGuest);
+			/* This handles the cases for when the new guest has a creation date
+			 that isn't later than the most recently arrived guest. To do this
+			 we can iterate from the bottom of the list to determine where to 
+			 insert the new guest.*/
+			Iterator<GuestModel> reverseGuest = walkins.descendingIterator();
+			
+			while (reverseGuest.hasNext()) {
+				GuestModel guest = reverseGuest.next();
+				
+				if (newGuest.getDateCreated().compareTo(guest.getDateCreated()) == 1) {
+					if (!(guest.equals(walkins.getLast()))) {
+						walkins.add(walkins.indexOf(guest), newGuest);
+						break;
+					}
+					
+					// This part is redundant since we already take care of
+					// appending a new guest in the if-block above this while-loop
+					// TODO consider advancing the iterator to the second-to-last guest
+					else {
+						walkins.add(newGuest);
+						break;
+					}
+				}
+			}
+
 			return;
 		} 
 		
@@ -106,5 +109,21 @@ public class WaitlistModel {
 			remaining.addLast(newGuest);
 			return;
 		}
+	}
+
+	
+	/**
+	 * Determines whether a guest's reservation window is open
+	 * 
+	 * @param guest a guest with a reservation
+	 * @return true if the guest's reservation window is open; false otherwise
+	 */
+	private static boolean isSoonReservation(GuestModel guest) {
+		if (guest.isReservation() == false) {
+			return false;
+		}
+		
+		// TODO replace this placeholder
+		return false;
 	}
 }
