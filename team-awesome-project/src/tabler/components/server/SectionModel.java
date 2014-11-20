@@ -16,12 +16,12 @@ public class SectionModel {
 	/**
 	 * This is the name of a section
 	 */
-	private String sectionName;
+	public String sectionName;
 	
 	/**
 	 * This is an array of TableObjects assigned to a section
 	 */
-	private ArrayList<TableModel> tableList;
+	public ArrayList<TableModel> tableList;
 
 	/**
 	 * Constructs a section with an empty list of tables

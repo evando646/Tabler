@@ -1,0 +1,7 @@
+<TableName>	<Precedence>
+11 7
+22 3
+43 2
+51 1
+62 3
+31 4
