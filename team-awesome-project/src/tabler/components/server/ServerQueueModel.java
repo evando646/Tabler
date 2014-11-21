@@ -2,6 +2,7 @@ package tabler.components.server;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.Calendar.GregorianCalendar;
 
 import tabler.components.server.ServerModel;
 
@@ -27,7 +28,19 @@ public class ServerQueueModel {
 	 */
 	public void addQueue(ServerModel server){
 		//1. Add server to queue
-		activeQueue.add(server);
+		GregorianCalendar tServer = server.assignedSection.timeLastSeated();
+		int len = activeQueue.size();
+
+		for (int i = 0; i <len; i++){
+			ServerModel curr = activeQueue.get(i);
+			if (curr.assignedSection.timeLastSeated().after(tServer)){
+				continue;
+			}
+			else{
+				break;
+			}
+		}
+		activeQueue.add(i, server);
 	}
 	
 	public void dequeue(ServerModel server){
