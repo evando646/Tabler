@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import tabler.components.server.SectionModel;
 import tabler.components.server.ServerModel;
-import tabler.components.server.TableModel;
+import tabler.components.table.*;
 //import tabler.components.server.ServerQueueView;
 
 
@@ -76,7 +76,7 @@ public class ServerTest {
 			// section value will be added when the sections are imported.
 			TableModel newTable = new TableModel("Unknown Section", tableNumber, 
 												tableCapacity,
-												positionX, positionY);
+												positionX, positionY, width, height);
 			
 			importedTables.add(newTable);
 			tableScanner.close();
