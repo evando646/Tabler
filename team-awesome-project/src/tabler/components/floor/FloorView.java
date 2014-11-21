@@ -19,6 +19,8 @@ public class FloorView extends JFrame{
 	
 	public FloorView(ArrayList<TableModel> tableList)
 	{
+		tableButtons = new ArrayList<JButton>();
+		
 		panel = new JPanel();
 		
 		panel.setLayout(null);
@@ -28,6 +30,7 @@ public class FloorView extends JFrame{
 		for( TableModel table : tableList )
 		{
 			JButton b = new JButton( "" + table.getTableNumber() );
+			tableButtons.add(b);
 			panel.add(b);
 			b.setBounds(table.getPositionX() * SCALE + insets.left, table.getPositionY() * SCALE + insets.top, 
 					table.getWidth() * SCALE , table.getHeight() * SCALE);
@@ -39,7 +42,18 @@ public class FloorView extends JFrame{
 	
 	public void register (FloorController controller)
 	{
-		
+		for( JButton btn : tableButtons )
+		{
+			btn.addActionListener(controller);
+		}
 	}
 
+	public ArrayList<JButton> getTableButtons() {
+		return tableButtons;
+	}
+
+
+	public void setTableButtons(ArrayList<JButton> tableButtons) {
+		this.tableButtons = tableButtons;
+	}
 }

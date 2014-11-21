@@ -3,6 +3,7 @@ package tabler.components.server;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import tabler.components.table.*;
 
 /**
  * The SectionModel represents a collection of tables that can be assigned
