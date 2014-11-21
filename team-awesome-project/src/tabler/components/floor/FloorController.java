@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import tabler.FSM;
 import tabler.components.table.TableController;
 import tabler.components.table.TableModel;
 import tabler.components.table.TableView;
@@ -26,14 +27,7 @@ public class FloorController implements ActionListener{
 		{
 			if( table.getTableNumber() == Integer.parseInt(event.getActionCommand()) )
 			{
-				TableView view = new TableView(table);
-		        TableController controller = new TableController(table, view);
-		        
-		        view.register(controller);
-		
-		        view.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		        view.setSize(400,300);
-		        view.setVisible(true);
+				FSM._instance.Action(FSM.FSM_STATE.TABLE, table);
 			}
 		}
 		System.out.println(event.getActionCommand());
