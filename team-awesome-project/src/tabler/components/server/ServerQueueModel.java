@@ -65,11 +65,7 @@ public class ServerQueueModel {
 	}
 
 	public ServerModel isNext(){
-		if (this.assignedSection.isFull()){
-			return false;
-		}
-		else 
-			return true;
+		return activeQueue.peekFirst();
 	}
 	
 }
