@@ -16,19 +16,28 @@ public class ServerQueueController implements ActionListener{
 	public FloorModel model;
 	public FloorView view;
 	public ServerQueueModel queuemodel;
+	public ServerQueueView queueview;
 	public ArrayList<TableModel> tables;
 	public ArrayList<GuestModel> guests;
 	
-	public ServerQueueController( FloorModel model, FloorView view, ServerQueueModel queuemodel, ArrayList<GuestModel>guests){
+	public ServerQueueController( FloorModel model, FloorView view, ServerQueueModel queuemodel, ArrayList<GuestModel>guests,
+				ServerQueueView queueview){
 		this.model = model;
 		this.view = view;
 		this.queuemodel = queuemodel;
 		this.tables = model.getTableList();
 		this.guests= guests;
+		this.queueview = queueview;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
+		String e = event.getActionCommand();
+		int confirm = queueview.showOptions(e);
+		if(confirm == 1){
+			System.exit(0);
+		}
+	
 		System.out.println(event.getActionCommand());
 		int len = tables.size();
 		for(int i = 0; i < len; i++){

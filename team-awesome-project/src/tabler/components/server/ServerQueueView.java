@@ -1,4 +1,5 @@
 package tabler.components.server;
+
 import java.util.*;
 import java.awt.*;
 import java.io.File;
@@ -6,19 +7,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.*;
+import javax.swing.JOptionPane;
 
 
 import tabler.components.server.ServerQueueModel;
 
-import java.util.Vector;
 
-public abstract class ServerQueueView extends JFrame{
+public class ServerQueueView extends JFrame{
 	JFrame frame = new JFrame();
 	ArrayList<String> servers;
 	DefaultListModel list;
-	
-	ServerQueueView (ServerQueueModel active){
-		list = new DefaultListModel();
-
+	public ServerQueueView (){
+	}
+	public int showOptions(String s){
+		
+		return JOptionPane.showConfirmDialog(null,
+	             "Are you sure you want to seat table "+ s +"?", "choose one", JOptionPane.YES_NO_OPTION);
 	}
 }
