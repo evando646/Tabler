@@ -2,34 +2,44 @@ package tabler.components.server;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
-import java.awt.event.*;
-import java.awt.*;
-
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Scanner;
-import javax.swing.DefaultListModel;
 
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.table.*;
+import javax.swing.JFrame;
+
+import tabler.FSM;
+import tabler.components.floor.*;
+import tabler.components.table.*;
+import tabler.components.guest.*;
 
 public class ServerQueueController implements ActionListener{
 	
-
-	private TableView tableView;
-	private WaitlistView waitView;
+	public FloorModel model;
+	public FloorView view;
+	public ServerQueueModel queuemodel;
+	public ArrayList<TableModel> tables;
+	public ArrayList<GuestModel> guests;
 	
-	public ServerQueueController ( TableView tableView, WaitlistView waitView){
-		this.tableView = tableView;
-		this.waitView = waitView;
+	public ServerQueueController( FloorModel model, FloorView view, ServerQueueModel queuemodel, ArrayList<GuestModel>guests){
+		this.model = model;
+		this.view = view;
+		this.queuemodel = queuemodel;
+		this.tables = model.getTableList();
+		this.guests= guests;
 	}
-	
-	public void actionPreformed(ActionEvent e){
 
-		ServerModel.updateQueue();
-		ServerQueueView.updateList(ServerModel.addToQueue);
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		System.out.println(event.getActionCommand());
+		int len = tables.size();
+		for(int i = 0; i < len; i++){
+			if( tables.get(i).getTableNumber() == Integer.parseInt(event.getActionCommand())){
+				queuemodel.updateQueue(tables.get(i));
+				tables.get(i).assignGuest(guests.get(i));
+			}
+			else{
+				continue;
+			}
+		}
 	}
-	
+
 }

@@ -102,7 +102,7 @@ public class TableModel implements Comparable<TableModel> {
 	}
 
 	public boolean isOccupied() {
-		return !(currentGuest.equals(null));
+		return !(currentGuest == null);
 	}
 	
 	public int compareTo(TableModel other) {

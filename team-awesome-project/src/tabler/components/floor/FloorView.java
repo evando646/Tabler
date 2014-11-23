@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import tabler.components.server.*;
 import tabler.components.table.TableModel;
 
 public class FloorView extends JFrame{
@@ -47,6 +48,14 @@ public class FloorView extends JFrame{
 			btn.addActionListener(controller);
 		}
 	}
+	public void register (ServerQueueController controller)
+	{
+		for( JButton btn : tableButtons )
+		{
+			btn.addActionListener(controller);
+		}
+	}
+
 
 	public ArrayList<JButton> getTableButtons() {
 		return tableButtons;
