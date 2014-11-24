@@ -23,7 +23,10 @@ public class WaitlistModel {
 	private LinkedList<GuestModel> remaining;
 	
 	public WaitlistModel() {
-		System.out.println("The WaitlistModel constructor doesn't do anything yet");
+		this.soon = new LinkedList<GuestModel>();
+		this.walkins = new LinkedList<GuestModel>();
+		this.remaining = new LinkedList<GuestModel>();
+		//System.out.println("The WaitlistModel constructor doesn't do anything yet");
 	}
 	
 	/**
