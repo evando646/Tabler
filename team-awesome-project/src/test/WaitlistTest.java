@@ -113,6 +113,8 @@ public class WaitlistTest {
 			newWaitlist.addGuestToList(guest);
 		}
 		
+		System.out.println(newWaitlist);
+		
 		//System.out.println(newWaitlist);
 		//System.out.println(newWaitlistView);
 	}

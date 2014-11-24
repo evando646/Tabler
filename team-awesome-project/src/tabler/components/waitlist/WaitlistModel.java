@@ -114,6 +114,36 @@ public class WaitlistModel {
 		}
 	}
 
+	/**
+	 * Creates a string representation of the <code>WaitlistModel</code> object  
+	 * 
+	 * @return a string representation of the <code>WaitlistModel</code> object
+	 */
+	public String toString() {
+		String objectString = null;
+		
+		objectString = "[Waitlist:\n\tSoon\n\t====\n";
+		
+		for (GuestModel guest : this.soon) {
+			objectString += ("\t" + guest + "\n");
+		}
+		
+		objectString += "\tWalkins\n\t=======\n";
+		
+		for (GuestModel guest : this.walkins) {
+			objectString += ("\t" + guest + "\n");
+		}
+		
+		objectString += "\tRemaining\n\t========\n";
+		
+		for (GuestModel guest : this.remaining) {
+			objectString += ("\t" + guest + "\n");
+		}
+		
+		objectString += "]";
+		
+		return objectString;
+	}
 	
 	/**
 	 * Determines whether a guest's reservation window is open
