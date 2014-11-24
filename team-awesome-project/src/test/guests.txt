@@ -1,10 +1,10 @@
 <name> <contact> <party_size> <creation_offset(d,h,m,s)> <reservation_offset(d,h,m,s)> <note>
-R. Boppana,(210)555-1234,2,0,0,0,0,-,-,-,-,Prefers window seating
-T. Bylander,(210)555-2345,2,0,0,1,0,-,1,-,-,Requests high-chair
-A. Chronopoulos,(210)555-3456,2,0,0,2,0,-,-,-,-,Birthday
-M. Gibson,(210)555-4567,2,0,0,3,0,-,-,-,-,Birthday\nRequests high-chair 
+R. Boppana,(210)555-1234,2,0,0,3,0,-,-,-,-,Prefers window seating
+T. Bylander,(210)555-2345,2,0,0,2,0,-,-,-,-,Requests high-chair
+A. Chronopoulos,(210)555-3456,2,0,0,1,0,-,-,-,-,Birthday
+M. Gibson,(210)555-4567,2,0,0,0,0,-,-,-,-,Birthday\nRequests high-chair 
 T. Korkmaz,(210)555-5678,2,0,-3,0,0,-,0,-,-,
-P. Lama,(210)555-6789,2,0,0,2,0,-,-,-,-,
+P. Lama,(210)555-6789,2,0,0,2,30,-,-,-,-,
 T. Liu,(210)555-7890,2,0,0,2,0,-,-,-,-,
 H. Maynard,(210)555-8901,2,0,0,2,0,-,-,-,-,
 A. Al Muzahid,(210)555-9012,2,0,0,2,0,-,-,-,-,

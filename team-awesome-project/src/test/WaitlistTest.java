@@ -26,7 +26,7 @@ public class WaitlistTest {
 		
 		Scanner inputFile = null;
 		ArrayList<GuestModel> importedGuests = new ArrayList<GuestModel>();
-		int numImportGuests = 5;
+		int numImportGuests = 6;
 		
 		try {
 			inputFile = new Scanner(new File(guestsFile));
@@ -109,7 +109,7 @@ public class WaitlistTest {
 		guests = importGuests(guestsFile);
 
 		for (GuestModel guest : guests) {
-			System.out.println(guest);
+			//System.out.println(guest);
 			newWaitlist.addGuestToList(guest);
 		}
 		

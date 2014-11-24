@@ -47,9 +47,20 @@ public class WaitlistModel {
 			 is empty OR the guest is the latest to have arrived. Normally this
 			 would always be the case; except if we import guests with unordered
 			 creation dates.*/
-			if (walkins.isEmpty() || newGuest.getDateCreated().compareTo(
-					walkins.getLast().getDateCreated()) == 1) {
+			if (walkins.isEmpty() || 
+					newGuest.getDateCreated().after(walkins.getLast().getDateCreated())) {/*newGuest.getDateCreated().compareTo(
+					walkins.getLast().getDateCreated()) == 1) {*/
 				walkins.add(newGuest);
+				return;
+			}
+			
+			/* Add the walkin-guest to the beginning of the list if the guest's
+			 * creation date is earlier than the guest at the head of the waitlist.
+			 * Normally this would *not* be the case except if we import guests with
+			 * unordered creation dates.
+			 */
+			else if (newGuest.getDateCreated().before(walkins.getFirst().getDateCreated())) {
+				walkins.addFirst(newGuest);
 				return;
 			}
 			
@@ -62,7 +73,18 @@ public class WaitlistModel {
 			while (reverseGuest.hasNext()) {
 				GuestModel guest = reverseGuest.next();
 				
-				if (newGuest.getDateCreated().compareTo(guest.getDateCreated()) == 1) {
+				if (newGuest.getDateCreated().before(guest.getDateCreated())) {
+					if (!reverseGuest.hasNext()) {
+						walkins.add(walkins.indexOf(guest), newGuest);
+					} else {
+						continue;
+					}
+				} else {
+					walkins.add(walkins.indexOf(guest) + 1, newGuest);
+					return;
+				}
+				
+				/*if (newGuest.getDateCreated().compareTo(guest.getDateCreated()) == 1) {
 					if (!(guest.equals(walkins.getLast()))) {
 						walkins.add(walkins.indexOf(guest), newGuest);
 						break;
@@ -75,10 +97,8 @@ public class WaitlistModel {
 						walkins.add(newGuest);
 						break;
 					}
-				}
+				}*/
 			}
-
-			return;
 		} 
 		
 		/* Add guests with immediate reservations to the soon waitlist.
@@ -124,20 +144,32 @@ public class WaitlistModel {
 		
 		objectString = "[Waitlist:\n\tSoon\n\t====\n";
 		
-		for (GuestModel guest : this.soon) {
-			objectString += ("\t" + guest + "\n");
+		if (!(this.soon.isEmpty())) {
+			for (GuestModel guest : this.soon) {
+				objectString += ("\t" + guest + "\n");
+			}
+		} else {
+			objectString += "\tNone\n";
 		}
 		
-		objectString += "\tWalkins\n\t=======\n";
+		objectString += "\n\tWalkins\n\t=======\n";
 		
-		for (GuestModel guest : this.walkins) {
-			objectString += ("\t" + guest + "\n");
+		if (!(this.walkins.isEmpty())) {
+			for (GuestModel guest : this.walkins) {
+				objectString += ("\t" + guest + "\n");
+			}
+		} else {
+			objectString += "\tNone\n\n";
 		}
 		
-		objectString += "\tRemaining\n\t========\n";
+		objectString += "\n\tRemaining\n\t========\n";
 		
-		for (GuestModel guest : this.remaining) {
-			objectString += ("\t" + guest + "\n");
+		if (!(this.remaining.isEmpty())) {
+			for (GuestModel guest : this.remaining) {
+				objectString += ("\t" + guest + "\n");
+			}
+		} else {
+			objectString += "\tNone\n\n";
 		}
 		
 		objectString += "]";
