@@ -1,5 +1,6 @@
 package tabler.components.floor;
 
+import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.Panel;
 import java.util.ArrayList;
@@ -11,33 +12,31 @@ import javax.swing.JPanel;
 import tabler.components.server.*;
 import tabler.components.table.TableModel;
 
-public class FloorView extends JFrame{
+public class FloorView extends JPanel{
 	
 	private static final int SCALE = 5;
 	
-	private JPanel panel;
+	//private JPanel panel;
 	private ArrayList<JButton> tableButtons;
 	
 	public FloorView(ArrayList<TableModel> tableList)
 	{
 		tableButtons = new ArrayList<JButton>();
 		
-		panel = new JPanel();
+		this.setLayout(null);
+		this.setPreferredSize(new Dimension(800,600));
 		
-		panel.setLayout(null);
-		
-		Insets insets = panel.getInsets();
+		Insets insets = this.getInsets();
 		
 		for( TableModel table : tableList )
 		{
 			JButton b = new JButton( "" + table.getTableNumber() );
 			tableButtons.add(b);
-			panel.add(b);
+			this.add(b);
 			b.setBounds(table.getPositionX() * SCALE + insets.left, table.getPositionY() * SCALE + insets.top, 
 					table.getWidth() * SCALE , table.getHeight() * SCALE);
 		}
 		
-		add(panel);
 	}
 	
 	

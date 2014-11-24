@@ -15,17 +15,15 @@ public class TablerMain {
 		
 		System.out.println("This is tabler main");
 		
-		new FSM();
+		new FSM(); //Creating the program fsm
 		
-        FloorModel model = new FloorModel();
-        FloorView view = new FloorView(model.getTableList());
-        FloorController controller = new FloorController(model, view);
-        
-        view.register(controller);
-
-        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        view.setSize(1024,768);
-        view.setVisible(true);
+		JFrame mainFrame = new JFrame();
+		mainFrame.add(new MainPanel());
+		
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setSize(1024,768);
+		mainFrame.setVisible(true);
+		
 	}
 
 }
