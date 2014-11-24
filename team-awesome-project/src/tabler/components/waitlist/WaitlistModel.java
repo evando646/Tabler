@@ -9,7 +9,7 @@ public class WaitlistModel {
 	// Represents the reservation window (i.e., the period of time before
 	// and after a reservation start time for which the reservation would
 	// be considered active)
-	private static int RES_WIN_MINUTES = 15;
+	//private static int RES_WIN_MINUTES = 15;
 	
 	/*
 	 * The waitlist is really comprised of three lists: (1) the soon list which

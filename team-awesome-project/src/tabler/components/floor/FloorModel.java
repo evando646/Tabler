@@ -24,10 +24,6 @@ public class FloorModel {
 	 * 
 	 * @param list
 	 */
-	
-	public FloorModel (ArrayList<TableModel>tables){
-		this.tableList = tables;
-	}
 	public FloorModel()
 	{
 		tableList = new ArrayList<TableModel>();
