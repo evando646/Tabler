@@ -83,21 +83,6 @@ public class WaitlistModel {
 					walkins.add(walkins.indexOf(guest) + 1, newGuest);
 					return;
 				}
-				
-				/*if (newGuest.getDateCreated().compareTo(guest.getDateCreated()) == 1) {
-					if (!(guest.equals(walkins.getLast()))) {
-						walkins.add(walkins.indexOf(guest), newGuest);
-						break;
-					}
-					
-					// This part is redundant since we already take care of
-					// appending a new guest in the if-block above this while-loop
-					// TODO consider advancing the iterator to the second-to-last guest
-					else {
-						walkins.add(newGuest);
-						break;
-					}
-				}*/
 			}
 		} 
 		
@@ -121,16 +106,33 @@ public class WaitlistModel {
 		
 		// Add all other guests with reservations to the remaining waitlist
 		else {
-			for (int i = 0; i < remaining.size(); i++) {
-				if (newGuest.getReservationTime().compareTo(
-						remaining.get(i).getReservationTime()) == -1) {
-					remaining.add(i, newGuest);
+			if (remaining.isEmpty() || 
+					newGuest.getReservationTime().after(remaining.getLast().getReservationTime())) {
+				remaining.add(newGuest);
+				return;
+			}
+			
+			else if (newGuest.getReservationTime().before(remaining.getFirst().getReservationTime())) {
+				remaining.addFirst(newGuest);
+				return;
+			}
+			
+			Iterator<GuestModel> reverseGuest = remaining.descendingIterator();
+			
+			while (reverseGuest.hasNext()) {
+				GuestModel guest = reverseGuest.next();
+				
+				if (newGuest.getReservationTime().before(guest.getReservationTime())) {
+					if (!reverseGuest.hasNext()) {
+						remaining.add(remaining.indexOf(guest), newGuest);
+					} else {
+						continue;
+					}
+				} else {
+					remaining.add(remaining.indexOf(guest) + 1, newGuest);
 					return;
 				}
 			}
-			
-			remaining.addLast(newGuest);
-			return;
 		}
 	}
 
