@@ -1,5 +1,7 @@
 package tabler.components.waitlist;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -9,7 +11,7 @@ public class WaitlistModel {
 	// Represents the reservation window (i.e., the period of time before
 	// and after a reservation start time for which the reservation would
 	// be considered active)
-	//private static int RES_WIN_MINUTES = 15;
+	private static int RES_WIN_MINUTES = 15;
 	
 	/*
 	 * The waitlist is really comprised of three lists: (1) the soon list which
@@ -92,16 +94,33 @@ public class WaitlistModel {
 		 * be made.
 		 */ 
 		else if (isSoonReservation(newGuest) == true) {
-			for (int i = 0; i < soon.size(); i++) {
-				if (newGuest.getReservationTime().compareTo(
-						soon.get(i).getReservationTime()) == -1) {
-					soon.add(i, newGuest);
+			if (soon.isEmpty() ||
+					newGuest.getReservationTime().after(soon.getLast().getReservationTime())) {
+				soon.add(newGuest);
+				return;
+			}
+			
+			else if (newGuest.getReservationTime().before(soon.getFirst().getReservationTime())) {
+				soon.addFirst(newGuest);
+				return;
+			}
+			
+			Iterator<GuestModel> reverseGuest = soon.descendingIterator();
+			
+			while (reverseGuest.hasNext()) {
+				GuestModel guest = reverseGuest.next();
+				
+				if (newGuest.getReservationTime().before(guest.getReservationTime())) {
+					if (!reverseGuest.hasNext()) {
+						soon.add(soon.indexOf(guest), newGuest);
+					} else {
+						continue;
+					}
+				} else {
+					soon.add(soon.indexOf(guest) + 1, newGuest);
 					return;
 				}
 			}
-			
-			soon.addLast(newGuest);
-			return;
 		} 
 		
 		// Add all other guests with reservations to the remaining waitlist
@@ -185,12 +204,23 @@ public class WaitlistModel {
 	 * @param guest a guest with a reservation
 	 * @return true if the guest's reservation window is open; false otherwise
 	 */
+	//TODO Have this method use the ClockModel's  instance of now
 	private static boolean isSoonReservation(GuestModel guest) {
 		if (guest.isReservation() == false) {
 			return false;
 		}
 		
-		// TODO replace this placeholder
-		return false;
+		GregorianCalendar resWindowStart = new GregorianCalendar();
+		resWindowStart.add(Calendar.MINUTE, -RES_WIN_MINUTES);
+		
+		GregorianCalendar resWindowEnd = new GregorianCalendar();
+		resWindowEnd.add(Calendar.MINUTE, RES_WIN_MINUTES);
+		
+		if (guest.getReservationTime().before(resWindowStart) ||
+				guest.getReservationTime().after(resWindowEnd)) {
+			return false;
+		}
+
+		return true;
 	}
 }
