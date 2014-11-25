@@ -58,7 +58,7 @@ public class GuestView extends JFrame{
 	private JButton btnMinM;//minute minus button
 	private JButton btnMinP;//minute plus button
 	
-	
+	private GregorianCalendar timeOfView; 
 	
 	
 	/**
@@ -87,6 +87,7 @@ public class GuestView extends JFrame{
 				int day=time.get(Calendar.DAY_OF_MONTH)+dayAdd;
 				int hour=time.get(Calendar.HOUR)+hourAdd;
 				int min=time.get(Calendar.MINUTE)+minuteAdd;
+				setTimeOfView(year,month,day,hour,min);
 				if(min<10){
 					lblTime.setText("Time "+hour+":0"+min);
 				}
@@ -305,5 +306,25 @@ public class GuestView extends JFrame{
 		}
 	}
 	
+	public GregorianCalendar getViewTime(){
+		if(timeOfView==null){
+			return null;
+		}
+		return timeOfView;
+	}
+	
+	private void setTimeOfView(int year,int month,int day,int hour,int min){
+		timeOfView=new GregorianCalendar();
+		timeOfView.set(year, month, day, hour, min);
+	}
+	
 
+	public void displayErrorWindow(Exception error){
+		if(false){
+			JOptionPane.showMessageDialog(frame, "Valide sutff");
+		}
+		else{
+			JOptionPane.showMessageDialog(frame, error);
+		}
+	}
 }

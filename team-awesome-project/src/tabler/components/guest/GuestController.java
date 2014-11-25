@@ -6,8 +6,9 @@ import java.util.GregorianCalendar;
 
 public class GuestController implements ActionListener{
 	private GuestView view;
-	private GuestModel model;
-	private static GregorianCalendar ControllerTime;
+	private GuestModel model=null;
+	
+
 	
 
 	
@@ -26,14 +27,27 @@ public class GuestController implements ActionListener{
 		String command=e.getActionCommand();
 		
 		if(command.equals("Enter Guest")){
-			/**try{
-				model=new GuestModel(view.getNameTextField(),view.getNoteTextField(),view.)
-			}
-			catch(){
-				
-			}*/
 			
+			try{
+				System.out.println("First Line\n");
+				GregorianCalendar created=new GregorianCalendar();
+				model=new GuestModel(view.getNameTextField(),view.getNoteTextField(),
+						view.getContactTextField(),Integer.parseInt(view.getSizeTextField()),
+						created,view.getViewTime());
+				//System.out.println("If checkException:");
+				System.out.println(model.toString());//comment this out, only for debuging purpose
+				//PUT your code for storing/handeling the model
+			}
+			catch(Exception a){
+				System.err.println(a);
+				view.displayErrorWindow(a);
+				
+			}
+			
+			
+
 		}
+		
 		else if(command.equals("Y+")){
 			view.addYear();
 		}

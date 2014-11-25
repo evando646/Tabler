@@ -168,7 +168,8 @@ public class GuestModel {
 		objectString += "]";
 		
 		return objectString;
-		/*return "GuestModel [name=" + name + ", created=" + getCreatedTimeAsString()
+		
+		/**return "GuestModel [name=" + name + ", created=" + getCreatedTimeAsString()
 				+ ", reservationTime="  + ", \nsize=" + size
 				+ ", note=" + note + ", reservationTime=" +getReservationTimeAsString() +"\nIS Reservation" +reservation
 				+ ", contactNumber=" + contactNumber + "]";*/
