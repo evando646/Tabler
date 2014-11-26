@@ -3,6 +3,10 @@ package tabler.components.server;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import tabler.components.table.*;
+import tabler.components.floor.*;
+import tabler.components.guest.*;
+
 
 /**
  * The SectionModel represents a collection of tables that can be assigned
@@ -16,12 +20,12 @@ public class SectionModel {
 	/**
 	 * This is the name of a section
 	 */
-	private String sectionName;
+	public String sectionName;
 	
 	/**
 	 * This is an array of TableObjects assigned to a section
 	 */
-	private ArrayList<TableModel> tableList;
+	public ArrayList<TableModel> tableList;
 
 	/**
 	 * Constructs a section with an empty list of tables
@@ -50,7 +54,7 @@ public class SectionModel {
 	 * @param newTable a table to be added to the section
 	 */
 	public void addTable(TableModel newTable) {
-		for (TableModel table : tableList) {
+		for (TableModel table : this.tableList) {
 			if (table.equals(newTable)) {
 				System.err.println("Cannot add table to section " + 
 						"because it already exists in the section");
@@ -97,20 +101,35 @@ public class SectionModel {
 	}
 	
 	/**
-	 * This Function returns true if a section is full. False otherwise 
+	 *Counts number of occupied tables
 	 * 
-	 * @return true if the section is full; false otherwise
+	 * @return number of occupied tables in section
 	 */
-	public boolean isFull() {
+	public  int numOccupiedTables() {
 		int numOccupied = 0;
 		
-		for (TableModel table : tableList) {
+		for (TableModel table : this.tableList) {
 			if (table.isOccupied()) {
 				numOccupied++;
 			}
 		}
 		
-		return (numOccupied == tableList.size());
+		return (numOccupied);
+	}
+	/**
+	 * returns true if the section is one table away from being full
+	 * @return
+	 */
+	public boolean almostFull(){
+		int num = this.numOccupiedTables()+1;
+		return (num == this.tableList.size());
+	}
+	
+	/**
+	 * Returns true if section is currently full, false otherwise
+	 */
+	public boolean isFull(){
+		return (this.numOccupiedTables() == this.tableList.size());
 	}
 	
 	/**
