@@ -296,7 +296,7 @@ public class QueueTest {
 		System.out.println(table);
 		}
 		
-        FloorModel model = new FloorModel(tables); 
+        FloorModel model = new FloorModel(tables);
         FloorView view = new FloorView(model.getTableList());
 
         

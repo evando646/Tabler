@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import tabler.components.table.TableModel;
-
+import tabler.components.server.*;
 public class FloorView extends JFrame{
 	
 	private static final int SCALE = 5;
@@ -37,7 +37,7 @@ public class FloorView extends JFrame{
 	}
 	
 	
-	public void register (FloorController controller)
+	public void register (ServerQueueController controller)
 	{
 		
 	}
