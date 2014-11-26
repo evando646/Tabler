@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.table.TableModel;
 
 import tabler.components.floor.*;
+import tabler.components.floor.FloorModel;
 import tabler.components.guest.*;
 import tabler.components.server.*;
 
@@ -295,7 +296,7 @@ public class QueueTest {
 		System.out.println(table);
 		}
 		
-        FloorModel model = new FloorModel(tables);
+        FloorModel model = new FloorModel(tables); 
         FloorView view = new FloorView(model.getTableList());
 
         

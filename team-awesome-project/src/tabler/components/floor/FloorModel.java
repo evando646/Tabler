@@ -13,6 +13,7 @@ import tabler.components.table.*;
  * @author frg169
  *
  */
+
 public class FloorModel {
 	
 	private static final String TABLE_PATH = "./src/test/tables.txt";
@@ -20,10 +21,15 @@ public class FloorModel {
 	private ArrayList<TableModel> tableList;
 
 	/**
-	 * Constructor
+	 * Constructor for testing purposes
 	 * 
-	 * @param list
+	 * @param arraylist
+	 * @kristin
 	 */
+	public FloorModel (ArrayList<TableModel>tables){
+		this.tableList = tables;
+	}
+	
 	public FloorModel()
 	{
 		tableList = new ArrayList<TableModel>();
