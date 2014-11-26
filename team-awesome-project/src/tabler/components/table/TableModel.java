@@ -78,6 +78,8 @@ public class TableModel implements Comparable<TableModel> {
 		currentGuest = null;
 		currentGuestArrived = null;
 		
+		this.setTableState(TableState.NEEDS_SERVICING);
+		
 		return removedGuest;
 	}
 	
@@ -102,7 +104,7 @@ public class TableModel implements Comparable<TableModel> {
 	}
 
 	public boolean isOccupied() {
-		return !(currentGuest.equals(null));
+		return !(currentGuest == null);
 	}
 	
 	public int compareTo(TableModel other) {
@@ -149,6 +151,12 @@ public class TableModel implements Comparable<TableModel> {
 	
 	public TableState getTableState() {
 		return this.state;
+	}
+	
+	public void setTableState(TableState state) {
+		if (state != null) {
+			this.state = state;
+		}
 	}
 	
 	public String getTableSection() {
