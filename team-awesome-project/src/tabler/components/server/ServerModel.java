@@ -1,5 +1,10 @@
 package tabler.components.server;
 
+import tabler.components.table.*;
+import tabler.components.floor.*;
+import tabler.components.guest.*;
+
+
 /**
  * The ServerModel represents a server that tends to a section of tables
  * 
