@@ -1,112 +1,125 @@
 package tabler.components.server;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.GregorianCalendar;
 
-public class ServerQueueModel {
-	private LinkedList<ServerModel> activeQueue;
-	private ArrayList<ServerModel> fullServers;
+import tabler.components.table.*;
+import tabler.components.floor.*;
+import tabler.components.guest.*;
+
+public class ServerQueueModel{
+	public static LinkedList<ServerModel> activeQueue;
+	public static ArrayList<ServerModel> fullServers;
 	
+	public ServerQueueModel(){
+		activeQueue = new LinkedList<ServerModel>();
+	}
 	/**
-	 * Constructer for initial creation and addition of servers
+	 * Constructor for initial creation and addition of servers
 	 * @param ArrayList<ServerModel>servers
 	 */
 	public ServerQueueModel(ArrayList<ServerModel> servers) {
 		//1. Create queue 
 		activeQueue = new LinkedList<ServerModel>();
 		//2. Put ArrayList of ServerModels in active
-		activeQueue.add(servers);
+		activeQueue.addAll(servers);
+		
+		fullServers = new ArrayList<ServerModel>();
 		
 		
 	}
+	
 	/**
-	 * Constructer for post initial addition and deletion of ServerModels
-	 * @param TableModel table
+	 * Called upon table button selection
+	 * Method updateActiveQueue updates activeQueue for the server who's table is sent in
+	 * @param table
 	 */
-	public ServerQueueModel(ServerModel server){
-		//1. Add server to queue
-		activeQueue.add(server);
-	}
-	
-	
+	public static void updateQueue(TableModel table){
+		String section = table.getSectionName();
 
-	/**
-	 * This function returns a true or false value depending
-	 * on if the server is next up
-	 * Peak shows the head of the queue (least recent put in FIFO)
-	 */
-	public boolean isNext(){
-		if (this.assignedSection.isFull()){
-			return false;
-		}
-		else 
-			return true;
-	}
-	
-	/**
-	 * Implemented by changes in TableModel states. Assume created TableModel/GuestModel
-	 * 		-> Assign GuestModel to TableModel
-	 * 		-->Method call ServerQueueModel
-	 * @param TableModel table
-	 */
-	public void rearrangeQueue(TableModel table){
-		//1. Retrieve section->server assigned to table
-		//2. Check if server belongs to activeQueue
-		//3. 
-	}
-	public void updateQueue(){
-		/**
-		 * Adds any removed ServerModels back to the queue when sections are not full
-		 */
-		for(int i = 0; i < removedFromQueue.size(); i++){
-
-			if (removedFromQueue.get(i).assignedSection.isFull() != true){
-				int k = 0;
-				while(addToQueue.get(k).assignedSection.timeLastSeated() < removedFromQueue.get(i).assignedSection.timeLastSeated()){
-					k++;
-				}
-				addToQueue.add(k,removedFromQueue.get(i));
+		int len = activeQueue.size();
+		for (int i = 0; i < len; i ++){
+			
+			if (activeQueue.get(i).assignedSection.sectionName.equals(section)){
+				dequeue(activeQueue.get(i));
+				break;
 			}
 		}
-		/**
-		 * Removes any servers with full sections from the available queue
-		 */
-		for (int i = 0; i < addToQueue.size(); i++){
-			if(addToQueue.get(i).assignedSection.isFull() == true){
-				removedFromQueue.add(addToQueue.get(i));
-				addToQueue.remove(i);
+		
+	}
+	
+	/**
+	 * Called upon table state change
+	 * Method updateFullServers receives a table who's state has just changed
+	 * and removes or places ServerModel objects from the fullServers List
+	 * depending on table state consequence
+	 * @param  table
+	 */
+	public void updateFullServers(TableModel table){
+		
+	}
+	/**
+	 * Constructor for post initial addition and deletion of ServerModels
+	 * @param TableModel table
+	 */
+	public void addQueue(ServerModel server){
+		//1. Add server to queue
+		GregorianCalendar tServer = server.assignedSection.timeLastSeated();
+		int len = activeQueue.size();
+		int i = 0;
+		for (i = 0; i <len; i++){
+			ServerModel curr = activeQueue.get(i);
+			if (curr.assignedSection.timeLastSeated().after(tServer)){
 				continue;
 			}
-		}
-		/**
-		 * Calculates the servermodel with the most recent assigned table time (needs date accommodation)
-		 */
-		ServerModel lastAssigned = addToQueue.get(0);
-		int moveIndex = 0;
-		for(int i = 1; i < addToQueue.size(); i++){
-			if(addToQueue.get(i).assignedSection.timeLastSeated() > lastAssigned.assignedSection.timeLastSeated()){
-				lastAssigned = addToQueue.get(i);
-				moveIndex = i;
+			else{
+				
+				break;
 			}
 		}
-		update(addToQueue, lastAssigned, moveIndex);
+		activeQueue.add(i, server);
+		System.out.printf("Added %s to activeQueue\n", server.getServerName());
+		System.out.println("ActiveQueue=" + activeQueue.toString());
+	}
+	
+	public static void dequeue(ServerModel server){
+		int i = activeQueue.indexOf(server);
+		activeQueue.remove(i);
+		if(server.assignedSection.almostFull() == true){
+			fullServers.add(server);
+			System.out.printf("Added %s to fullServers\n", server.getServerName());
+			System.out.println("ActiveQueue=" + activeQueue.toString());
+			System.out.println("FullServers=" + fullServers.toString());
+			
+			return;
+		}
+		else
+			activeQueue.add(server);
+			System.out.printf("%s is the tail of activeServers\n", server.getServerName());
+			System.out.println("ActiveQueue=" + activeQueue.toString());
 		return;
+	}
+	
+	public String toString(){
+		int len = activeQueue.size();
+		String servers[] = new String[len];
+		
+		for (int i = 0; i < len; i++){
+			servers[i] = activeQueue.get(i).serverName;
+		}
+		return Arrays.toString(servers);
 		
 	}
-	/**
-	 * Moves the most recent assigned servermodel to end of queue
-	 * @param queue
-	 * @param last
-	 * @param moveIndex
-	 */
-	public void update(LinkedList<ServerModel> queue, ServerModel last, int moveIndex){
-		queue.remove(moveIndex);
-		queue.add(last);
-		return;
-	}
-	/**
-	 * This is a queue to keep track of Server's who are
-	 * available in a Fist In First Out order
-	 */
 
+	public ServerModel isNext(){
+		return activeQueue.peekFirst();
+	}
+	public static LinkedList<ServerModel> getList(){
+		return activeQueue;
+	}
+	public int getSize(){
+		return activeQueue.size();
+	}
 }
