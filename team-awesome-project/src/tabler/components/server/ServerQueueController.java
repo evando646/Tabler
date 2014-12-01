@@ -61,7 +61,7 @@ public class ServerQueueController implements ActionListener{
 		
 		//Implement listAction if any one of these buttons are pressed
 		if (e.equals("view") || e.equals("skip")
-				||e.equals("hide") || e.equals("previous")){
+				||e.equals("hide") || e.equals("previous") || e.equals("view all")){
 			listAction(e);
 			return;
 		}
@@ -137,7 +137,14 @@ public class ServerQueueController implements ActionListener{
 		int index = queueview.getChosenIndex();
 		ArrayList<TableModel> tables = queuemodel.getList().get(index).getSection().availableTables();
 		if (e.equals("skip")){
-			view.editBorders(tables, "hide");
+			if(queueview.allViewed()){
+				ArrayList<TableModel> all = queueview.getAll();
+				view.editBorders(all, "hide");
+				queueview.setAll(false);
+			}
+			else {
+				view.editBorders(tables, "hide");
+			}
 			queueview.skip(queuemodel);
 			index = queueview.getChosenIndex();
 			tables.clear();
@@ -147,14 +154,26 @@ public class ServerQueueController implements ActionListener{
 			return;
 		} 
 		else if (e.equals("view")){
-				index = queueview.getChosenIndex();
-				tables = queuemodel.getList().get(index).getSection().availableTables();
-				view.editBorders(tables, e);
-				 System.out.printf("Visible Index: %d", index);
-				return;
+			if(queueview.allViewed()){
+				ArrayList<TableModel> all = queueview.getAll();
+				view.editBorders(all, "hide");
+				queueview.setAll(false);
+			}
+			index = queueview.getChosenIndex();
+			tables = queuemodel.getList().get(index).getSection().availableTables();
+			view.editBorders(tables, e);
+			 System.out.printf("Visible Index: %d", index);
+			return;
 		}
 		else if (e.equals("previous")){
-			view.editBorders(tables, "hide");
+			if(queueview.allViewed()){
+				ArrayList<TableModel> all = queueview.getAll();
+				view.editBorders(all, "hide");
+				queueview.setAll(false);
+			}
+			else {
+				view.editBorders(tables, "hide");
+			}
 			queueview.viewPrev(queuemodel);
 			index = queueview.getChosenIndex();
 			tables.clear();
@@ -164,10 +183,22 @@ public class ServerQueueController implements ActionListener{
 			return;
 		}
 		else if (e.equals("hide")){
-			view.editBorders(tables, e);
-			queueview.revert(queuemodel);
-			 System.out.printf("Visible Index: %d", index);
-			return;
+			if(queueview.allViewed()){
+				ArrayList<TableModel> all = queueview.getAll();
+				view.editBorders(all, "hide");
+				queueview.setAll(false);
+			}
+			else{
+				view.editBorders(tables, e);
+				queueview.revert(queuemodel);
+				System.out.printf("Visible Index: %d", index);
+				return;
+			}
+		}
+		else if (e.equals("view all")){
+			ArrayList<TableModel> all = queueview.viewAll(model.getTableList());
+			queueview.setAll(true);
+			view.editBorders(all, e);
 		}
 	}
 

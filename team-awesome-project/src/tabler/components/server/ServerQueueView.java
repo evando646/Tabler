@@ -26,7 +26,10 @@ public class ServerQueueView extends JFrame{
 	public JButton skip;
 	public JButton prev;
 	public JButton revert;
+	public JButton viewAll;
 	public JScrollBar bar;
+	public boolean all;
+	public ArrayList<TableModel> allAvailable;
 	public ArrayList<String> servers;
 	public String [] possibleValues;
 	int visibleIndex;
@@ -60,10 +63,12 @@ public class ServerQueueView extends JFrame{
 		skip = new JButton("skip");
 		prev = new JButton("previous");
 		revert = new JButton("hide");
+		viewAll = new JButton("view all");
 		
 		pane.setViewportView(list);
-		
-		label = new JLabel("...");
+		all = false;
+		allAvailable = null;
+		//label = new JLabel("...");
 		
 	}
 	/**
@@ -85,7 +90,7 @@ public class ServerQueueView extends JFrame{
         this.frame = new JFrame("Foo001");
         this.panel = new JPanel(new BorderLayout());
         JPanel subpanel = new JPanel();
-        subpanel.add(label);
+        subpanel.add(viewAll);
         subpanel.add(revert);
    
 	    panel.add(view, BorderLayout.NORTH);
@@ -130,6 +135,39 @@ public class ServerQueueView extends JFrame{
 		
 	}
 	/**
+	 * Method returns available tables arraylist to controller
+	 * @param floorview view
+	 */
+	public ArrayList<TableModel> viewAll(ArrayList<TableModel> tables){
+
+		allAvailable = new ArrayList<TableModel>();
+		for (TableModel t: tables){
+			if(!t.isOccupied()){
+				allAvailable.add(t);
+			}
+		}
+		return allAvailable;
+	}
+	/**
+	 * Method returns allAvailable tables once set
+	 */
+	public ArrayList<TableModel> getAll(){
+		return allAvailable;
+	}
+	/**
+	 * Method determines whether all available tables are currently shown
+	 */
+	public boolean allViewed(){
+		return all;
+	}
+	/**
+	 * Sets boolean value of all viewed 
+	 * @param b
+	 */
+	public void setAll(boolean b){
+		this.all = b;
+	}
+	/**
 	 * Returns index of server in activeQueue currently shown
 	 * @return int: visibleIndex
 	 */
@@ -143,6 +181,9 @@ public class ServerQueueView extends JFrame{
 	 * @param ServerQueueModel: model
 	 */
 	public void skip(ServerQueueModel model){
+		if (this.allViewed()){
+			
+		}
 		if(model.getSize() == 0){
 			System.out.println("Queue is empty");
 			return;
@@ -200,6 +241,7 @@ public class ServerQueueView extends JFrame{
 		skip.addActionListener(controller);
 		prev.addActionListener(controller);
 		revert.addActionListener(controller);
+		viewAll.addActionListener(controller);
 	}
 	/**
 	 * showOptions results in a confirmation question pop up after a 

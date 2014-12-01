@@ -98,5 +98,11 @@ public class FloorView extends JFrame{
 		}
 	}
 
-
+	/**
+	 * Method gets and returns all table buttons
+	 * @return ArrayList<JButton> 
+	 */
+	public ArrayList<JButton> getTableButtons(){
+		return tableButtons;
+	}
 }
