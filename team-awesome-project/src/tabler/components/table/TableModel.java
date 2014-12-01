@@ -64,11 +64,15 @@ public class TableModel implements Comparable<TableModel> {
 		
 		return objectString;
 	}
-	
+	/**
+	 * Adds new guest to table and changes the table state to occupied - kristin
+	 * @param newGuest
+	 */
 	public void assignGuest(GuestModel newGuest) {
 		if (!newGuest.equals(null)) {
 			currentGuest = newGuest;
 			currentGuestArrived = new GregorianCalendar();
+			state = TableState.OCCUPIED;
 		}
 	}
 	
