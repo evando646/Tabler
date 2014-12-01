@@ -9,6 +9,7 @@ import tabler.components.table.*;
 import tabler.components.floor.*;
 import tabler.components.guest.*;
 
+
 public class ServerQueueModel{
 	public static LinkedList<ServerModel> activeQueue;
 	public static ArrayList<ServerModel> fullServers;
@@ -61,8 +62,9 @@ public class ServerQueueModel{
 		
 	}
 	/**
-	 * Constructor for post initial addition and deletion of ServerModels
-	 * @param TableModel table
+	 * addQueue() method attempts to replace some serverModel in activeQueue
+	 * depending on return value of timeLastSeated() for all servers
+	 * @param ServerModel: server
 	 */
 	public void addQueue(ServerModel server){
 		//1. Add server to queue
@@ -84,6 +86,12 @@ public class ServerQueueModel{
 		System.out.println("ActiveQueue=" + activeQueue.toString());
 	}
 	
+	/**
+	 * dequeue() method takes some serverModel in the activeQueue and attempts
+	 * to move its list position to the tail, otherwise places the serverModel
+	 * inside the fullServers arrayList
+	 * @param ServerModel: server
+	 */
 	public static void dequeue(ServerModel server){
 		int i = activeQueue.indexOf(server);
 		activeQueue.remove(i);
@@ -102,6 +110,10 @@ public class ServerQueueModel{
 		return;
 	}
 	
+	/**
+	 * toString() returns the entire queue as a string array
+	 * @return String: activeQueue
+	 */
 	public String toString(){
 		int len = activeQueue.size();
 		String servers[] = new String[len];
@@ -112,14 +124,37 @@ public class ServerQueueModel{
 		return Arrays.toString(servers);
 		
 	}
-
+	/**
+	 * isNext() returns the next server suggested to be seadted-> head of queue
+	 * @return ServerModel: head server in activeQueue
+	 */
 	public ServerModel isNext(){
 		return activeQueue.peekFirst();
 	}
+	/**
+	 * Returns the current instance of the activeQueue
+	 * @return LinkedList: activeQueue
+	 */
 	public static LinkedList<ServerModel> getList(){
 		return activeQueue;
 	}
+	/**
+	 * getSize() returns the current size of activeQueue 
+	 * @return int: size of activeQueue
+	 */
 	public int getSize(){
 		return activeQueue.size();
 	}
+	/**
+	 * isEmpty() returns true if the activeQueue list is empty, false otherwise
+	 * @return boolean
+	 */
+	public boolean isEmpty(){
+		if (getList().peekFirst() == null){
+			return true;
+		}
+		return false;
+	}
+	
+	
 }
