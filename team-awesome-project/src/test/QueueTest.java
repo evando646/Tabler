@@ -13,7 +13,7 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 
 
-import javax.swing.table.TableModel;
+import tabler.components.table.TableModel;
 
 import tabler.components.floor.*;
 import tabler.components.floor.FloorModel;

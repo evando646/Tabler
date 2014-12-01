@@ -135,7 +135,7 @@ public class ServerQueueController implements ActionListener{
 	public void listAction(String e){
 		
 		int index = queueview.getChosenIndex();
-		ArrayList<TableModel>tables = queuemodel.getList().get(index).getSection().availableTables();
+		ArrayList<TableModel> tables = queuemodel.getList().get(index).getSection().availableTables();
 		if (e.equals("skip")){
 			view.editBorders(tables, "hide");
 			queueview.skip(queuemodel);
