@@ -42,7 +42,10 @@ public class WaitlistTest {
 		
 		GregorianCalendar now = new GregorianCalendar();
 		
-		while (inputFile.hasNextLine() && numImportGuests > 0) {
+		// Use this while-condition to import some of the guests
+		//while (inputFile.hasNextLine() && numImportGuests > 0) {
+		// Use this while-condition to import all of the guests
+		while (inputFile.hasNextLine()) {
 			String nextGuest = inputFile.nextLine();
 			Scanner guestScanner = new Scanner(nextGuest);
 			guestScanner.useDelimiter(",");
@@ -101,6 +104,18 @@ public class WaitlistTest {
 		return importedGuests;
 	}
 	
+	public static void testRemoveGuest(ArrayList<GuestModel> guests, WaitlistModel waitlist) {
+		System.out.println("\nWill remove the following guests");
+		System.out.println(guests.get(0) + "\n" + guests.get(3) + "\n" + guests.get(7));
+		
+		waitlist.removeGuest(guests.get(0));
+		waitlist.removeGuest(guests.get(3));
+		waitlist.removeGuest(guests.get(7));
+		System.out.println();
+		
+		System.out.println(waitlist);
+	}
+	
 	public static void main(String[] args) {
 		WaitlistModel newWaitlist = new WaitlistModel();
 		WaitlistView newWaitlistView = new WaitlistView();
@@ -115,15 +130,8 @@ public class WaitlistTest {
 		
 		System.out.println(newWaitlist);
 		
-		System.out.println("\nWill remove the following guests");
-		System.out.println(guests.get(0) + "\n" + guests.get(3) + "\n" + guests.get(7));
+		//testRemoveGuest(guests, newWaitlist);
 		
-		newWaitlist.removeGuest(guests.get(0));
-		newWaitlist.removeGuest(guests.get(3));
-		newWaitlist.removeGuest(guests.get(7));
-		System.out.println();
-		
-		System.out.println(newWaitlist);
 		
 		//System.out.println(newWaitlist);
 		//System.out.println(newWaitlistView);
