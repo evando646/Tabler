@@ -115,6 +115,16 @@ public class WaitlistTest {
 		
 		System.out.println(newWaitlist);
 		
+		System.out.println("\nWill remove the following guests");
+		System.out.println(guests.get(0) + "\n" + guests.get(3) + "\n" + guests.get(7));
+		
+		newWaitlist.removeGuest(guests.get(0));
+		newWaitlist.removeGuest(guests.get(3));
+		newWaitlist.removeGuest(guests.get(7));
+		System.out.println();
+		
+		System.out.println(newWaitlist);
+		
 		//System.out.println(newWaitlist);
 		//System.out.println(newWaitlistView);
 	}
