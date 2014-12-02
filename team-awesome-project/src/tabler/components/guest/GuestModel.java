@@ -165,6 +165,10 @@ public class GuestModel {
 			objectString += "N/A";
 		}
 		
+		objectString += ", note=";
+	    
+		objectString += (getNote().equals("") ? "N/A" : getNote());
+		
 		objectString += "]";
 		
 		return objectString;
