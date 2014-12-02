@@ -26,7 +26,7 @@ public class WaitlistTest {
 		
 		Scanner inputFile = null;
 		ArrayList<GuestModel> importedGuests = new ArrayList<GuestModel>();
-		int numImportGuests = 6;
+		int numImportGuests = 9;
 		
 		try {
 			inputFile = new Scanner(new File(guestsFile));
