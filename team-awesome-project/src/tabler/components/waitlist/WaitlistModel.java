@@ -38,7 +38,13 @@ public class WaitlistModel {
 	 * @param newGuest a guest to add to the waitlist
 	 */
 	public void addGuestToList(GuestModel newGuest) {
-		if (newGuest == null) {
+		/*
+		 * Here we reject guests that have reservations which occur in the past
+		 * (with a small buffer of 1 second)
+		 */
+		if (newGuest == null || 
+				newGuest.getReservationTime().getTimeInMillis() - 
+				(new GregorianCalendar().getTimeInMillis() - 1000) < 0) {
 			return;
 		}
 		
