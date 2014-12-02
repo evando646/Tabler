@@ -37,7 +37,7 @@ public class WaitlistModel {
 	 * 
 	 * @param newGuest a guest to add to the waitlist
 	 */
-	public void addGuestToList(GuestModel newGuest) {
+	public void addGuest(GuestModel newGuest) {
 		/*
 		 * Here we reject guests that have reservations which occur in the past
 		 * (with a small buffer of 1 second)
@@ -161,6 +161,29 @@ public class WaitlistModel {
 		}
 	}
 
+	/**
+	 * Removes a guest from the waitlist if the guest exists
+	 * 
+	 * @param guest the guest to remove from the waitlist
+	 * @return a reference to the guest that was successfully removed;
+	 * 			null otherwise
+	 */
+	public GuestModel removeGuest(GuestModel guest) {
+		if (guest == null) {
+			return null;
+		}
+		
+		if (walkins.remove(guest) == true) {
+			return guest;
+		} else if (soon.remove(guest) == true) {
+			return guest;
+		} else if (remaining.remove(guest) == true) {
+			return guest;
+		}
+		
+		return null;
+	}
+	
 	/**
 	 * Creates a string representation of the <code>WaitlistModel</code> object  
 	 * 

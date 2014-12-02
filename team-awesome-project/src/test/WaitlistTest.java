@@ -110,7 +110,7 @@ public class WaitlistTest {
 
 		for (GuestModel guest : guests) {
 			//System.out.println(guest);
-			newWaitlist.addGuestToList(guest);
+			newWaitlist.addGuest(guest);
 		}
 		
 		System.out.println(newWaitlist);
