@@ -118,7 +118,7 @@ public class WaitlistTest {
 	
 	public static void main(String[] args) {
 		WaitlistModel newWaitlist = new WaitlistModel();
-		WaitlistView newWaitlistView = new WaitlistView();
+		WaitlistView newWaitlistView = null;
 		ArrayList<GuestModel> guests = null;
 		
 		guests = importGuests(guestsFile);
@@ -128,6 +128,7 @@ public class WaitlistTest {
 			newWaitlist.addGuest(guest);
 		}
 		
+		newWaitlistView = new WaitlistView(newWaitlist);
 		System.out.println(newWaitlist);
 		
 		//testRemoveGuest(guests, newWaitlist);
