@@ -1,7 +1,18 @@
 package tabler.components.waitlist;
 
-public class WaitlistView {
-	public WaitlistView() {
+import javax.swing.JPanel;
+
+/**
+ * The <code>WaitlistView</code> class represents the View portion of the
+ * waitlist component. It dictates how the waitlist is displayed in the GUI.
+ * 
+ * @author Augustine (mr-augustine)
+ *
+ */
+@SuppressWarnings("serial")
+public class WaitlistView extends JPanel {
+	
+	public WaitlistView(WaitlistModel waitlist) {
 		System.out.println("The WaitlistView currently doesn't do anything");
 	}
 }
