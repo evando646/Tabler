@@ -59,24 +59,22 @@ public class WaitlistTest {
 			int minuteOffset = guestScanner.nextInt();
 			int secondOffset = guestScanner.nextInt();
 			
-			GregorianCalendar created = new GregorianCalendar(
-					now.get(Calendar.YEAR),	now.get(Calendar.MONTH), 
-					now.get(Calendar.DAY_OF_MONTH) +  + dayOffset, 
-					now.get(Calendar.HOUR) + hourOffset, 
-					now.get(Calendar.MINUTE) + minuteOffset, 
-					now.get(Calendar.SECOND) + secondOffset);
+			GregorianCalendar created = (GregorianCalendar) now.clone();
+			created.add(Calendar.DAY_OF_MONTH, dayOffset);
+			created.add(Calendar.HOUR, hourOffset);
+			created.add(Calendar.MINUTE, minuteOffset);
+			created.add(Calendar.SECOND, secondOffset);
 			
 			String rDayOffset = guestScanner.next();
 			String rHourOffset = guestScanner.next();
 			String rMinuteOffset = guestScanner.next();
 			String rSecondOffset = guestScanner.next();
 
-			GregorianCalendar reservationStart = new GregorianCalendar(
-					now.get(Calendar.YEAR), now.get(Calendar.MONTH),
-					now.get(Calendar.DAY_OF_MONTH) + (rDayOffset.equals("-") ? dayOffset : Integer.parseInt(rDayOffset.toString())),
-					now.get(Calendar.HOUR) + (rHourOffset.equals("-") ? hourOffset : Integer.parseInt(rHourOffset.toString())),
-					now.get(Calendar.MINUTE) + (rMinuteOffset.equals("-") ? minuteOffset : Integer.parseInt(rMinuteOffset.toString())),
-					now.get(Calendar.SECOND)+ (rSecondOffset.equals("-") ? secondOffset : Integer.parseInt(rSecondOffset.toString())));
+			GregorianCalendar reservationStart = (GregorianCalendar) now.clone();
+			reservationStart.add(Calendar.DAY_OF_MONTH, (rDayOffset.equals("-") ? dayOffset : Integer.parseInt(rDayOffset)));
+			reservationStart.add(Calendar.HOUR, (rHourOffset.equals("-") ? hourOffset : Integer.parseInt(rHourOffset)));
+			reservationStart.add(Calendar.MINUTE, (rMinuteOffset.equals("-") ? minuteOffset : Integer.parseInt(rMinuteOffset)));
+			reservationStart.add(Calendar.SECOND, (rSecondOffset.equals("-") ? secondOffset : Integer.parseInt(rSecondOffset)));
 			
 			String note;
 
