@@ -5,7 +5,9 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -16,8 +18,13 @@ import tabler.components.clock.ClockView;
 import tabler.components.floor.FloorController;
 import tabler.components.floor.FloorModel;
 import tabler.components.floor.FloorView;
+import tabler.components.server.ServerModel;
+import tabler.components.server.ServerQueueController;
+import tabler.components.server.ServerQueueModel;
+import tabler.components.server.ServerQueueView;
 import tabler.components.waitlist.WaitlistModel;
 import tabler.components.waitlist.WaitlistView;
+import tabler.components.guest.GuestModel;
 
 public class MainPanel extends JPanel {
 
@@ -54,6 +61,19 @@ public class MainPanel extends JPanel {
         this.add(waitlistView,BorderLayout.EAST);
         
         //ServerQueue
+        //ServerQueueModel queuemodel = new ServerQueueModel(servers);
+        ServerQueueModel queuemodel = new ServerQueueModel(new ArrayList<ServerModel>());
+        final ServerQueueView qview = new ServerQueueView(queuemodel);
+        System.out.println(queuemodel.toString());
+        ServerQueueController queueController = new ServerQueueController(floorModel, floorView, queuemodel, new ArrayList<GuestModel>(), qview);
         
+        floorView.register(queueController);
+        qview.register(queueController);
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+               qview.createAndShowGui();
+            }
+         });
 	}
 }
