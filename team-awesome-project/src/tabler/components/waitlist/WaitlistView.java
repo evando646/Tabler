@@ -13,6 +13,6 @@ import javax.swing.JPanel;
 public class WaitlistView extends JPanel {
 	
 	public WaitlistView(WaitlistModel waitlist) {
-		System.out.println("The WaitlistView currently doesn't do anything");
+		
 	}
 }

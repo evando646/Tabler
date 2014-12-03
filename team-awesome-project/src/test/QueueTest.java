@@ -301,16 +301,21 @@ public class QueueTest {
 
         
         ServerQueueModel queuemodel = new ServerQueueModel(servers);
-        ServerQueueView qview = new ServerQueueView(queuemodel);
+        final ServerQueueView qview = new ServerQueueView(queuemodel);
         System.out.println(queuemodel.toString());
         ServerQueueController queueController = new ServerQueueController(model, view, queuemodel, guests, qview);
         
         view.register(queueController);
         qview.register(queueController);
         
-        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        view.setSize(1024,768);
-        view.setVisible(true);
+        //view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame frame = new JFrame();
+        
+        frame.add(view);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800,600);
+        frame.setVisible(true);
         
         
         java.awt.EventQueue.invokeLater(new Runnable() {
