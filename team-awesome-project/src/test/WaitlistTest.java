@@ -26,7 +26,10 @@ public class WaitlistTest {
 		
 		Scanner inputFile = null;
 		ArrayList<GuestModel> importedGuests = new ArrayList<GuestModel>();
-		int numImportGuests = 9;
+		//Enable this variable if you want to limit the number of guests to
+		//import. Also change the while condition and enable the variable
+		//decrement at the end of the while loop
+		//int numImportGuests = 9;
 		
 		try {
 			inputFile = new Scanner(new File(guestsFile));
@@ -95,7 +98,7 @@ public class WaitlistTest {
 			if (newGuest != null) { importedGuests.add(newGuest); }
 			//System.out.println(nextGuest);
 			guestScanner.close();
-			numImportGuests--;
+			//numImportGuests--;
 		}
 		
 		inputFile.close();
