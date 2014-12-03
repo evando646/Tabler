@@ -21,6 +21,8 @@ public class FloorView extends JPanel{
 	
 	private static final int SCALE = 5;
 	
+	private Border oldBorder = null;
+	
 	private JPanel panel;
 	private ArrayList<JButton> tableButtons;
 	
@@ -56,7 +58,7 @@ public class FloorView extends JPanel{
 		Border border;
 		JPanel contentPane = (JPanel) this.getRootPane().getContentPane();
 		if (S.equals("hide")){
-			border =  BorderFactory.createEmptyBorder();
+			border =  oldBorder;
 		}
 		else{
 			border = new LineBorder(Color.black, 7);
@@ -66,11 +68,15 @@ public class FloorView extends JPanel{
 		for(int i = 0; i < bsize; i ++){
 			for (int j = 0; j < lsize; j++){
 				if (this.tableButtons.get(i).getText().equals(Integer.toString(TablesList.get(j).getTableNumber()))){
+					if ( oldBorder == null )
+					{
+						oldBorder = tableButtons.get(i).getBorder();
+					}
 					tableButtons.get(i).setBorder(border);
 				}
 			}
 		}
-		contentPane.updateUI();
+		contentPane.repaint();
 	}
 	/**
 	 * Reinstated register method for floor buttons for testing

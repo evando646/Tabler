@@ -309,8 +309,13 @@ public class QueueTest {
         qview.register(queueController);
         
         //view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        view.setSize(1024,768);
-        view.setVisible(true);
+        JFrame frame = new JFrame();
+        
+        frame.add(view);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800,600);
+        frame.setVisible(true);
         
         
         java.awt.EventQueue.invokeLater(new Runnable() {
