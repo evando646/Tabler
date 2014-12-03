@@ -209,7 +209,7 @@ public class WaitlistModel {
 				objectString += ("\t" + guest + "\n");
 			}
 		} else {
-			objectString += "\tNone\n\n";
+			objectString += "\tNone\n";
 		}
 		
 		objectString += "\n\tRemaining\n\t========\n";
