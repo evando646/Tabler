@@ -1,16 +1,21 @@
 package test;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 import tabler.components.guest.GuestModel;
 import tabler.components.waitlist.WaitlistModel;
 import tabler.components.waitlist.WaitlistView;
 
 public class WaitlistTest {
+
 	private static String guestsFile = "./src/test/guests.txt";
 
 	/**
@@ -132,11 +137,32 @@ public class WaitlistTest {
 		newWaitlistView = new WaitlistView(newWaitlist);
 		System.out.println(newWaitlist);
 		
+		JFrame test = new WaitlistTestFrame();
+		newWaitlistView = new WaitlistView(newWaitlist);
+		test.add(newWaitlistView);
 		//testRemoveGuest(guests, newWaitlist);
 		
 		
 		//System.out.println(newWaitlist);
 		//System.out.println(newWaitlistView);
+	}
+
+}
+
+@SuppressWarnings("serial")
+class WaitlistTestFrame extends JFrame {
+	public WaitlistTestFrame() {
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		Dimension screenSize = kit.getScreenSize();
+		int screenHeight = screenSize.height;
+		int screenWidth = screenSize.width;
+		
+		setSize(screenWidth / 5, screenHeight / 2);
+		setLocationByPlatform(true);
+		this.setTitle("WaitlistTest");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+
 	}
 
 }
