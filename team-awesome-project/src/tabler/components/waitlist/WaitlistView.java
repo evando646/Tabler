@@ -3,10 +3,12 @@ package tabler.components.waitlist;
 import tabler.components.guest.GuestModel;
 import tabler.components.guest.GuestView;
 
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * The <code>WaitlistView</code> class represents the View portion of the
@@ -20,9 +22,14 @@ public class WaitlistView extends JPanel {
 	private GuestlistView guestlist;
 	
 	public WaitlistView(WaitlistModel waitlist) {
+		this.setLayout(new BorderLayout());
 		this.guestlist = new GuestlistView(waitlist);
 		
-		this.add(guestlist);
+		JScrollPane scroll = new JScrollPane(this.guestlist);
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		
+		this.add(scroll, BorderLayout.CENTER);
 	}
 }
 
