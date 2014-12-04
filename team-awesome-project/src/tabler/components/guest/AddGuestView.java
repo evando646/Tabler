@@ -26,7 +26,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
-public class GuestView extends JFrame{
+public class AddGuestView extends JFrame{
 	/**
 	 * 
 	 */
@@ -64,7 +64,7 @@ public class GuestView extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public GuestView() {
+	public AddGuestView() {
 		yearAdd=0;
 		dayAdd=0;
 		monthAdd=0;
