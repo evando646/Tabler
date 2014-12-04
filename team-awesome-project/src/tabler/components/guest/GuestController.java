@@ -5,14 +5,14 @@ import java.awt.event.ActionListener;
 import java.util.GregorianCalendar;
 
 public class GuestController implements ActionListener{
-	private GuestView view;
+	private AddGuestView view;
 	private GuestModel model=null;
 	
 
 	
 
 	
-	public GuestController(GuestView view){
+	public GuestController(AddGuestView view){
 		this.view=view;
 
 		

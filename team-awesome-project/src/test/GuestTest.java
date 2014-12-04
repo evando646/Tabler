@@ -10,7 +10,7 @@ import java.lang.Integer;
 import javax.swing.JFrame;
 
 import tabler.components.guest.GuestModel;
-import tabler.components.guest.GuestView;
+import tabler.components.guest.AddGuestView;
 
 public class GuestTest {
 	private static String guestsFile = "./src/test/guests.txt";
@@ -118,7 +118,7 @@ public class GuestTest {
 
 
 		//
-		GuestView window=new GuestView();
+		AddGuestView window=new AddGuestView();
 		//model=new GuestModel();
 		GuestController controller=new GuestController(window);
 		
