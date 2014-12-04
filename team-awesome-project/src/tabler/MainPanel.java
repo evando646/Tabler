@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -36,6 +37,10 @@ public class MainPanel extends JPanel {
 	{
 		this.setLayout(new BorderLayout());
 		
+		//Subpanel for waitlist and serverqueue
+        JPanel subPanelEast = new JPanel();
+        subPanelEast.setLayout(new BoxLayout(subPanelEast, BoxLayout.Y_AXIS));
+        
 		//Replace this with clock view
 		ClockModel clockModel = new ClockModel();
 		ClockView clockView = new ClockView(clockModel);
@@ -56,8 +61,7 @@ public class MainPanel extends JPanel {
         floorView.register(floorController);
         
         this.add(floorView,BorderLayout.WEST);
-        JPanel subPanelEast = new JPanel();
-        subPanelEast.setLayout(new BoxLayout(subPanelEast, BoxLayout.Y_AXIS));
+
         //Waitlist
         WaitlistModel waitlistModel = new WaitlistModel();
         WaitlistView waitlistView = new WaitlistView(waitlistModel);
@@ -86,6 +90,7 @@ public class MainPanel extends JPanel {
         this.add(subPanelEast, BorderLayout.EAST);
         floorView.register(queueController);
         qview.register(queueController);
+      
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

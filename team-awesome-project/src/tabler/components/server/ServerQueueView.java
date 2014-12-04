@@ -68,7 +68,7 @@ public class ServerQueueView extends JPanel{
 		pane.setViewportView(list);
 		all = false;
 		allAvailable = null;
-		//label = new JLabel("...");
+
 		
 	}
 	/**
@@ -100,13 +100,6 @@ public class ServerQueueView extends JPanel{
 	    this.add(subpanel, BorderLayout.SOUTH);
 
         this.add(pane, BorderLayout.CENTER);
-	    //frame.add(panel);
-        
-
-     //   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       // frame.pack();
-       // frame.setLocationRelativeTo(null);
-        //frame.setVisible(true);
         
    
 	}
