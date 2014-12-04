@@ -184,6 +184,31 @@ public class WaitlistModel {
 		return null;
 	}
 	
+	public LinkedList<GuestModel> getSoonGuests() {		
+		return this.soon;
+	}
+	
+	public LinkedList<GuestModel> getWalkinsGuests() {
+		return this.walkins;
+	}
+	
+	public LinkedList<GuestModel> getTodaysRemainingGuests() {
+		LinkedList<GuestModel> todaysRemaining = new LinkedList<GuestModel>();
+		
+		for (GuestModel guest : this.remaining) {
+			if (guest.getReservationTime().get(Calendar.YEAR) == new GregorianCalendar().get(Calendar.YEAR) &&
+					guest.getReservationTime().get(Calendar.DAY_OF_YEAR) == new GregorianCalendar().get(Calendar.DAY_OF_YEAR)) {
+				todaysRemaining.add(guest);
+			}
+		}
+		
+		return todaysRemaining;
+	}
+	
+	public LinkedList<GuestModel> getAllRemainingGuests() {
+		return this.remaining;
+	}
+	
 	/**
 	 * Creates a string representation of the <code>WaitlistModel</code> object  
 	 * 
