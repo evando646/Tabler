@@ -15,7 +15,7 @@ import tabler.components.table.*;
 import tabler.components.floor.*;
 import tabler.components.guest.*;
 
-public class ServerQueueView extends JFrame{
+public class ServerQueueView extends JPanel{
 	public JFrame frame;
 	public JPanel panel;
 	public JList list;
@@ -251,7 +251,7 @@ public class ServerQueueView extends JFrame{
 	public int showOptions(String s){
 		
 		return JOptionPane.showConfirmDialog(null,
-	             "Are you sure you want to " + s + "?", "choose one", JOptionPane.YES_NO_OPTION);
+	             "Are you sure you want to seat " + s + "?", "choose one", JOptionPane.YES_NO_OPTION);
 	}
 	/**
 	 * unavailableError() results in a JDialog error pop up 

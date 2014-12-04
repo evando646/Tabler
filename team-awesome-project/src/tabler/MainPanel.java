@@ -18,6 +18,7 @@ import tabler.components.clock.ClockView;
 import tabler.components.floor.FloorController;
 import tabler.components.floor.FloorModel;
 import tabler.components.floor.FloorView;
+import tabler.components.server.SectionModel;
 import tabler.components.server.ServerModel;
 import tabler.components.server.ServerQueueController;
 import tabler.components.server.ServerQueueModel;
@@ -27,7 +28,9 @@ import tabler.components.waitlist.WaitlistView;
 import tabler.components.guest.GuestModel;
 
 public class MainPanel extends JPanel {
-
+	
+	
+	
 	public MainPanel()
 	{
 		this.setLayout(new BorderLayout());
@@ -62,7 +65,15 @@ public class MainPanel extends JPanel {
         
         //ServerQueue
         //ServerQueueModel queuemodel = new ServerQueueModel(servers);
-        ServerQueueModel queuemodel = new ServerQueueModel(new ArrayList<ServerModel>());
+        SectionModel sectionmodel = new SectionModel();
+        ServerModel servermodel = new ServerModel();
+		ArrayList<SectionModel> sections = null;
+		ArrayList<ServerModel> servers = null;
+		
+
+		sections = sectionmodel.importSections(floorModel.getTableList());
+		servers = servermodel.importServers( sections);
+        ServerQueueModel queuemodel = new ServerQueueModel(servers);
         final ServerQueueView qview = new ServerQueueView(queuemodel);
         System.out.println(queuemodel.toString());
         ServerQueueController queueController = new ServerQueueController(floorModel, floorView, queuemodel, new ArrayList<GuestModel>(), qview);

@@ -1,8 +1,11 @@
 package tabler.components.server;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Scanner;
+
 import tabler.components.table.*;
 import tabler.components.floor.*;
 import tabler.components.guest.*;
@@ -17,6 +20,7 @@ import tabler.components.guest.*;
  *
  */
 public class SectionModel {
+	private static String sectionsFile = "./src/test/sections.txt";
 	/**
 	 * This is the name of a section
 	 */
@@ -32,6 +36,9 @@ public class SectionModel {
 	 * 
 	 * @param sectionName the name of the section
 	 */
+	public SectionModel(){
+		
+	}
 	public SectionModel(String sectionName) {
 		this.sectionName = sectionName;
 		tableList = new ArrayList<TableModel>();
@@ -188,5 +195,51 @@ public class SectionModel {
 		objectString += "}]";
 		
 		return objectString;
+	}
+	public static ArrayList<SectionModel> importSections( 
+			ArrayList<TableModel> tables) {
+		if (sectionsFile.equals(null)) {
+			return null;
+		}
+		
+		Scanner inputFile = null;
+		ArrayList<SectionModel> importedSections = new ArrayList<SectionModel>();
+		
+		try {
+			inputFile = new Scanner(new File(sectionsFile));
+		} catch (Exception FileNotFoundException) {
+			System.err.printf("Error: %s not found\n", inputFile);
+			System.exit(1);
+		}
+		
+		// skip the field descriptor line
+		inputFile.nextLine();
+		
+		//System.out.println("Contents of sections file\n");
+		
+		while (inputFile.hasNextLine()) {
+			String sectionName = inputFile.next();
+			
+			SectionModel newSection = new SectionModel(sectionName);
+			
+			// Add the corresponding table (identified in the file by tableNumber)
+			// to the new section AND updated the table's section number
+			while (inputFile.hasNextInt()) {
+				int nextTableNumber = inputFile.nextInt();
+				
+				for (TableModel table : tables) {
+					if (table.getTableNumber() == nextTableNumber) {
+						newSection.addTable(table);
+						table.setSection(sectionName);
+					}
+				}
+			}
+			
+			importedSections.add(newSection);
+			
+			//System.out.println(inputFile.nextLine());
+		}
+		
+		return importedSections;
 	}
 }
