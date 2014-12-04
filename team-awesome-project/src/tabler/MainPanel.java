@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -55,13 +56,14 @@ public class MainPanel extends JPanel {
         floorView.register(floorController);
         
         this.add(floorView,BorderLayout.WEST);
-        
+        JPanel subPanelEast = new JPanel();
+        subPanelEast.setLayout(new BoxLayout(subPanelEast, BoxLayout.Y_AXIS));
         //Waitlist
         WaitlistModel waitlistModel = new WaitlistModel();
         WaitlistView waitlistView = new WaitlistView(waitlistModel);
  
         waitlistView.add( new JLabel("Waitlist") );
-        this.add(waitlistView,BorderLayout.EAST);
+
         
         //ServerQueue
         //ServerQueueModel queuemodel = new ServerQueueModel(servers);
@@ -78,6 +80,10 @@ public class MainPanel extends JPanel {
         System.out.println(queuemodel.toString());
         ServerQueueController queueController = new ServerQueueController(floorModel, floorView, queuemodel, new ArrayList<GuestModel>(), qview);
         
+        subPanelEast.add(qview);
+        subPanelEast.add(waitlistView);
+        
+        this.add(subPanelEast, BorderLayout.EAST);
         floorView.register(queueController);
         qview.register(queueController);
         

@@ -88,24 +88,25 @@ public class ServerQueueView extends JPanel{
 			this.frame.dispose();
 		}
         this.frame = new JFrame("Foo001");
-        this.panel = new JPanel(new BorderLayout());
+		this.setLayout(new BorderLayout());
+
         JPanel subpanel = new JPanel();
         subpanel.add(viewAll);
         subpanel.add(revert);
    
-	    panel.add(view, BorderLayout.NORTH);
-	    panel.add(skip, BorderLayout.EAST);
-	    panel.add(prev, BorderLayout.WEST);
-	    panel.add(subpanel, BorderLayout.SOUTH);
+	    this.add(view, BorderLayout.NORTH);
+	    this.add(skip, BorderLayout.EAST);
+	    this.add(prev, BorderLayout.WEST);
+	    this.add(subpanel, BorderLayout.SOUTH);
 
-        panel.add(pane, BorderLayout.CENTER);
-	    frame.add(panel);
+        this.add(pane, BorderLayout.CENTER);
+	    //frame.add(panel);
         
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+     //   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // frame.pack();
+       // frame.setLocationRelativeTo(null);
+        //frame.setVisible(true);
         
    
 	}
@@ -131,7 +132,7 @@ public class ServerQueueView extends JPanel{
 			lModel.addElement(servers.get(i));
 		}
 		this.visibleIndex = 0;
-		createAndShowGui();
+		this.repaint();
 		
 	}
 	/**
@@ -194,7 +195,7 @@ public class ServerQueueView extends JPanel{
 		else{
 			this.visibleIndex++;
 		}
-		createAndShowGui();
+		this.repaint();
 	}
 	/**
 	 * revert() method is called in response to user pressing "hide"
@@ -209,7 +210,7 @@ public class ServerQueueView extends JPanel{
 		}
 		this.visibleIndex = 0;
 
-		createAndShowGui();
+		this.repaint();
 	}
 	
 	/**
@@ -229,7 +230,7 @@ public class ServerQueueView extends JPanel{
 		}else{
 			this.visibleIndex--;
 		}
-		createAndShowGui();
+		this.repaint();
 	}
 	
 	/**
