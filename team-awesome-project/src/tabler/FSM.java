@@ -8,7 +8,7 @@ import tabler.components.table.*;
 
 public class FSM {
 	
-	public enum FSM_STATE { START, TABLE, GUEST, SERVER };
+	public enum FSM_STATE { START, TABLE, GUEST, SERVER, ADD_GUEST };
 	
 	private FSM_STATE prevState = null;
 	private FSM_STATE curState = null;
@@ -87,7 +87,9 @@ public class FSM {
 			curServer = (ServerModel)ref;
 			
 			break;
+		case ADD_GUEST:
+			mainPanelRef.getWaitlistModel().addGuest((GuestModel)ref);
+			break;
 		}
 	}
-
 }

@@ -102,6 +102,8 @@ public class MainPanel extends JPanel {
 				JFrame frame = new JFrame();
 				frame.add(addGuest);
 				
+				guestController.setFrameToClose(frame);
+				
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setSize(491, 300);
 				

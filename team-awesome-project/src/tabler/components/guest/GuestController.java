@@ -4,10 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.GregorianCalendar;
 
+import javax.swing.JFrame;
+
+import tabler.FSM;
+import tabler.FSM.FSM_STATE;
+
 public class GuestController implements ActionListener{
 	private AddGuestView view;
 	private GuestModel model=null;
 	
+	private JFrame frameToClose = null;
 
 	
 
@@ -37,6 +43,11 @@ public class GuestController implements ActionListener{
 				//System.out.println("If checkException:");
 				System.out.println(model.toString());//comment this out, only for debuging purpose
 				//PUT your code for storing/handeling the model
+				FSM._instance.Action(FSM_STATE.ADD_GUEST, model);
+				if( frameToClose != null )
+				{
+					frameToClose.dispose();
+				}
 			}
 			catch(Exception a){
 				System.err.println(a);
@@ -84,7 +95,10 @@ public class GuestController implements ActionListener{
 
 	}
 	
-
+	public void setFrameToClose(JFrame frame)
+	{
+		frameToClose = frame;
+	}
 	
 	//private check
 	
