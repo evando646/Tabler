@@ -22,14 +22,16 @@ public class FSM {
 	private ServerModel curServer = null;
 	private ServerModel prevServer = null;
 	
+	private MainPanel mainPanelRef = null;
 	
-	public FSM()
+	public FSM(MainPanel panel)
 	{
 		prevState = FSM_STATE.START;
 		
 		if( _instance == null )
 		{
 			_instance = this;
+			mainPanelRef = panel;
 		}
 	}
 	
@@ -59,6 +61,11 @@ public class FSM {
 			{
 				//Assign guest to curTable;
 				//This is an ending case
+				curTable.assignGuest(curGuest);
+				mainPanelRef.getWaitlistModel().removeGuest(curGuest);
+				
+				curGuest = null;
+				curTable = null;
 			}
 			
 			prevState = curState;

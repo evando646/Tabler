@@ -35,8 +35,28 @@ import tabler.components.guest.GuestModel;
 import test.WaitlistTest;
 
 public class MainPanel extends JPanel {
+
+	private ArrayList<GuestModel> guests;
+
+	private ClockModel clockModel;
+	private ClockView clockView;
+	private ClockController clockController;
 	
+	private FloorModel floorModel;
+	private FloorView floorView;
+	private FloorController floorController;
 	
+	private WaitlistModel waitlistModel;
+	private WaitlistView waitlistView;
+	
+	private SectionModel sectionmodel;
+	private ServerModel servermodel;
+	private ArrayList<SectionModel> sections = null;
+	private ArrayList<ServerModel> servers = null;
+	
+	private ServerQueueModel queuemodel;
+	private ServerQueueView qview;
+	private ServerQueueController queueController;
 	
 	public MainPanel()
 	{
@@ -47,9 +67,9 @@ public class MainPanel extends JPanel {
         subPanelEast.setLayout(new BoxLayout(subPanelEast, BoxLayout.Y_AXIS));
         
 		//Replace this with clock view
-		ClockModel clockModel = new ClockModel();
-		ClockView clockView = new ClockView(clockModel);
-		ClockController clockController = new ClockController(clockModel, clockView);
+		clockModel = new ClockModel();
+		clockView = new ClockView(clockModel);
+		clockController = new ClockController(clockModel, clockView);
 		
 		Timer t = new Timer(1000, clockController);
 		t.start();
@@ -57,9 +77,9 @@ public class MainPanel extends JPanel {
 		this.add(clockView, BorderLayout.NORTH);
 		
 		//Floor View
-        FloorModel floorModel = new FloorModel();
-        FloorView floorView = new FloorView(floorModel.getTableList());
-        FloorController floorController = new FloorController(floorModel, floorView);
+        floorModel = new FloorModel();
+        floorView = new FloorView(floorModel.getTableList());
+        floorController = new FloorController(floorModel, floorView);
         
         floorView.setPreferredSize(new Dimension(800,600));
 
@@ -68,30 +88,28 @@ public class MainPanel extends JPanel {
         this.add(floorView,BorderLayout.WEST);
 
         //Waitlist
-        ArrayList<GuestModel> guests = importGuests("./src/test/guests.txt");
-        WaitlistModel waitlistModel = new WaitlistModel();
+        guests = importGuests("./src/test/guests.txt");
+        waitlistModel = new WaitlistModel();
         for (GuestModel guest : guests) {
         	waitlistModel.addGuest(guest);
         }
-        WaitlistView waitlistView = new WaitlistView(waitlistModel);
+        waitlistView = new WaitlistView(waitlistModel);
  
         //waitlistView.add( new JLabel("Waitlist") );
 
         
         //ServerQueue
         //ServerQueueModel queuemodel = new ServerQueueModel(servers);
-        SectionModel sectionmodel = new SectionModel();
-        ServerModel servermodel = new ServerModel();
-		ArrayList<SectionModel> sections = null;
-		ArrayList<ServerModel> servers = null;
-		
+        sectionmodel = new SectionModel();
+        servermodel = new ServerModel();
+	
 
 		sections = sectionmodel.importSections(floorModel.getTableList());
 		servers = servermodel.importServers( sections);
-        ServerQueueModel queuemodel = new ServerQueueModel(servers);
-        final ServerQueueView qview = new ServerQueueView(queuemodel);
+        queuemodel = new ServerQueueModel(servers);
+        qview = new ServerQueueView(queuemodel);
         System.out.println(queuemodel.toString());
-        ServerQueueController queueController = new ServerQueueController(floorModel, floorView, queuemodel, new ArrayList<GuestModel>(), qview);
+        queueController = new ServerQueueController(floorModel, floorView, queuemodel, new ArrayList<GuestModel>(), qview);
         
         subPanelEast.add(qview);
         subPanelEast.add(waitlistView);
@@ -198,5 +216,69 @@ public class MainPanel extends JPanel {
 		
 		inputFile.close();
 		return importedGuests;
+	}
+	
+	public ArrayList<GuestModel> getGuests() {
+		return guests;
+	}
+
+	public ClockModel getClockModel() {
+		return clockModel;
+	}
+
+	public ClockView getClockView() {
+		return clockView;
+	}
+
+	public ClockController getClockController() {
+		return clockController;
+	}
+
+	public FloorModel getFloorModel() {
+		return floorModel;
+	}
+
+	public FloorView getFloorView() {
+		return floorView;
+	}
+
+	public FloorController getFloorController() {
+		return floorController;
+	}
+
+	public WaitlistModel getWaitlistModel() {
+		return waitlistModel;
+	}
+
+	public WaitlistView getWaitlistView() {
+		return waitlistView;
+	}
+
+	public SectionModel getSectionmodel() {
+		return sectionmodel;
+	}
+
+	public ServerModel getServermodel() {
+		return servermodel;
+	}
+
+	public ArrayList<SectionModel> getSections() {
+		return sections;
+	}
+
+	public ArrayList<ServerModel> getServers() {
+		return servers;
+	}
+
+	public ServerQueueModel getQueuemodel() {
+		return queuemodel;
+	}
+
+	public ServerQueueView getQview() {
+		return qview;
+	}
+
+	public ServerQueueController getQueueController() {
+		return queueController;
 	}
 }

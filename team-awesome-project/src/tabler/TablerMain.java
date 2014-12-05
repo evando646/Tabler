@@ -11,11 +11,13 @@ public class TablerMain {
 		//COMMIT TEST -kris
 		
 		System.out.println("This is tabler main");
-		
-		new FSM(); //Creating the program fsm
+				
+		MainPanel mainPanel = new MainPanel();
 		
 		JFrame mainFrame = new JFrame();
-		mainFrame.add(new MainPanel());
+		mainFrame.add(mainPanel);
+		
+		new FSM(mainPanel); //Creating the program fsm
 		
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setSize(1024,768);
