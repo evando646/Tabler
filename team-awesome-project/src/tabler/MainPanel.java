@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,6 +15,7 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,6 +34,8 @@ import tabler.components.server.ServerQueueModel;
 import tabler.components.server.ServerQueueView;
 import tabler.components.waitlist.WaitlistModel;
 import tabler.components.waitlist.WaitlistView;
+import tabler.components.guest.AddGuestView;
+import tabler.components.guest.GuestController;
 import tabler.components.guest.GuestModel;
 import test.WaitlistTest;
 
@@ -58,6 +63,8 @@ public class MainPanel extends JPanel {
 	private ServerQueueView qview;
 	private ServerQueueController queueController;
 	
+	private JPanel buttonPanel;
+	
 	public MainPanel()
 	{
 		this.setLayout(new BorderLayout());
@@ -65,6 +72,11 @@ public class MainPanel extends JPanel {
 		//Subpanel for waitlist and serverqueue
         JPanel subPanelEast = new JPanel();
         subPanelEast.setLayout(new BoxLayout(subPanelEast, BoxLayout.Y_AXIS));
+        
+        JPanel subPanelNorth = new JPanel();
+        subPanelNorth.setLayout(new BoxLayout(subPanelNorth, BoxLayout.X_AXIS));
+        
+        this.add(subPanelNorth,BorderLayout.NORTH);
         
 		//Replace this with clock view
 		clockModel = new ClockModel();
@@ -74,7 +86,32 @@ public class MainPanel extends JPanel {
 		Timer t = new Timer(1000, clockController);
 		t.start();
 		
-		this.add(clockView, BorderLayout.NORTH);
+		subPanelNorth.add(clockView);
+		
+		buttonPanel = new JPanel();
+	
+		JButton addGuest = new JButton("Add Guest");
+		addGuest.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent event) {
+				AddGuestView addGuest = new AddGuestView();
+				
+				GuestController guestController = new GuestController(addGuest);
+				
+				addGuest.registerListener(guestController);
+				
+				JFrame frame = new JFrame();
+				frame.add(addGuest);
+				
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setSize(491, 300);
+				
+				frame.setVisible(true);
+			}
+		});
+		
+		buttonPanel.add(addGuest);
+		
+		subPanelNorth.add(buttonPanel,BorderLayout.NORTH);
 		
 		//Floor View
         floorModel = new FloorModel();
