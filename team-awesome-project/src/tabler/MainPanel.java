@@ -153,7 +153,7 @@ public class MainPanel extends JPanel {
         queuemodel = new ServerQueueModel(servers);
         qview = new ServerQueueView(queuemodel);
         System.out.println(queuemodel.toString());
-        queueController = new ServerQueueController(floorModel, floorView, queuemodel, new ArrayList<GuestModel>(), qview);
+        queueController = new ServerQueueController(floorModel, floorView, queuemodel, guests, qview);
         
         subPanelEast.add(qview);
         subPanelEast.add(waitlistView);

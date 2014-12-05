@@ -56,6 +56,7 @@ public class ServerQueueController implements ActionListener{
 		//preliminary check for isEmpty() to avoid any NullPointerException errors
 		if(queuemodel.isEmpty()){
 			queueview.WaitError();
+			queueview.emptyList();
 			return;
 		}
 		
@@ -103,6 +104,7 @@ public class ServerQueueController implements ActionListener{
 				int index = queueview.getChosenIndex();
 				//Temporary test check 
 				if(queuemodel.isEmpty()){
+					queueview.emptyList();
 					queueview.WaitError();
 					return;
 				}

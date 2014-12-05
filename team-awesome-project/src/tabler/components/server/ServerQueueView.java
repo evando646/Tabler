@@ -250,6 +250,18 @@ public class ServerQueueView extends JPanel{
 		return JOptionPane.showConfirmDialog(null,
 	             "Are you sure you want to seat " + s + "?", "choose one", JOptionPane.YES_NO_OPTION);
 	}
+	
+	public void emptyList(){
+		this.lModel = new DefaultListModel();
+		this.list.setModel(lModel);
+		
+		lModel.addElement("Empty");
+		
+		this.visibleIndex = 0;
+		list.ensureIndexIsVisible(this.visibleIndex);
+		list.repaint();
+		
+	}
 	/**
 	 * unavailableError() results in a JDialog error pop up 
 	 * when a user attempts to seat an already occupied table 
