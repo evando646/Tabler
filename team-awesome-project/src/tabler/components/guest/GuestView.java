@@ -2,6 +2,7 @@ package tabler.components.guest;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 
@@ -17,17 +18,23 @@ public class GuestView extends JPanel {
 	private static Color walkinGuestButtonColor = Color.white;
 	private static Font defaultGuestFont = new Font("Serif", Font.BOLD, 20);
 	private static Font defaultPartySizeFont = new Font("Serif", Font.BOLD, 20);
-	
-	private JLabel guestName;
-	private JLabel partySize;
+
+	private JButton guestName;
 	private JButton guestMode;
+	private JLabel partySize;
+	
+	private GuestModel model;
 
 	public GuestView(GuestModel guest) {
+		model = guest;
 		this.setBackground(defaultBG);
 		this.setLayout(new BorderLayout());
 		
-		this.guestName = new JLabel(guest.getName(), JLabel.CENTER);
-		this.partySize = new JLabel(String.format("%d", guest.getSize()), JLabel.RIGHT);
+		this.guestName = new JButton(guest.getName());
+		this.guestName.setBorderPainted(false);
+		this.guestName.setBackground(defaultBG);
+		this.guestName.setPreferredSize(new Dimension(this.guestName.getPreferredSize().width-1, this.guestName.getPreferredSize().height));
+		this.partySize = new JLabel(String.format("  %d", guest.getSize()), JLabel.RIGHT);
 		this.guestMode = new JButton();
 		
 		guestMode.setBackground((guest.isReservation() ? 
@@ -51,5 +58,18 @@ public class GuestView extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+	}
+	
+	
+	public JButton getGuestName() {
+		return guestName;
+	}
+
+	public JButton getGuestMode() {
+		return guestMode;
+	}
+
+	public GuestModel getModel() {
+		return model;
 	}
 }

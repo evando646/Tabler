@@ -32,6 +32,7 @@ import tabler.components.server.ServerModel;
 import tabler.components.server.ServerQueueController;
 import tabler.components.server.ServerQueueModel;
 import tabler.components.server.ServerQueueView;
+import tabler.components.waitlist.WaitlistController;
 import tabler.components.waitlist.WaitlistModel;
 import tabler.components.waitlist.WaitlistView;
 import tabler.components.guest.AddGuestView;
@@ -53,6 +54,7 @@ public class MainPanel extends JPanel {
 	
 	private WaitlistModel waitlistModel;
 	private WaitlistView waitlistView;
+	private WaitlistController waitlistController;
 	
 	private SectionModel sectionmodel;
 	private ServerModel servermodel;
@@ -133,6 +135,9 @@ public class MainPanel extends JPanel {
         	waitlistModel.addGuest(guest);
         }
         waitlistView = new WaitlistView(waitlistModel);
+        waitlistController = new WaitlistController(waitlistModel,waitlistView);
+        
+        waitlistView.registerListener(waitlistController);
  
         //waitlistView.add( new JLabel("Waitlist") );
 
@@ -315,6 +320,10 @@ public class MainPanel extends JPanel {
 
 	public ServerQueueView getQview() {
 		return qview;
+	}
+
+	public WaitlistController getWaitlistController() {
+		return waitlistController;
 	}
 
 	public ServerQueueController getQueueController() {

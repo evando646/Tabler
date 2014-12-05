@@ -82,7 +82,8 @@ public class AddGuestView extends JPanel{
 				while(true){
 				GregorianCalendar time=new GregorianCalendar();
 				int year=time.get(Calendar.YEAR)+yearAdd;
-				int month=time.get(Calendar.MONTH)+1+monthAdd;
+				time.add(Calendar.MONTH, monthAdd);
+				int month= time.get(Calendar.MONTH)+1;
 				int day=time.get(Calendar.DAY_OF_MONTH)+dayAdd;
 				int hour=time.get(Calendar.HOUR)+hourAdd;
 				int min=time.get(Calendar.MINUTE)+minuteAdd;

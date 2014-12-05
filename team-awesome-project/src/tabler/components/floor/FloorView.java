@@ -16,6 +16,7 @@ import javax.swing.border.LineBorder;
 
 import tabler.components.server.*;
 import tabler.components.table.TableModel;
+import tabler.components.table.TableModel.TableState;
 import tabler.components.server.*;
 public class FloorView extends JPanel{
 	
@@ -39,6 +40,10 @@ public class FloorView extends JPanel{
 		for( TableModel table : tableList )
 		{
 			JButton b = new JButton( "" + table.getTableNumber() );
+			if( table.getState() == TableState.AVAILABLE )
+			{
+				b.setBackground(Color.BLUE);
+			}
 			tableButtons.add(b);
 			this.add(b);
 			b.setBounds(table.getPositionX() * SCALE + insets.left, table.getPositionY() * SCALE + insets.top, 
