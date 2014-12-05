@@ -150,6 +150,7 @@ public class ServerQueueController implements ActionListener{
 			tables.clear();
 			tables = queuemodel.getList().get(index).getSection().availableTables();
 			/**view.editBorders(tables, e);*/
+			
 			System.out.printf("Visible Index: %d", index);
 			return;
 		} 

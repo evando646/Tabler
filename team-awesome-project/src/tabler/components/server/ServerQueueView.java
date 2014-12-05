@@ -120,12 +120,13 @@ public class ServerQueueView extends JPanel{
 		}
 		
 		this.lModel = new DefaultListModel();
-		this.list = new JList<String>(lModel);
+		this.list.setModel(lModel);
 		for(int i = 0; i < len; i ++){
 			lModel.addElement(servers.get(i));
 		}
 		this.visibleIndex = 0;
-		this.repaint();
+		list.ensureIndexIsVisible(this.visibleIndex);
+		list.repaint();
 		
 	}
 	/**
@@ -188,6 +189,7 @@ public class ServerQueueView extends JPanel{
 		else{
 			this.visibleIndex++;
 		}
+		list.ensureIndexIsVisible(this.visibleIndex);
 		this.repaint();
 	}
 	/**
@@ -202,7 +204,7 @@ public class ServerQueueView extends JPanel{
 			return;
 		}
 		this.visibleIndex = 0;
-
+		list.ensureIndexIsVisible(this.visibleIndex);
 		this.repaint();
 	}
 	
@@ -223,6 +225,7 @@ public class ServerQueueView extends JPanel{
 		}else{
 			this.visibleIndex--;
 		}
+		list.ensureIndexIsVisible(this.visibleIndex);
 		this.repaint();
 	}
 	
