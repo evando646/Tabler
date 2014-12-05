@@ -38,6 +38,7 @@ public class WaitlistModel {
 	 * @param newGuest a guest to add to the waitlist
 	 */
 	public void addGuest(GuestModel newGuest) {
+		System.out.println("Add guest");
 		/*
 		 * Here we reject guests that have reservations which occur in the past
 		 * (with a small buffer of 1 second)
@@ -169,6 +170,7 @@ public class WaitlistModel {
 	 * 			null otherwise
 	 */
 	public GuestModel removeGuest(GuestModel guest) {
+		System.out.println("remove guest");
 		if (guest == null) {
 			return null;
 		}

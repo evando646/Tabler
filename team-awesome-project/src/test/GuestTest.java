@@ -9,6 +9,7 @@ import java.lang.Integer;
 
 import javax.swing.JFrame;
 
+import tabler.components.guest.GuestController;
 import tabler.components.guest.GuestModel;
 import tabler.components.guest.AddGuestView;
 
@@ -115,7 +116,7 @@ public class GuestTest {
 		//month in range of 0-11 jan-December
 		GregorianCalendar setRev=new GregorianCalendar(2018,2,15,8,6);//year,month,dayofmonth,hour,minute
 		GuestModel model=null;
-
+		*/
 
 		//
 		AddGuestView window=new AddGuestView();
@@ -124,8 +125,7 @@ public class GuestTest {
 		
 		window.registerListener(controller);
 		
-		window.frame.setVisible(true);
-		*/
+		window.setVisible(true);
 		
 		
 

@@ -5,7 +5,7 @@ import java.util.GregorianCalendar;
 import tabler.components.guest.GuestModel;
 
 public class TableModel implements Comparable<TableModel> {
-	private static enum TableState { AVAILABLE, OCCUPIED, NEEDS_SERVICING, RESERVED };
+	public static enum TableState { AVAILABLE, OCCUPIED, NEEDS_SERVICING, RESERVED };
 	
 	private int tableNumber;
 	private int capacity;

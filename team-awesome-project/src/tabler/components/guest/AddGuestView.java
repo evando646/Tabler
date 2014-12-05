@@ -2,7 +2,7 @@ package tabler.components.guest;
 
 
 
-//import PanelSwitcherControler;
+//import thisSwitcherControler;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
@@ -26,12 +26,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
-public class AddGuestView extends JFrame{
+public class AddGuestView extends JPanel{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public JFrame frame;
 	private JTextField txtEnterHere;//Text Field for Name of Party
 	private JTextField textField_1;//Text field for Contact name
 	private JTextField textField;//text field for Party size
@@ -83,7 +82,8 @@ public class AddGuestView extends JFrame{
 				while(true){
 				GregorianCalendar time=new GregorianCalendar();
 				int year=time.get(Calendar.YEAR)+yearAdd;
-				int month=time.get(Calendar.MONTH)+1+monthAdd;
+				time.add(Calendar.MONTH, monthAdd);
+				int month= time.get(Calendar.MONTH)+1;
 				int day=time.get(Calendar.DAY_OF_MONTH)+dayAdd;
 				int hour=time.get(Calendar.HOUR)+hourAdd;
 				int min=time.get(Calendar.MINUTE)+minuteAdd;
@@ -112,9 +112,8 @@ public class AddGuestView extends JFrame{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 491, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(100, 100, 491, 300);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblNameOfParty = new JLabel("Name of Party");
 		lblNameOfParty.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -148,79 +147,79 @@ public class AddGuestView extends JFrame{
 		
 		lblDate.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblDate.setBounds(285, 47, 105, 14);//96
-		frame.getContentPane().setLayout(null);
+		this.setLayout(null);
 		
 		btnMP = new JButton("M+");
 		btnMP.setBounds(285, 72, 43, 19);
 		btnMP.setFont(new Font("Tahoma", Font.PLAIN, 6));
-		frame.getContentPane().add(btnMP);
-		frame.getContentPane().add(lblNote);
-		frame.getContentPane().add(textArea);
-		frame.getContentPane().add(btnEnterGuest);
-		frame.getContentPane().add(lblNameOfParty);
-		frame.getContentPane().add(txtEnterHere);
-		frame.getContentPane().add(lblDate);
-		frame.getContentPane().add(textField_1);
-		frame.getContentPane().add(lblConatctName);
+		this.add(btnMP);
+		this.add(lblNote);
+		this.add(textArea);
+		this.add(btnEnterGuest);
+		this.add(lblNameOfParty);
+		this.add(txtEnterHere);
+		this.add(lblDate);
+		this.add(textField_1);
+		this.add(lblConatctName);
 		
 		btnMM = new JButton("M-");
 		btnMM.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		btnMM.setBounds(285, 96, 43, 19);
-		frame.getContentPane().add(btnMM);
+		this.add(btnMM);
 		
 		btnDP = new JButton("D+");
 		btnDP.setFont(new Font("Tahoma", Font.PLAIN, 6));
 		btnDP.setBounds(338, 72, 43, 19);
-		frame.getContentPane().add(btnDP);
+		this.add(btnDP);
 		
 		btnDM = new JButton("D-");
 		btnDM.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		btnDM.setBounds(338, 96, 43, 19);
-		frame.getContentPane().add(btnDM);
+		this.add(btnDM);
 		
 		btnYP = new JButton("Y+");
 		btnYP.setFont(new Font("Tahoma", Font.PLAIN, 7));
 		btnYP.setBounds(391, 72, 43, 19);
-		frame.getContentPane().add(btnYP);
+		this.add(btnYP);
 		
 		btnYM = new JButton("Y-");
 		btnYM.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		btnYM.setBounds(391, 96, 43, 19);
-		frame.getContentPane().add(btnYM);
+		this.add(btnYM);
 		
 		lblTime = new JLabel("Time");
 		lblTime.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTime.setBounds(285, 126, 78, 14);
-		frame.getContentPane().add(lblTime);
+		this.add(lblTime);
 		
 		btnHP = new JButton("h+");
 		btnHP.setFont(new Font("Tahoma", Font.PLAIN, 6));
 		btnHP.setBounds(285, 148, 43, 19);
-		frame.getContentPane().add(btnHP);
+		this.add(btnHP);
 		
 		btnHM = new JButton("h-");
 		btnHM.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		btnHM.setBounds(285, 172, 43, 19);
-		frame.getContentPane().add(btnHM);
+		this.add(btnHM);
 		
 		btnMinM = new JButton("m-");
 		btnMinM.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		btnMinM.setBounds(338, 172, 55, 19);
-		frame.getContentPane().add(btnMinM);
+		this.add(btnMinM);
 		
 		btnMinP = new JButton("m+");
 		btnMinP.setFont(new Font("Tahoma", Font.PLAIN, 6));
 		btnMinP.setBounds(338, 148, 55, 19);
-		frame.getContentPane().add(btnMinP);
+		this.add(btnMinP);
 		
 		JLabel lblSize = new JLabel("Size");
 		lblSize.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblSize.setBounds(24, 134, 46, 14);
-		frame.getContentPane().add(lblSize);
+		this.add(lblSize);
 		
 		textField = new JTextField();
 		textField.setBounds(50, 135, 43, 20);
-		frame.getContentPane().add(textField);
+		this.add(textField);
 		textField.setColumns(10);
 	}
 	
@@ -321,10 +320,10 @@ public class AddGuestView extends JFrame{
 
 	public void displayErrorWindow(Exception error){
 		if(false){
-			JOptionPane.showMessageDialog(frame, "Valide sutff");
+			//JOptionPane.showMessageDialog(this, "Valide sutff");
 		}
 		else{
-			JOptionPane.showMessageDialog(frame, error);
+			//JOptionPane.showMessageDialog(this, error);
 		}
 	}
 }

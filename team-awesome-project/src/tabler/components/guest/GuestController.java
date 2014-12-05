@@ -2,12 +2,19 @@ package tabler.components.guest;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import javax.swing.JFrame;
+
+import tabler.FSM;
+import tabler.FSM.FSM_STATE;
 
 public class GuestController implements ActionListener{
 	private AddGuestView view;
 	private GuestModel model=null;
 	
+	private JFrame frameToClose = null;
 
 	
 
@@ -31,17 +38,23 @@ public class GuestController implements ActionListener{
 			try{
 				System.out.println("First Line\n");
 				GregorianCalendar created=new GregorianCalendar();
+				GregorianCalendar res = new GregorianCalendar();
+				res.add(Calendar.HOUR, 2);
 				model=new GuestModel(view.getNameTextField(),view.getNoteTextField(),
 						view.getContactTextField(),Integer.parseInt(view.getSizeTextField()),
-						created,view.getViewTime());
+						created,/*view.getViewTime()*/res);
 				//System.out.println("If checkException:");
 				System.out.println(model.toString());//comment this out, only for debuging purpose
 				//PUT your code for storing/handeling the model
+				FSM._instance.Action(FSM_STATE.ADD_GUEST, model);
+				if( frameToClose != null )
+				{
+					frameToClose.dispose();
+				}
 			}
 			catch(Exception a){
 				System.err.println(a);
 				view.displayErrorWindow(a);
-				
 			}
 			
 			
@@ -84,7 +97,10 @@ public class GuestController implements ActionListener{
 
 	}
 	
-
+	public void setFrameToClose(JFrame frame)
+	{
+		frameToClose = frame;
+	}
 	
 	//private check
 	

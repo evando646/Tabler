@@ -8,7 +8,7 @@ import tabler.components.table.*;
 
 public class FSM {
 	
-	public enum FSM_STATE { START, TABLE, GUEST, SERVER };
+	public enum FSM_STATE { START, TABLE, GUEST, SERVER, ADD_GUEST, REMOVE_GUEST };
 	
 	private FSM_STATE prevState = null;
 	private FSM_STATE curState = null;
@@ -22,14 +22,16 @@ public class FSM {
 	private ServerModel curServer = null;
 	private ServerModel prevServer = null;
 	
+	private MainPanel mainPanelRef = null;
 	
-	public FSM()
+	public FSM(MainPanel panel)
 	{
 		prevState = FSM_STATE.START;
 		
 		if( _instance == null )
 		{
 			_instance = this;
+			mainPanelRef = panel;
 		}
 	}
 	
@@ -59,6 +61,11 @@ public class FSM {
 			{
 				//Assign guest to curTable;
 				//This is an ending case
+				curTable.assignGuest(curGuest);
+				mainPanelRef.getWaitlistModel().removeGuest(curGuest);
+				
+				curGuest = null;
+				curTable = null;
 			}
 			
 			prevState = curState;
@@ -80,7 +87,12 @@ public class FSM {
 			curServer = (ServerModel)ref;
 			
 			break;
+		case ADD_GUEST:
+			mainPanelRef.getWaitlistController().addGuest((GuestModel)ref);
+			break;
+		case REMOVE_GUEST:
+			mainPanelRef.getWaitlistController().removeGuest(((GuestView)ref).getModel());
+			break;
 		}
 	}
-
 }
