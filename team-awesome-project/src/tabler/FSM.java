@@ -35,10 +35,12 @@ public class FSM {
 		}
 	}
 	
+	@SuppressWarnings("incomplete-switch")
 	public void Action( FSM_STATE state , Object ref )
 	{
 		prevState = curState;
 		curState = state;
+		System.out.println("curState: "+curState+" prevState: "+prevState);
 		
 		switch(state)
 		{
@@ -46,7 +48,7 @@ public class FSM {
 			prevTable = curTable;
 			curTable = (TableModel)ref;
 			
-			if( prevState == FSM_STATE.START || prevState == FSM_STATE.TABLE )
+			if( prevState == FSM_STATE.START /*|| prevState == FSM_STATE.TABLE*/ )
 			{
 				TableView view = new TableView(curTable);
 		        TableController controller = new TableController(curTable, view);
@@ -65,12 +67,17 @@ public class FSM {
 				curTable.assignGuest(curGuest);
 				mainPanelRef.getWaitlistModel().removeGuest(curGuest);
 				mainPanelRef.getWaitlistView().updateView(mainPanelRef.getWaitlistModel());
+				mainPanelRef.getWaitlistView().registerListener(mainPanelRef.getWaitlistController());
+				
 				
 				curGuest = null;
 				curTable = null;
+				prevGuest=null;
+				prevTable=null;
 			}
 			
-			prevState = curState;
+			//prevState = curState;
+			prevState=FSM_STATE.START;
 			curState = FSM_STATE.START;
 			
 			break;
@@ -91,9 +98,17 @@ public class FSM {
 			break;
 		case ADD_GUEST:
 			mainPanelRef.getWaitlistController().addGuest((GuestModel)ref);
+			prevState=FSM_STATE.START;
+			curState = FSM_STATE.START;
 			break;
 		case REMOVE_GUEST:
 			mainPanelRef.getWaitlistController().removeGuest(((GuestView)ref).getModel());
+			prevGuest=null;
+			curGuest=null;
+			prevTable=null;
+			curTable=null;
+			prevState=FSM_STATE.START;
+			curState = FSM_STATE.START;
 			break;
 		}
 	}
