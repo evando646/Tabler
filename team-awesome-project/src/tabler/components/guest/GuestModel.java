@@ -69,23 +69,31 @@ public class GuestModel {
 	 * @return
 	 */
 	private boolean checkReservation(GregorianCalendar created,GregorianCalendar reservationTime){
+		System.out.printf("REV %d %d %d, %d:%d\n",reservationTime.get(Calendar.YEAR),reservationTime.get(Calendar.MONTH),reservationTime.get(Calendar.DAY_OF_MONTH),
+				reservationTime.get(Calendar.HOUR_OF_DAY),reservationTime.get(Calendar.MINUTE)) ;
+		System.out.printf("CRTD %d %d %d, %d:%d\n",created.get(Calendar.YEAR),created.get(Calendar.MONTH),created.get(Calendar.DAY_OF_MONTH),
+				created.get(Calendar.HOUR_OF_DAY),created.get(Calendar.MINUTE)) ;
 		if(reservationTime.get(Calendar.YEAR)>created.get(Calendar.YEAR)){
 			this.reservation=true;
 			return true;
 		}
 		else if(reservationTime.get(Calendar.MONTH)>created.get(Calendar.MONDAY)){
+			System.out.println("Year is greater in RES\n");
 			this.reservation=true;
 			return true;
 		}
 		else if(reservationTime.get(Calendar.DAY_OF_MONTH)>created.get(Calendar.DAY_OF_MONTH)){
+			System.out.println("Month is greater in RES");
 			this.reservation=true;
 			return true;
 		}
 		else if((reservationTime.get(Calendar.HOUR_OF_DAY)-created.get(Calendar.HOUR_OF_DAY))>=RES_ADV_NOTICE_HOURS){
+			System.out.println("Hour is 2 hours ahead in RES");
 			this.reservation=true;
 			return true;
 		}
-		else if(reservationTime.get(Calendar.HOUR_OF_DAY)==created.get(Calendar.HOUR_OF_DAY)&&reservationTime.get(Calendar.MINUTE)==created.get(Calendar.MINUTE)){
+		else if((reservationTime.get(Calendar.HOUR_OF_DAY)==created.get(Calendar.HOUR_OF_DAY))&&(reservationTime.get(Calendar.MINUTE)==created.get(Calendar.MINUTE))){
+			System.out.println("is waitlist not Res in RES");
 			this.reservation=false;
 			return true;
 		}

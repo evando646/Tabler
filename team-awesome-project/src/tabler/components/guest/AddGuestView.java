@@ -81,12 +81,17 @@ public class AddGuestView extends JPanel{
 			try{
 				while(true){
 				GregorianCalendar time=new GregorianCalendar();
-				int year=time.get(Calendar.YEAR)+yearAdd;
+				time.add(Calendar.YEAR, yearAdd);
 				time.add(Calendar.MONTH, monthAdd);
-				int month= time.get(Calendar.MONTH)+1;
-				int day=time.get(Calendar.DAY_OF_MONTH)+dayAdd;
-				int hour=time.get(Calendar.HOUR)+hourAdd;
-				int min=time.get(Calendar.MINUTE)+minuteAdd;
+				time.add(Calendar.DAY_OF_MONTH,+dayAdd);
+				time.add(Calendar.HOUR_OF_DAY, hourAdd);
+				time.add(Calendar.MINUTE, minuteAdd);
+				
+				int year=time.get(Calendar.YEAR);
+				int month= time.get(Calendar.MONTH);
+				int day=time.get(Calendar.DAY_OF_MONTH);
+				int hour=time.get(Calendar.HOUR_OF_DAY);
+				int min=time.get(Calendar.MINUTE);
 				setTimeOfView(year,month,day,hour,min);
 				if(min<10){
 					lblTime.setText("Time "+hour+":0"+min);
@@ -94,7 +99,7 @@ public class AddGuestView extends JPanel{
 				else{
 					lblTime.setText("Time "+hour+":"+min);
 				}
-				lblDate.setText("Date: "+month+"/"+day+"/"+year);
+				lblDate.setText("Date: "+(month+1)+"/"+day+"/"+year);
 				
 				sleep(1000);
 				}

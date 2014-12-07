@@ -39,10 +39,10 @@ public class GuestController implements ActionListener{
 				System.out.println("First Line\n");
 				GregorianCalendar created=new GregorianCalendar();
 				GregorianCalendar res = new GregorianCalendar();
-				res.add(Calendar.HOUR, 2);
+				//res.add(Calendar.HOUR, 2);
 				model=new GuestModel(view.getNameTextField(),view.getNoteTextField(),
 						view.getContactTextField(),Integer.parseInt(view.getSizeTextField()),
-						created,/*view.getViewTime()*/res);
+						created,view.getViewTime()/*res*/);
 				//System.out.println("If checkException:");
 				System.out.println(model.toString());//comment this out, only for debuging purpose
 				//PUT your code for storing/handeling the model
