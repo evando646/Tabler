@@ -39,6 +39,9 @@ public class GuestModel {
 		if(!checkContact(contactNumber)){
 			throw new Exception("Enter Valid Contact Number\n Only (123) 456-7890");
 		}
+		if(!(checkReservation(created,reservationTime))){
+			throw new Exception("Reservation Time is Invalid");
+		}
 		
 
 		
@@ -48,9 +51,47 @@ public class GuestModel {
 		this.contactNumber=contactNumber;
 		this.created=created;
 		this.reservationTime=reservationTime;
-		reservation = isReservation(created, reservationTime);
+		//reservation = isReservation(created, reservationTime);
 		//checkReservation(created,reservationTime);
 		
+	}
+	
+	/**
+	 * This fucntion will check wether or not a reservation time is valid and if a 
+	 * reservation time is made.
+	 * 
+	 * If the diffrence between the resveration time hour and created time hour
+	 * is not greater than or equal to two hours it will check the min
+	 * If the min are not equal then a reservation is not made right if they
+	 * are then it is just a walk in
+	 * @param created
+	 * @param reservationTime
+	 * @return
+	 */
+	private boolean checkReservation(GregorianCalendar created,GregorianCalendar reservationTime){
+		if(reservationTime.get(Calendar.YEAR)>created.get(Calendar.YEAR)){
+			this.reservation=true;
+			return true;
+		}
+		else if(reservationTime.get(Calendar.MONTH)>created.get(Calendar.MONDAY)){
+			this.reservation=true;
+			return true;
+		}
+		else if(reservationTime.get(Calendar.DAY_OF_MONTH)>created.get(Calendar.DAY_OF_MONTH)){
+			this.reservation=true;
+			return true;
+		}
+		else if(reservationTime.get(Calendar.HOUR)-created.get(Calendar.HOUR)>=RES_ADV_NOTICE_HOURS){
+			this.reservation=true;
+			return true;
+		}
+		else if(reservationTime.get(Calendar.MINUTE)==created.get(Calendar.MINUTE)){
+			this.reservation=false;
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 	
 	/*
