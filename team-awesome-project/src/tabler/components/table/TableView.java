@@ -116,7 +116,7 @@ public class TableView extends JFrame {
 		panel.add(guestArrivedLabel,c);
 		
 		guestArrivedTextField = new JTextField();
-		guestArrivedTextField.setText( (table.getCurrentGuestArrived() != null) ? table.getCurrentGuestArrived().toString() : "" );
+		guestArrivedTextField.setText( (table.getCurrentGuestArrived() != null) ? table.getCurrentGuestArrived() : "" );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 4;

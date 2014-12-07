@@ -1,5 +1,6 @@
 package tabler.components.table;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import tabler.components.guest.GuestModel;
@@ -150,8 +151,24 @@ public class TableModel implements Comparable<TableModel> {
 		return this.currentGuest;
 	}
 	
-	public GregorianCalendar getCurrentGuestArrived() {
-		return this.currentGuestArrived;
+	//public GregorianCalendar getCurrentGuestArrived() {
+		//return this.currentGuestArrived;
+	//}
+	
+	public String getCurrentGuestArrived(){
+		if(currentGuestArrived!=null){
+			int hour=currentGuestArrived.get(Calendar.HOUR_OF_DAY);
+			int min=currentGuestArrived.get(Calendar.MINUTE);
+			if(min<10){
+				return (hour+":0"+min);
+			}
+			else{
+				return(hour+":"+min);
+			}
+		}
+		else{
+			return null;
+		}
 	}
 	
 	public TableState getTableState() {
