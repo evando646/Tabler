@@ -22,7 +22,7 @@ public class ServerQueueController implements ActionListener{
 	public ServerQueueView queueview;
 	public ArrayList<TableModel> tables;
 	public ArrayList<GuestModel> guests;
-
+	public GuestModel currentGuest;
 	
 	/**
 	 * ServerQueueController constructor
@@ -41,6 +41,7 @@ public class ServerQueueController implements ActionListener{
 		this.tables = model.getTableList();
 		this.guests= guests;
 		this.queueview = queueview;
+		this.currentGuest = null;
 
 	}
 
@@ -88,7 +89,9 @@ public class ServerQueueController implements ActionListener{
 					queueview.unavailableError(e);
 					return;
 				}
-				
+				else if (tables.get(i).getCurrentGuest() == null){
+					return;
+				}
 				//otherwise update activeQueue using information extracted from selected tableModel
 				queuemodel.updateQueue(tables.get(i));
 				

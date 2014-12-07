@@ -248,7 +248,7 @@ public class ServerQueueView extends JPanel{
 	public int showOptions(String s){
 		
 		return JOptionPane.showConfirmDialog(null,
-	             "Are you sure you want to seat " + s + "?", "choose one", JOptionPane.YES_NO_OPTION);
+	             "Do you want to seat " + s + "?", "choose one", JOptionPane.YES_NO_OPTION);
 	}
 	
 	public void emptyList(){
