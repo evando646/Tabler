@@ -81,11 +81,11 @@ public class GuestModel {
 			this.reservation=true;
 			return true;
 		}
-		else if(reservationTime.get(Calendar.HOUR)-created.get(Calendar.HOUR)>=RES_ADV_NOTICE_HOURS){
+		else if(reservationTime.get(Calendar.HOUR_OF_DAY)-created.get(Calendar.HOUR_OF_DAY)>=RES_ADV_NOTICE_HOURS){
 			this.reservation=true;
 			return true;
 		}
-		else if(reservationTime.get(Calendar.HOUR)==created.get(Calendar.HOUR)&&reservationTime.get(Calendar.MINUTE)==created.get(Calendar.MINUTE)){
+		else if(reservationTime.get(Calendar.HOUR_OF_DAY)==created.get(Calendar.HOUR_OF_DAY)&&reservationTime.get(Calendar.MINUTE)==created.get(Calendar.MINUTE)){
 			this.reservation=false;
 			return true;
 		}
