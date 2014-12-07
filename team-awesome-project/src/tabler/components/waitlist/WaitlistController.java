@@ -30,6 +30,11 @@ public class WaitlistController implements ActionListener {
 			{
 				FSM._instance.Action(FSM_STATE.REMOVE_GUEST, btn.getParent());
 			}
+			else{
+				FSM._instance.Action(FSM_STATE.GUEST, ((GuestView)btn.getParent()).getModel());
+				
+				
+			}
 		}
 		
 	}

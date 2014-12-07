@@ -61,8 +61,10 @@ public class FSM {
 			{
 				//Assign guest to curTable;
 				//This is an ending case
+				System.out.printf("Assinging %s to %s\n", curGuest.toString(), curTable.toString());
 				curTable.assignGuest(curGuest);
 				mainPanelRef.getWaitlistModel().removeGuest(curGuest);
+				mainPanelRef.getWaitlistView().updateView(mainPanelRef.getWaitlistModel());
 				
 				curGuest = null;
 				curTable = null;

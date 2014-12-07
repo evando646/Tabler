@@ -22,6 +22,7 @@ public class ServerQueueController implements ActionListener{
 	public ServerQueueView queueview;
 	public ArrayList<TableModel> tables;
 	public ArrayList<GuestModel> guests;
+
 	
 	/**
 	 * ServerQueueController constructor

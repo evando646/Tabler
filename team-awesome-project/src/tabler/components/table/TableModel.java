@@ -72,6 +72,7 @@ public class TableModel implements Comparable<TableModel> {
 		if (!newGuest.equals(null)) {
 			currentGuest = newGuest;
 			currentGuestArrived = new GregorianCalendar();
+			System.out.printf("Successfully assigned\n");
 			state = TableState.OCCUPIED;
 		}
 	}
