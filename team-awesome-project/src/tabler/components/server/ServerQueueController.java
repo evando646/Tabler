@@ -22,7 +22,7 @@ public class ServerQueueController implements ActionListener{
 	public ServerQueueView queueview;
 	public ArrayList<TableModel> tables;
 	public ArrayList<GuestModel> guests;
-
+	
 	/**
 	 * ServerQueueController constructor
 	 * @param model
@@ -48,6 +48,7 @@ public class ServerQueueController implements ActionListener{
 	 * to be implemented
 	 * @param ActionEvent event
 	 */
+
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		System.out.println("Pressed " + getActionString(event) + "\n");
@@ -92,7 +93,7 @@ public class ServerQueueController implements ActionListener{
 				
 				//Temporary call for testing purposes
 				//Assign the guest to note table as OCCUPIED
-				tables.get(i).assignGuest(guests.get(i));
+				//tables.get(i).assignGuest(guest);
 		
 				//Sets all table button borders to empty
 				view.editBorders(tables, "hide");
