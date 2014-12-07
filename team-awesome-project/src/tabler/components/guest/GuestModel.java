@@ -81,7 +81,7 @@ public class GuestModel {
 			this.reservation=true;
 			return true;
 		}
-		else if(reservationTime.get(Calendar.HOUR_OF_DAY)-created.get(Calendar.HOUR_OF_DAY)>=RES_ADV_NOTICE_HOURS){
+		else if((reservationTime.get(Calendar.HOUR_OF_DAY)-created.get(Calendar.HOUR_OF_DAY))>=RES_ADV_NOTICE_HOURS){
 			this.reservation=true;
 			return true;
 		}
