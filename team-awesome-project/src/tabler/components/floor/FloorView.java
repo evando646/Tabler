@@ -42,7 +42,7 @@ public class FloorView extends JPanel{
 			JButton b = new JButton( "" + table.getTableNumber() );
 			if( table.getState() == TableState.AVAILABLE )
 			{
-				b.setBackground(Color.BLUE);
+				b.setBackground(Color.CYAN);
 			}
 			tableButtons.add(b);
 			this.add(b);
