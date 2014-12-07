@@ -10,8 +10,8 @@ public class FSM {
 	
 	public enum FSM_STATE { START, TABLE, GUEST, SERVER, ADD_GUEST, REMOVE_GUEST };
 	
-	private FSM_STATE prevState = null;
-	private FSM_STATE curState = null;
+	private FSM_STATE prevState = FSM_STATE.START;
+	private FSM_STATE curState = FSM_STATE.START;
 	
 	public static FSM _instance = null;
 	

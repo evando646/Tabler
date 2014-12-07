@@ -38,6 +38,8 @@ public class TableView extends JFrame {
 	private JLabel sectionLabel;
 	private JTextField sectionTextField;
 	
+	private JButton clearTableBtn;
+	
 	
 	public TableView( TableModel table )
 	{
@@ -151,12 +153,19 @@ public class TableView extends JFrame {
 		c.gridx = 1;
 		panel.add(sectionTextField,c);
 		
+		clearTableBtn = new JButton("Clear Table");
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.ipadx = 0;
+		c.gridy = 7;
+		c.gridx = 0;
+		panel.add(clearTableBtn,c);
+		
 		add(panel);
 	}
 	
 	public void register( TableController controller)
 	{
-		
+		clearTableBtn.addActionListener(controller);
 	}
 	
 }

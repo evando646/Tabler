@@ -15,8 +15,18 @@ public class TableController implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	/**
+	 * when the clear button is pressed it will remove the guest from the table
+	 * and clear the view
+	 */
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		String command=e.getActionCommand();
+		
+		if(command.equals("Clear Table")){
+			model.removeGuest();
+			view.dispose();
+		}
 		
 	}
 	
