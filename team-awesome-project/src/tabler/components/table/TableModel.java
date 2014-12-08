@@ -1,11 +1,17 @@
 package tabler.components.table;
 
+import java.awt.Color;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import javax.swing.JButton;
 
 import tabler.components.guest.GuestModel;
 
 public class TableModel implements Comparable<TableModel> {
+	public static Color availableBg = Color.cyan;
+	public static Color occupiedBg = Color.red;
+	
 	public static enum TableState { AVAILABLE, OCCUPIED, NEEDS_SERVICING, RESERVED };
 	
 	private int tableNumber;
@@ -18,6 +24,7 @@ public class TableModel implements Comparable<TableModel> {
 	private GregorianCalendar currentGuestArrived;
 	private TableState state;
 	private String section;
+	private JButton button;
 
 	public TableModel (String section, int tableNum, int capacity, int x, int y, int width, int height){
 		this.tableNumber = tableNum;
@@ -75,6 +82,7 @@ public class TableModel implements Comparable<TableModel> {
 			currentGuestArrived = new GregorianCalendar();
 			System.out.printf("Successfully assigned\n");
 			state = TableState.OCCUPIED;
+			button.setBackground(occupiedBg);
 		}
 	}
 	
@@ -85,6 +93,8 @@ public class TableModel implements Comparable<TableModel> {
 		currentGuestArrived = null;
 		
 		this.setTableState(TableState.NEEDS_SERVICING);
+		
+		button.setBackground(availableBg);
 		
 		return removedGuest;
 	}
@@ -151,25 +161,25 @@ public class TableModel implements Comparable<TableModel> {
 		return this.currentGuest;
 	}
 	
-	//public GregorianCalendar getCurrentGuestArrived() {
-		//return this.currentGuestArrived;
-	//}
-	
-	public String getCurrentGuestArrived(){
-		if(currentGuestArrived!=null){
-			int hour=currentGuestArrived.get(Calendar.HOUR_OF_DAY);
-			int min=currentGuestArrived.get(Calendar.MINUTE);
-			if(min<10){
-				return (hour+":0"+min);
-			}
-			else{
-				return(hour+":"+min);
-			}
-		}
-		else{
-			return null;
-		}
+	public GregorianCalendar getCurrentGuestArrived() {
+		return this.currentGuestArrived;
 	}
+	
+//	public String getCurrentGuestArrived(){
+//		if(currentGuestArrived!=null){
+//			int hour=currentGuestArrived.get(Calendar.HOUR_OF_DAY);
+//			int min=currentGuestArrived.get(Calendar.MINUTE);
+//			if(min<10){
+//				return (hour+":0"+min);
+//			}
+//			else{
+//				return(hour+":"+min);
+//			}
+//		}
+//		else{
+//			return null;
+//		}
+//	}
 	
 	public TableState getTableState() {
 		return this.state;
@@ -183,5 +193,10 @@ public class TableModel implements Comparable<TableModel> {
 	
 	public String getTableSection() {
 		return this.section;
+	}
+	
+	public void setButton( JButton button )
+	{
+		this.button = button;
 	}
 }

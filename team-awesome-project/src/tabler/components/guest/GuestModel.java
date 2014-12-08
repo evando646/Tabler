@@ -9,6 +9,8 @@ package tabler.components.guest;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javax.swing.JButton;
+
 public class GuestModel {
 	private static final long RES_ADV_NOTICE_HOURS = 2;
 	private static final long MIN_PER_HOUR = 60;
@@ -24,7 +26,7 @@ public class GuestModel {
 	private String note;
 	private boolean reservation;
 	private String contactNumber;
-	
+	private JButton nameButton;
 	
 	/*
 	 * Initialize everything
@@ -367,4 +369,13 @@ public class GuestModel {
 		
 	}
 	
+	public void setNameButton(JButton button)
+	{
+		this.nameButton = button;
+	}
+	
+	public JButton getNameButton()
+	{
+		return nameButton;
+	}
 }

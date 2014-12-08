@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 
+import tabler.FSM;
+import tabler.FSM.FSM_STATE;
 import tabler.components.table.*;
 import tabler.components.floor.*;
 import tabler.components.guest.*;
@@ -70,12 +72,6 @@ public class ServerQueueController implements ActionListener{
 			return;
 		}
 		
-		//if not sent to listAction, user is prompted to confirm decision to seat table
-		int confirm = queueview.showOptions("table " + e);
-		if(confirm == 1){
-			return;
-		}
-		
 		//size of total number of tables
 		int len = tables.size();
 	
@@ -86,19 +82,21 @@ public class ServerQueueController implements ActionListener{
 				
 				//respond with error if table is already taken
 				if(tables.get(i).isOccupied() == true){
+					System.out.println("occupied");
 					queueview.unavailableError(e);
 					return;
 				}
-				else if (tables.get(i).getCurrentGuest() == null){
-					return;
-				}
+
 				//otherwise update activeQueue using information extracted from selected tableModel
 				queuemodel.updateQueue(tables.get(i));
 				
 				//Temporary call for testing purposes
 				//Assign the guest to note table as OCCUPIED
 				//tables.get(i).assignGuest(guest);
-		
+				//if not sent to listAction, user is prompted to confirm decision to seat table
+
+				FSM._instance.Action(FSM_STATE.TABLE, tables.get(i));
+
 				//Sets all table button borders to empty
 				view.editBorders(tables, "hide");
 				

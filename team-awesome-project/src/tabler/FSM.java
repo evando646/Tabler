@@ -1,14 +1,19 @@
 package tabler;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JFrame;
 
 import tabler.components.guest.*;
 import tabler.components.server.*;
 import tabler.components.table.*;
+import tabler.components.floor.*;
 
 public class FSM {
 	
-	public enum FSM_STATE { START, TABLE, GUEST, SERVER, ADD_GUEST, REMOVE_GUEST };
+	public enum FSM_STATE { START, TABLE, GUEST, SERVER, ADD_GUEST, REMOVE_GUEST, VIEW_TABLE, VIEW_FLOOR };
 	
 	private FSM_STATE prevState = FSM_STATE.START;
 	private FSM_STATE curState = FSM_STATE.START;
@@ -40,41 +45,83 @@ public class FSM {
 	{
 		prevState = curState;
 		curState = state;
-		System.out.println("curState: "+curState+" prevState: "+prevState);
+		System.out.println("curState: "+curState+" prevState: "+prevState + "\nRef Obj: " + ref);
 		
 		switch(state)
-		{
+		{	
+		case VIEW_TABLE:
+			prevTable = curTable;
+			curTable = (TableModel)ref;
+			
+			Component[] comps1 = mainPanelRef.getComponents();
+			
+			for( Component c : comps1 )
+			{
+				if( c instanceof FloorView )
+				{
+					mainPanelRef.remove(c);
+				}
+			}
+			TableView view = new TableView(curTable);
+	        TableController controller = new TableController(curTable, view);
+	        
+	        view.register(controller);
+	
+	        mainPanelRef.add(view, BorderLayout.WEST);
+	        mainPanelRef.updateUI();
+			break;
+		case VIEW_FLOOR:
+			Component[] comps2 = mainPanelRef.getComponents();
+			
+			for( Component c : comps2 )
+			{
+				if( c instanceof TableView )
+				{
+					mainPanelRef.remove(c);
+				}
+			}
+			mainPanelRef.add(mainPanelRef.getFloorView(), BorderLayout.WEST);
+			mainPanelRef.updateUI();
+			break;
 		case TABLE:
 			prevTable = curTable;
 			curTable = (TableModel)ref;
 			
-			if( prevState == FSM_STATE.START /*|| prevState == FSM_STATE.TABLE*/ )
+			if( curGuest == null )
 			{
-				TableView view = new TableView(curTable);
-		        TableController controller = new TableController(curTable, view);
-		        
-		        view.register(controller);
-		
-		        view.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		        view.setSize(400,300);
-		        view.setVisible(true);
+				int confirm = mainPanelRef.getQview().showOptions("table " + ((TableModel)ref).getTableNumber());
+				
+				if( confirm == 0 )
+				{
+					((TableModel)ref).assignGuest(mainPanelRef.getWaitlistController().getNextGuest());
+					mainPanelRef.getFloorView().updateUI();
+				}
+				mainPanelRef.getFloorView().editBorders(mainPanelRef.getFloorModel().getTableList(), "hide");
 			}
-			else if ( prevState == FSM_STATE.GUEST )
+			else
 			{
+				System.out.println("guest selected and clicked on table");
 				//Assign guest to curTable;
 				//This is an ending case
-				System.out.printf("Assinging %s to %s\n", curGuest.toString(), curTable.toString());
-				curTable.assignGuest(curGuest);
-				mainPanelRef.getWaitlistModel().removeGuest(curGuest);
-				mainPanelRef.getWaitlistView().updateView(mainPanelRef.getWaitlistModel());
-				mainPanelRef.getWaitlistView().registerListener(mainPanelRef.getWaitlistController());
-				
-				
-				curGuest = null;
-				curTable = null;
-				prevGuest=null;
-				prevTable=null;
+				if( !curTable.isOccupied() )
+				{
+					System.out.printf("Assinging %s to %s\n", curGuest.toString(), curTable.toString());
+					curTable.assignGuest(curGuest);
+					mainPanelRef.getWaitlistModel().removeGuest(curGuest);
+					mainPanelRef.getWaitlistView().updateView(mainPanelRef.getWaitlistModel());
+					mainPanelRef.getWaitlistView().registerListener(mainPanelRef.getWaitlistController());
+				}
+				else
+				{
+					System.out.println("Table is occupied");
+				}
+				mainPanelRef.getFloorView().editBorders(mainPanelRef.getFloorModel().getTableList(), "hide");
 			}
+			
+			curGuest = null;
+			curTable = null;
+			prevGuest=null;
+			prevTable=null;
 			
 			//prevState = curState;
 			prevState=FSM_STATE.START;
@@ -85,11 +132,20 @@ public class FSM {
 			prevGuest = curGuest;
 			curGuest = (GuestModel)ref;
 			
-			if (prevState == FSM_STATE.TABLE)
+			if( curGuest == prevGuest )
 			{
-				curTable.assignGuest( (GuestModel)ref );
+				curGuest.getNameButton().setBackground(GuestView.defaultBG);
+				curGuest = null;
 			}
-			
+			else
+			{
+				if(prevGuest != null)
+				{
+				prevGuest.getNameButton().setBackground(GuestView.defaultBG);
+				}
+				curGuest.getNameButton().setBackground(GuestView.selectedBG);
+			}
+			System.out.println("curGuest: " + curGuest);
 			break;
 		case SERVER:
 			prevServer = curServer;
@@ -111,5 +167,6 @@ public class FSM {
 			curState = FSM_STATE.START;
 			break;
 		}
+		
 	}
 }

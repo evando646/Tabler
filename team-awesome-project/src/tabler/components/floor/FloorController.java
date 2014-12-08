@@ -19,14 +19,14 @@ public class FloorController implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		for( TableModel table : model.getTableList())
-		{
-			if( table.getTableNumber() == Integer.parseInt(event.getActionCommand()) )
-			{
-				FSM._instance.Action(FSM.FSM_STATE.TABLE, table);
-			}
-		}
-		System.out.println(event.getActionCommand());
+//		for( TableModel table : model.getTableList())
+//		{
+//			if( table.getTableNumber() == Integer.parseInt(event.getActionCommand()) )
+//			{
+//				FSM._instance.Action(FSM.FSM_STATE.TABLE, table);
+//			}
+//		}
+//		System.out.println(event.getActionCommand());
 	}
 
 }

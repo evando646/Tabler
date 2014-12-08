@@ -33,9 +33,12 @@ public class TableTest {
 	        	        
 	        view.register(controller);
 	        
-	        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        view.setSize(400,300);
-	        view.setVisible(true);
+	        JFrame frame = new JFrame();
+	        frame.add(view);
+	        
+	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        frame.setSize(400,300);
+	        frame.setVisible(true);
 		}
 		catch ( Exception e )
 		{

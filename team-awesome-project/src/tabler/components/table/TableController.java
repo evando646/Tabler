@@ -3,6 +3,9 @@ package tabler.components.table;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import tabler.FSM;
+import tabler.FSM.FSM_STATE;
+
 public class TableController implements ActionListener{
 	
 	private TableModel model;
@@ -25,9 +28,12 @@ public class TableController implements ActionListener{
 		
 		if(command.equals("Clear Table")){
 			model.removeGuest();
-			view.dispose();
+			view.updateInfo();
 		}
-		
+		else if(command.equals("Close"))
+		{
+			FSM._instance.Action(FSM_STATE.VIEW_FLOOR, null);
+		}
 	}
 	
 }

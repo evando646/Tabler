@@ -13,7 +13,8 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class GuestView extends JPanel {
-	private static Color defaultBG = Color.gray;
+	public static Color defaultBG = Color.gray;
+	public static Color selectedBG = Color.blue;
 	private static Color resGuestButtonColor = Color.red;
 	private static Color walkinGuestButtonColor = Color.white;
 	private static Font defaultGuestFont = new Font("Serif", Font.BOLD, 20);
@@ -31,6 +32,7 @@ public class GuestView extends JPanel {
 		this.setLayout(new BorderLayout());
 		
 		this.guestName = new JButton(guest.getName());
+		model.setNameButton(this.guestName);
 		this.guestName.setBorderPainted(false);
 		this.guestName.setBackground(defaultBG);
 		this.guestName.setPreferredSize(new Dimension(this.guestName.getPreferredSize().width-1, this.guestName.getPreferredSize().height));

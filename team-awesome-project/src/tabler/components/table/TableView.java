@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,11 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class TableView extends JFrame {
+public class TableView extends JPanel {
 	
 	private final int IPADX_CONST = 200;
-	
-	private JPanel panel;
 	
 	private JLabel tableNumLabel;
 	private JTextField tableNumTextField;
@@ -40,12 +39,15 @@ public class TableView extends JFrame {
 	
 	private JButton clearTableBtn;
 	
+	private JButton close;
+	
+	private TableModel table;
+	
 	
 	public TableView( TableModel table )
-	{
-		panel = new JPanel();
-		
-		panel.setLayout(new GridBagLayout());
+	{	
+		this.table = table;
+		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
 		tableNumLabel = new JLabel("Table Number: ");
@@ -53,119 +55,145 @@ public class TableView extends JFrame {
 		c.ipadx = 0;
 		c.gridy = 0;
 		c.gridx = 0;
-		panel.add(tableNumLabel,c);
+		this.add(tableNumLabel,c);
 		
 		tableNumTextField = new JTextField();
-		tableNumTextField.setText( "" +  table.getTableNumber() );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 0;
 		c.gridx = 1;
-		panel.add(tableNumTextField,c);
+		this.add(tableNumTextField,c);
 		
 		tableCapacityLabel = new JLabel("Table Capacity");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = 0;
 		c.gridy = 1;
 		c.gridx = 0;
-		panel.add(tableCapacityLabel,c);
+		this.add(tableCapacityLabel,c);
 		
 		tableCapacityTextField = new JTextField();
-		tableCapacityTextField.setText( "" + table.getCapacity() );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 1;
 		c.gridx = 1;
-		panel.add(tableCapacityTextField,c);
+		this.add(tableCapacityTextField,c);
 		
 		guestNameLabel = new JLabel("Guest Name: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = 0;
 		c.gridy = 2;
 		c.gridx = 0;
-		panel.add(guestNameLabel,c);
+		this.add(guestNameLabel,c);
 		
 		guestNameTextField = new JTextField();
-		guestNameTextField.setText( (table.getCurrentGuest() != null) ? table.getCurrentGuest().getName() : "" );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 2;
 		c.gridx = 1;
-		panel.add(guestNameTextField,c);
+		this.add(guestNameTextField,c);
 		
 		guestPartySizeLabel = new JLabel("Guest Party Size: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = 0;
 		c.gridy = 3;
 		c.gridx = 0;
-		panel.add(guestPartySizeLabel,c);
+		this.add(guestPartySizeLabel,c);
 		
 		guestParySizeTextField = new JTextField();
-		guestParySizeTextField.setText( "" + ( (table.getCurrentGuest() != null) ? table.getCurrentGuest().getSize() : 0 ) );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 3;
 		c.gridx = 1;
-		panel.add(guestParySizeTextField,c);
+		this.add(guestParySizeTextField,c);
 
 		guestArrivedLabel = new JLabel("Guest Arrival Time: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = 0;
 		c.gridy = 4;
 		c.gridx = 0;
-		panel.add(guestArrivedLabel,c);
+		this.add(guestArrivedLabel,c);
 		
 		guestArrivedTextField = new JTextField();
-		guestArrivedTextField.setText( (table.getCurrentGuestArrived() != null) ? table.getCurrentGuestArrived() : "" );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 4;
 		c.gridx = 1;
-		panel.add(guestArrivedTextField,c);
+		this.add(guestArrivedTextField,c);
 		
 		tableStateLabel = new JLabel("Table State: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = 0;
 		c.gridy = 5;
 		c.gridx = 0;
-		panel.add(tableStateLabel,c);
+		this.add(tableStateLabel,c);
 		
 		tableStateTextField = new JTextField();
-		tableStateTextField.setText( "" + table.getState() );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 5;
 		c.gridx = 1;
-		panel.add(tableStateTextField,c);
+		this.add(tableStateTextField,c);
 		
 		sectionLabel = new JLabel("Floor Section: ");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = 0;
 		c.gridy = 6;
 		c.gridx = 0;
-		panel.add(sectionLabel,c);
+		this.add(sectionLabel,c);
 		
 		sectionTextField = new JTextField();
-		sectionTextField.setText( table.getTableSection() );
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = IPADX_CONST;
 		c.gridy = 6;
 		c.gridx = 1;
-		panel.add(sectionTextField,c);
+		this.add(sectionTextField,c);
 		
 		clearTableBtn = new JButton("Clear Table");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = 0;
 		c.gridy = 7;
 		c.gridx = 0;
-		panel.add(clearTableBtn,c);
+		this.add(clearTableBtn,c);
 		
-		add(panel);
+		close = new JButton("Close");
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.ipadx = 0;
+		c.gridy = 8;
+		c.gridx = 0;
+		this.add(close,c);
+		
+		updateInfo();
+	}
+	
+	public void updateInfo()
+	{
+		tableNumTextField.setText( "" +  table.getTableNumber() );
+		tableCapacityTextField.setText( "" + table.getCapacity() );
+		guestNameTextField.setText( (table.getCurrentGuest() != null) ? table.getCurrentGuest().getName() : "" );
+		guestParySizeTextField.setText( "" + ( (table.getCurrentGuest() != null) ? table.getCurrentGuest().getSize() : 0 ) );
+		String text = "";
+		if( table.getCurrentGuestArrived() != null )
+		{
+			int hour=table.getCurrentGuestArrived().get(Calendar.HOUR_OF_DAY);
+			int min=table.getCurrentGuestArrived().get(Calendar.MINUTE);
+			if(min<10){
+				text =+ hour+":0"+min;
+			}
+			else{
+				text =+ hour+":"+min;
+			}
+		}
+		guestArrivedTextField.setText( text );
+		tableStateTextField.setText( "" + table.getState() );
+		sectionTextField.setText( table.getTableSection() );
+		
+		this.updateUI();
 	}
 	
 	public void register( TableController controller)
 	{
 		clearTableBtn.addActionListener(controller);
+		close.addActionListener(controller);
 	}
 	
 }

@@ -32,11 +32,18 @@ public class WaitlistController implements ActionListener {
 			}
 			else{
 				FSM._instance.Action(FSM_STATE.GUEST, ((GuestView)btn.getParent()).getModel());
-				
-				
 			}
 		}
 		
+	}
+	
+	public GuestModel getNextGuest()
+	{
+		GuestModel guest = model.getTodaysRemainingGuests().get(0);
+		model.removeGuest(guest);
+		view.updateView(model);
+		view.registerListener(this);
+		return(guest);
 	}
 	
 	public void addGuest( GuestModel guest )
